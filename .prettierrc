@@ -6,23 +6,5 @@
   "singleQuote": true,
   "trailingComma": "none",
   "bracketSpacing": true,
-  "jsxBracketSameLine": false,
-  "overrides": [
-    {
-      "files": ".prettierrc",
-      "options": { "parser": "json", "trailingComma": "none" }
-    },
-    {
-      "files": ".babelrc",
-      "options": { "parser": "json", "trailingComma": "none" }
-    },
-    {
-      "files": "*.json",
-      "options": { "trailingComma": "none" }
-    },
-    {
-      "files": "*.html",
-      "options": { "parser": "html" }
-    }
-  ]
+  "jsxBracketSameLine": false
 }
