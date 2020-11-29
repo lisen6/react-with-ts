@@ -37,7 +37,7 @@ $font-size-lg: $font-size-base * 1.25 !default;
 $font-size-sm: $font-size-base * 0.875 !default;
 
 // 字重
-$font-size-ligher: lighter !default;
+$font-size-lighter: lighter !default;
 $font-weight-light: 300 !default;
 $font-weight-normal: 400 !default;
 $font-weight-bold: 700 !default;
@@ -62,7 +62,7 @@ $body-bg: $white !default;
 $body-color: $gray-900 !default;
 $body-text-align: null !default;
 
-// 边框 和 border-raidus
+// 边框 和 border-radius
 $border-width: 1px !default;
 $border-color: $gray-300 !default;
 $border-radius: 0.25rem !default;
@@ -109,4 +109,17 @@ $btn-border-radius: $border-radius !default;
 $btn-border-radius-lg: $border-radius-lg !default;
 $btn-border-radius-sm: $border-radius-sm !default;
 
-$btn-transition: all 0.2s !default;
+$btn-transition: color 0.15s ease-in-out, background-color 0.15 ease-in-out;
+
+// menu
+$menu-border-width: $border-width !default;
+$menu-border-color: $border-color !default;
+$menu-box-shadow: inset 0 1px 0 rgba($white, 0.15), 0 1px 1px;
+$menu-transition: color 0.15s ease-in-out, border-color 0.15 ease-in-out;
+
+// menu-item
+$menu-item-padding-y: 0.5rem !default;
+$menu-item-padding-x: 1rem !default;
+$menu-item-active-color: $primary !default;
+$menu-item-active-border-width: 2px !default;
+$menu-item-disabled-color: $gray-600 !default;
