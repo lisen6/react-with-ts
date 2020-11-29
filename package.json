@@ -28,11 +28,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
-    }
-  },
   "browserslist": {
     "production": [
       ">0.2%",
