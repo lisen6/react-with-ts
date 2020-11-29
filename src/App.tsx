@@ -1,9 +1,9 @@
-import React from "react";
-import "./styles/index.scss";
-import Button, { ButtonType, ButtonSize } from "./components/Button/button";
+import React from 'react'
+import './styles/index.scss'
+import Button, { ButtonType, ButtonSize } from './components/Button/button'
 
-import Menu from "./components/Menu/menu";
-import MenuItem from "./components/Menu/menuItem";
+import Menu from './components/Menu/menu'
+import MenuItem from './components/Menu/menuItem'
 
 function App() {
   return (
@@ -53,7 +53,7 @@ function App() {
         </Menu>
       </div>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
