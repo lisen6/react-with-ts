@@ -3,6 +3,7 @@ import "./styles/index.scss";
 import Button, { ButtonType, ButtonSize } from "./components/Button/button";
 
 import Menu from "./components/Menu/menu";
+import SubMenu from './components/Menu/subMenu'
 import MenuItem from "./components/Menu/menuItem";
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
     <>
       <div className="Button-wrapper">
         <Button
-          onClick={(e) => console.log(e, 123)}
+          onClick={(e: React.MouseEvent) => console.log(e, 123)}
           btnType={ButtonType.Default}
         >
           Button
@@ -44,12 +45,16 @@ function App() {
       <div className="Menu-wrapper">
         <Menu
           defaultIndex={0}
-          mode="vertical"
-          onSelect={(index) => console.log(index)}
+          mode="horizontal"
+          onSelect={(index: number) => console.log(index)}
         >
-          <MenuItem>1</MenuItem>
-          <MenuItem>2</MenuItem>
-          <MenuItem>3</MenuItem>
+          <MenuItem>link1</MenuItem>
+          <MenuItem disabled>link2</MenuItem>
+          <SubMenu title="dropdown">
+            <MenuItem>dropdown1</MenuItem>
+            <MenuItem>dropdown2</MenuItem>
+          </SubMenu>
+          <MenuItem>link4</MenuItem>
         </Menu>
       </div>
     </>
