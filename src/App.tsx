@@ -44,9 +44,10 @@ function App() {
       </div>
       <div className="Menu-wrapper">
         <Menu
-          defaultIndex={0}
-          mode="horizontal"
-          onSelect={(index: number) => console.log(index)}
+          defaultIndex="0"
+          mode="vertical"
+          defaultOpenSubMenus={[]}
+          onSelect={(index: string) => console.log(index)}
         >
           <MenuItem>link1</MenuItem>
           <MenuItem disabled>link2</MenuItem>
