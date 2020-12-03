@@ -95,7 +95,7 @@ describe('test Menu and MenuItem component', () => {
   //   wrapper.container.append(createStyleFile())
 
   //   expect(wrapper.queryByText('drop1')).not.toBeVisible()
-  //   const dropDownElement = wrapper.getByText('dropdown')
+  //   const dropDownvayneElement = wrapper.getByText('dropdown')
 
   //   fireEvent.mouseEnter(dropDownElement)
   //   waitFor(() => {
