@@ -1,0 +1,34 @@
+.Panel-head {
+  display: flex;
+  align-items: center;
+  padding: $panel-item-padding-y $panel-item-padding-x;
+  border-bottom: solid $panel-item-border-width $panel-item-border-color;
+  background: $panel-item-background;
+  cursor: pointer;
+  &.is-disabled {
+    cursor: not-allowed;
+  }
+  i {
+    margin-right: 10px;
+    transform: rotate(-90deg);
+    transition: transform 0.3s;
+    &.is-active {
+      transform: rotate(0);
+    }
+  }
+}
+
+.Panel-content {
+  box-sizing: border-box;
+  height: $panel-item-not-active-height;
+  opacity: $panel-item-not-active-opacity;
+  overflow: hidden;
+  transition: $panel-item-transition;
+  &.is-active {
+    opacity: $panel-item-active-opacity;
+  }
+  span {
+    display: inline-block;
+    padding: $panel-item-padding-y $panel-item-padding-x;
+  }
+}

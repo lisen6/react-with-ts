@@ -3,8 +3,11 @@ import "./styles/index.scss";
 import Button, { ButtonType, ButtonSize } from "./components/Button/button";
 
 import Menu from "./components/Menu/menu";
-import SubMenu from './components/Menu/subMenu'
+import SubMenu from "./components/Menu/subMenu";
 import MenuItem from "./components/Menu/menuItem";
+
+import Collapse from "./components/Collapse/Collapse";
+import Panel from "./components/Collapse/Panel";
 
 function App() {
   return (
@@ -57,6 +60,34 @@ function App() {
           </SubMenu>
           <MenuItem>link4</MenuItem>
         </Menu>
+      </div>
+
+      <div className="Collapse-wrapper" style={{ maxWidth: 800 }}>
+        <Collapse
+          // defaultActiveKey={["1", "2", "3"]}
+          // collapsible="disabled"
+          onChange={(index: string[]) => console.log(index, "显示已展开的面板")}
+        >
+          <Panel header="this is panel header 1" index="1">
+            我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1
+            <Collapse
+              defaultActiveKey={["1"]}
+              onChange={(index: string[]) =>
+                console.log(index, "显示已展开的面板2")
+              }
+            >
+              <Panel header="this is panel header 2" index="1">
+                我是children2
+              </Panel>
+            </Collapse>
+          </Panel>
+          <Panel header="this is panel header 2" index="2">
+            我是children2
+          </Panel>
+          <Panel showArrow={false} header="this is panel header 3" index="3">
+            我是children3
+          </Panel>
+        </Collapse>
       </div>
     </>
   );
