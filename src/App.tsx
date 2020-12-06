@@ -9,6 +9,8 @@ import MenuItem from "./components/Menu/menuItem";
 import Collapse from "./components/Collapse/Collapse";
 import Panel from "./components/Collapse/Panel";
 
+import Icon from './components/Icon/Icon'
+
 function App() {
   return (
     <>
@@ -88,6 +90,9 @@ function App() {
             我是children3
           </Panel>
         </Collapse>
+      </div>
+      <div className="Icon-wrapper">
+        <Icon theme="primary" icon="coffee" size="10x" />
       </div>
     </>
   );

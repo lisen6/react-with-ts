@@ -31,6 +31,35 @@
 
   .submenu-item {
     position: relative;
+    padding: $menu-item-padding-y $menu-item-padding-x;
+
+    .submenu-title {
+      display: flex;
+      align-items: center;
+    }
+
+    .arrow-icon {
+      margin-left: 3px;
+      transition: transform 0.3s ease-out;
+    }
+
+    &:hover {
+      .arrow-icon {
+        transform: rotate(-180deg);
+      }
+    }
+  }
+
+  .is-vertical {
+    .arrow-icon {
+      transform: rotate(0deg) !important;
+    }
+  }
+
+  .is-vertical.is-opened {
+    .arrow-icon {
+      transform: rotate(-180deg) !important;
+    }
   }
 
   .submenu {
@@ -67,7 +96,7 @@
     position: absolute;
     background: $white;
     z-index: 100;
-    top: calc(100% + 8px);
+    top: calc(100%);
     left: -5%;
     border: 1px solid $gray-400;
 

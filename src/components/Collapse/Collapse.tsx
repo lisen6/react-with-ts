@@ -1,5 +1,5 @@
 import React, { createContext } from "react";
-import { PanelProps } from "./Panel";
+// import { PanelProps } from "./Panel";
 
 type onChangeCallback = (val: string[]) => void;
 
