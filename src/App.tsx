@@ -50,7 +50,7 @@ function App() {
       <div className="Menu-wrapper">
         <Menu
           defaultIndex="0"
-          mode="vertical"
+          mode="horizontal"
           defaultOpenSubMenus={[]}
           onSelect={(index: string) => console.log(index)}
         >

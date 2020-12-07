@@ -38,6 +38,21 @@
       align-items: center;
     }
 
+    ul {
+      box-sizing: border-box;
+      position: absolute;
+      background: $white;
+      z-index: 100;
+      top: calc(100%);
+      left: -5%;
+      border: 1px solid $gray-400;
+
+      li {
+        border-bottom: $menu-item-active-border-width solid transparent;
+        list-style: none;
+      }
+    }
+
     .arrow-icon {
       margin-left: 3px;
       transition: transform 0.3s ease-out;
@@ -66,7 +81,7 @@
     list-style: none;
     padding-left: 0;
     white-space: nowrap;
-    display: none;
+    // display: none;
 
     .menu-item {
       padding: $menu-item-padding-y $menu-item-padding-x;
@@ -82,7 +97,7 @@
   }
 
   .menu-opened {
-    display: block;
+    // display: block;
   }
 }
 

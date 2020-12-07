@@ -4,32 +4,58 @@
   border-radius: $border-radius;
 }
 
-@mixin Button-style(
-  $background,
+@mixin Button-style($background,
   $border,
   $color,
   $hover-background: lighten($background, 7.5%),
   $hover-border: lighten($border, 10%),
-  $hover-color: $color
-) {
+  $hover-color: $color) {
   color: $color;
   background: $background;
   border-color: $border;
+
   &:hover {
     color: $hover-color;
     background: $hover-background;
     border-color: $hover-border;
   }
+
   &:focus,
   &[focus] {
     color: $hover-color;
     background: $hover-background;
     border-color: $hover-border;
   }
+
   &:disabled,
   &[disabled] {
     color: $color;
     background: $background;
     border-color: $border;
+  }
+}
+
+@mixin zoom-animation($direction: 'top', $scaleStart: scaleY(0), $scaleEnd: scaleY(1), $origin: center top) {
+  .zoom-in-#{$direction}-enter {
+    opacity: 0;
+    transform: $scaleStart;
+  }
+
+  .zoom-in-#{$direction}-enter-active {
+    opacity: 1;
+    transform: $scaleEnd;
+    transition: transform 300ms ease-in-out;
+    transform-origin: $origin;
+  }
+
+  .zoom-in-#{$direction}-exit {
+    opacity: 1;
+  }
+
+  .zoom-in-#{$direction}-exit-active {
+    opacity: 0;
+    transform: $scaleStart;
+    transition: transform 300ms ease-in-out;
+    transform-origin: center top;
   }
 }
