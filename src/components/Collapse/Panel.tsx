@@ -65,12 +65,13 @@ const Panel: React.FC<PanelProps> = (props) => {
   });
 
   useEffect(() => {
-    // const childElement: any = innerLayerRef.current;
-    // const parentElement: any = outLayerRef.current;
-    // parentElement.style.height = 'auto'
-    // parentElement.style.height = isOpened
-    //   ? childElement.getBoundingClientRect().height + "px"
-    //   : 0;
+    const childElement: any = innerLayerRef.current;
+    const parentElement: any = outLayerRef.current;
+    if (childElement.getBoundingClientRect().height > 300) {
+      parentElement.style.maxHeight = isOpened
+        ? childElement.getBoundingClientRect().height + "px"
+        : 0;
+    }
   }, [isOpened]);
 
   return (
@@ -83,7 +84,6 @@ const Panel: React.FC<PanelProps> = (props) => {
       <div ref={outLayerRef} className={ChildClasses} style={style}>
         <span ref={innerLayerRef}>{children}</span>
       </div>
-
     </div>
   );
 };

@@ -9,7 +9,7 @@ import MenuItem from "./components/Menu/menuItem";
 import Collapse from "./components/Collapse/Collapse";
 import Panel from "./components/Collapse/Panel";
 
-import Icon from './components/Icon/Icon'
+import Icon from "./components/Icon/Icon";
 
 function App() {
   return (

@@ -21,19 +21,16 @@
   }
 }
 
-
 .Panel-content {
   box-sizing: border-box;
-  height: 0;
   // opacity: $panel-item-not-active-opacity;
+  max-height: 0;
   overflow: hidden;
-  // transition: all 0.3s;
-  // transition: max-height 0.5s;
+  transition: max-height 0.3s;
 
   &.is-active {
     // opacity: $panel-item-active-opacity;
-    // max-height: 500px;
-    height: auto;
+    max-height: 300px;
   }
 
   span {
