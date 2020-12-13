@@ -1,37 +1,37 @@
-import React from "react";
+import React, { FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
 import classnames from "classnames";
 
-export enum ButtonSize {
-  Large = "lg",
-  Small = "sm",
-}
+type ButtonSize = "lg" | "sm";
 
-export enum ButtonType {
-  Primary = "primary",
-  Default = "default",
-  Danger = "danger",
-  Link = "link",
-}
+type ButtonType = "primary" | "default" | "danger" | "link";
 
-interface BaseButtonProps {
+export interface BaseButtonProps {
   className?: string;
+  /** 设置Button的禁用 */
   disabled?: boolean;
+  /** 设置Button的尺寸 */
   size?: ButtonSize;
+  /** 设置A标签的跳转地址 */
   href?: string;
+  /** 设置Button的类型 */
   btnType: ButtonType;
   children: React.ReactNode;
 }
 
-type NativeButtonProps = BaseButtonProps &
-  React.ButtonHTMLAttributes<HTMLElement>;
+type NativeButtonProps = BaseButtonProps & ButtonHTMLAttributes<HTMLElement>;
 
-type AnchorButtonProps = BaseButtonProps &
-  React.AnchorHTMLAttributes<HTMLElement>;
+type AnchorButtonProps = BaseButtonProps & AnchorHTMLAttributes<HTMLElement>;
 
 // Partial<T, U>  T跟U的所有属性可选
 export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>;
 
-const Button: React.FC<ButtonProps> = (props) => {
+/**
+ * ## 引用方法
+ * ~~~js
+ * import {Button} from 'vikingShip'
+ * ~~~
+ */
+export const Button: FC<ButtonProps> = (props) => {
   const {
     btnType,
     disabled,
@@ -45,10 +45,10 @@ const Button: React.FC<ButtonProps> = (props) => {
   const classes = classnames("btn", className, {
     [`btn-${btnType}`]: btnType,
     [`btn-${size}`]: size,
-    disabled: btnType === ButtonType.Link && disabled,
+    disabled: btnType === "link" && disabled,
   });
 
-  if (btnType === ButtonType.Link && href) {
+  if (btnType === "link" && href) {
     return (
       <a className={classes} href={href} {...resetProps}>
         {children}
@@ -65,7 +65,7 @@ const Button: React.FC<ButtonProps> = (props) => {
 
 Button.defaultProps = {
   disabled: false,
-  btnType: ButtonType.Default,
+  btnType: "default",
 };
 
 export default Button;

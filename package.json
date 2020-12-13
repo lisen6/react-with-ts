@@ -29,6 +29,7 @@
   },
   "scripts": {
     "dev": "react-scripts start",
+    "dev-chain": "react-app-rewired start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -50,11 +51,16 @@
   "devDependencies": {
     "@storybook/addon-actions": "^6.1.10",
     "@storybook/addon-essentials": "^6.1.10",
+    "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-links": "^6.1.10",
     "@storybook/node-logger": "^6.1.10",
     "@storybook/preset-create-react-app": "^3.1.5",
     "@storybook/react": "^6.1.10",
     "@types/react-transition-group": "^4.4.0",
-    "prettier": "^2.2.1"
+    "@types/storybook__addon-info": "^5.2.3",
+    "customize-cra": "^1.0.0",
+    "prettier": "^2.2.1",
+    "react-app-rewired": "^2.1.7",
+    "react-docgen-typescript-loader": "^3.7.2"
   }
 }

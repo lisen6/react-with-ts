@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/index.scss";
-import Button, { ButtonType, ButtonSize } from "./components/Button/button";
+import Button from "./components/Button/button";
 
 import Menu from "./components/Menu/menu";
 import SubMenu from "./components/Menu/subMenu";
@@ -17,33 +17,24 @@ function App() {
       <div className="Button-wrapper">
         <Button
           onClick={(e: React.MouseEvent) => console.log(e, 123)}
-          btnType={ButtonType.Default}
+          btnType="default"
         >
           Button
         </Button>
-        <Button disabled btnType={ButtonType.Default}>
+        <Button disabled btnType="default">
           Disabled Button
         </Button>
-        <Button btnType={ButtonType.Primary} size={ButtonSize.Large}>
+        <Button btnType="primary" size="lg">
           Button Large
         </Button>
-        <Button btnType={ButtonType.Danger} size={ButtonSize.Small}>
+        <Button btnType="danger" size="sm">
           Button Small
         </Button>
 
-        <Button
-          href="/baidu.com"
-          btnType={ButtonType.Link}
-          size={ButtonSize.Small}
-        >
+        <Button href="/baidu.com" btnType="link" size="sm">
           Link
         </Button>
-        <Button
-          disabled
-          href="/baidu.com"
-          btnType={ButtonType.Link}
-          size={ButtonSize.Small}
-        >
+        <Button disabled href="/baidu.com" btnType="link" size="sm">
           Disabled Link
         </Button>
       </div>
