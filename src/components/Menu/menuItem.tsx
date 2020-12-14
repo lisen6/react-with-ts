@@ -4,6 +4,7 @@ import { MenuContext } from "./menu";
 
 export interface MenuItemProps {
   index?: string;
+  /** 是否禁用 */
   disabled?: boolean;
   className?: string;
   style?: React.CSSProperties;

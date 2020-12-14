@@ -57,8 +57,6 @@ function App() {
 
       <div className="Collapse-wrapper" style={{ maxWidth: 800 }}>
         <Collapse
-          // defaultActiveKey={["1", "2", "3"]}
-          // collapsible="disabled"
           onChange={(index: string[]) => console.log(index, "显示已展开的面板")}
         >
           <Panel header="this is panel header 1" index="1">

@@ -6,7 +6,9 @@ import Icon from '../Icon/Icon'
 import Transition from '../Transition/transition'
 // import { CSSTransition } from 'react-transition-group'
 export interface SubMenuProps {
+  /** 菜单项的索引。不能重复 */
   index?: string;
+  /** 菜单项的名称 */
   title: string;
   className?: string
 }
@@ -62,15 +64,14 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
     })
     console.log(menuOpen, 222)
     return (
-      <Transition
-        in={menuOpen}
-        animation="zoom-in-bottom"
-        timeout={300}
-      >
-        <ul className={subMenuClasses}>
-          {childComponent}
-        </ul>
-      </Transition>
+      // <Transition
+      //   in={menuOpen}
+      //   animation="zoom-in-bottom"
+      //   timeout={300}
+      // >
+      <ul className={subMenuClasses}>
+        {childComponent}
+      </ul>
     )
   }
 

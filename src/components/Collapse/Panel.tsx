@@ -1,17 +1,20 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
 import classNames from "classnames";
-
+import Icon from '../Icon/Icon'
 import { CollapseContext } from "./Collapse";
 
 export interface PanelProps {
+  /** 头部标题 */
   header?: string;
+  /** 默认展开索引 */
   index?: string;
+  /** 是否显示箭头图标 */
   showArrow?: Boolean;
   className?: string;
   style?: React.CSSProperties;
 }
 
-const Panel: React.FC<PanelProps> = (props) => {
+export const Panel: React.FC<PanelProps> = (props) => {
   const { header, index, showArrow, children, style, className } = props;
 
   const outLayerRef = useRef(null);
@@ -78,6 +81,7 @@ const Panel: React.FC<PanelProps> = (props) => {
     <div className="collapse-item">
       <div onClick={handleClick} className={HeadClasses}>
         {/* {showArrow && <I size={"14px"} className={IconClasses} icon={Down} />} */}
+        {/* {showArrow && <Icon icon="sort-down" className={IconClasses} size="2x" />} */}
         {header}
       </div>
 

@@ -4,8 +4,11 @@ import React, { createContext } from "react";
 type onChangeCallback = (val: string[]) => void;
 
 export interface CollapseProps {
+  /** 收缩的回调函数 */
   onChange?: onChangeCallback;
+  /** 默认展开的数组 */
   defaultActiveKey?: string[];
+  /** 手风琴模式, 是否每次只激活一个tab */
   accordion?: Boolean;
   collapsible?: string;
 }
@@ -21,7 +24,15 @@ export const CollapseContext = createContext<ICollapseContext>({
   defaultActiveKey: [],
 });
 
-const Collapse: React.FC<CollapseProps> = (props) => {
+
+/**
+ * ## 引用方法
+ * ~~~js
+ * import { Collapse } from 'vikingShip'
+ * ~~~
+ * 
+ */
+export const Collapse: React.FC<CollapseProps> = (props) => {
   const {
     onChange,
     children,

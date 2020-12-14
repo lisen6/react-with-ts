@@ -10,10 +10,12 @@
     cursor: not-allowed;
   }
 
-  i {
+  svg {
     margin-right: 10px;
     transform: rotate(-90deg);
+    transform-origin: center;
     transition: transform 0.3s;
+
 
     &.is-active {
       transform: rotate(0);
@@ -23,18 +25,17 @@
 
 .Panel-content {
   box-sizing: border-box;
-  // opacity: $panel-item-not-active-opacity;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s;
 
   &.is-active {
-    // opacity: $panel-item-active-opacity;
     max-height: 300px;
   }
 
   span {
     display: inline-block;
+    width: calc(100% - 32px);
     padding: $panel-item-padding-y $panel-item-padding-x;
   }
 }

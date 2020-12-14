@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   padding-left: 0;
   border-bottom: $menu-border-width solid $menu-border-color;
-  box-shadow: $menu-box-shadow;
+  // box-shadow: $menu-box-shadow;
   list-style: none;
 
   .menu-item {
@@ -40,15 +40,10 @@
 
     ul {
       box-sizing: border-box;
-      position: absolute;
       background: $white;
-      z-index: 100;
-      top: calc(100%);
-      left: -5%;
-      border: 1px solid $gray-400;
+      padding-top: 0.5rem;
 
       li {
-        border-bottom: $menu-item-active-border-width solid transparent;
         list-style: none;
       }
     }
@@ -81,7 +76,7 @@
     list-style: none;
     padding-left: 0;
     white-space: nowrap;
-    // display: none;
+    display: none;
 
     .menu-item {
       padding: $menu-item-padding-y $menu-item-padding-x;
@@ -97,7 +92,7 @@
   }
 
   .menu-opened {
-    // display: block;
+    display: block;
   }
 }
 

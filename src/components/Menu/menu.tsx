@@ -6,11 +6,15 @@ type MenuMode = "horizontal" | "vertical";
 type SelectCallback = (selectedIndex: string) => void;
 
 export interface MenuProps {
+  /** 默认选中的菜单项 */
   defaultIndex?: string;
+  /** 横向 || 竖向 */
   mode?: MenuMode;
   className?: string;
   style?: React.CSSProperties;
+  /** 选中之后的回调函数 */
   onSelect?: SelectCallback;
+  /** 默认展开的菜单项 */
   defaultOpenSubMenus: string[]
 }
 
@@ -23,6 +27,13 @@ interface IMenuContext {
 
 export const MenuContext = createContext<IMenuContext>({ index: '0', defaultOpenSubMenus: [] });
 
+
+/**
+ * ## 引用方法
+ * ~~~js
+ * import { Button } from 'vikingShip'
+ * ~~~
+ */
 const Menu: React.FC<MenuProps> = (props) => {
   const { defaultIndex, mode, className, style, children, onSelect, defaultOpenSubMenus } = props;
   const classes = classNames("menu", className, {
