@@ -11,6 +11,7 @@ const defaultButton = () => (
 const buttonWithSize = () => (
   <>
     <Button size="lg">large Button</Button>
+    <Button>default Button</Button>
     <Button size="sm">small Button</Button>
   </>
 );
