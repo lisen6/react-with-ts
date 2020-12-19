@@ -1,6 +1,6 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
 import classNames from "classnames";
-import Icon from '../Icon/Icon'
+import Icon from "../Icon/Icon";
 import { CollapseContext } from "./Collapse";
 
 export interface PanelProps {
@@ -67,6 +67,8 @@ export const Panel: React.FC<PanelProps> = (props) => {
     "is-active": panelOpen,
   });
 
+  const ContentClasses = classNames("Panel-text");
+
   useEffect(() => {
     const childElement: any = innerLayerRef.current;
     const parentElement: any = outLayerRef.current;
@@ -86,7 +88,9 @@ export const Panel: React.FC<PanelProps> = (props) => {
       </div>
 
       <div ref={outLayerRef} className={ChildClasses} style={style}>
-        <span ref={innerLayerRef}>{children}</span>
+        <span className={ContentClasses} ref={innerLayerRef}>
+          {children}
+        </span>
       </div>
     </div>
   );

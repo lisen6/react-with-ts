@@ -25,7 +25,8 @@
     &.is-active,
     &:hover {
       color: $menu-item-active-color;
-      border-bottom: $menu-item-active-border-width solid $menu-item-active-color;
+      border-bottom: $menu-item-active-border-width solid
+        $menu-item-active-color;
     }
   }
 
@@ -97,7 +98,7 @@
 }
 
 .menu-horizontal {
-  >.menu-item {
+  > .menu-item {
     border-bottom: $menu-item-active-border-width solid transparent;
     position: relative;
   }
@@ -110,8 +111,12 @@
     left: -5%;
     border: 1px solid $gray-400;
 
-    >.menu-item {
+    > .menu-item {
       border-bottom: $menu-item-active-border-width solid transparent;
+      &.is-active {
+        border-bottom: $menu-item-active-border-width solid
+          $menu-item-active-color;
+      }
     }
   }
 }
@@ -130,7 +135,6 @@
   }
 
   .menu-item {
-
     border-left: $menu-item-active-border-width solid transparent;
 
     &.is-active,

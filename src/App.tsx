@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles/index.scss";
 import Button from "./components/Button/button";
 
@@ -11,7 +11,10 @@ import Panel from "./components/Collapse/Panel";
 
 import Icon from "./components/Icon/Icon";
 
+import Input from "./components/Input/input";
+
 function App() {
+  const [inputValue, setInputValue] = useState("lisen.6");
   return (
     <>
       <div className="Button-wrapper">
@@ -38,6 +41,7 @@ function App() {
           Disabled Link
         </Button>
       </div>
+
       <div className="Menu-wrapper">
         <Menu
           defaultIndex="0"
@@ -80,8 +84,28 @@ function App() {
           </Panel>
         </Collapse>
       </div>
+
       <div className="Icon-wrapper">
         <Icon theme="primary" icon="coffee" size="10x" />
+      </div>
+
+      <div className="Input-wrapper">
+        <Input
+          style={{ width: 380 }}
+          name="userName"
+          clearable
+          // showPassword
+          value={inputValue}
+          addonBefore={"123"}
+          // addonAfter={"456"}
+          onChange={(val) => {
+            console.log(val);
+            setInputValue(val);
+          }}
+          placeholder="请输入内容"
+        />
+        <br />
+        <span>{inputValue}</span>
       </div>
     </>
   );

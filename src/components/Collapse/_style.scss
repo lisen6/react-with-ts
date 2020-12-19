@@ -16,7 +16,6 @@
     transform-origin: center;
     transition: transform 0.3s;
 
-
     &.is-active {
       transform: rotate(0);
     }
@@ -33,7 +32,7 @@
     max-height: 300px;
   }
 
-  span {
+  .Panel-text {
     display: inline-block;
     width: calc(100% - 32px);
     padding: $panel-item-padding-y $panel-item-padding-x;
