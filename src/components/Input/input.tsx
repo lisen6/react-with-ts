@@ -122,7 +122,7 @@ export const Input: FC<InputProps> = (props) => {
                 onClick={(e) => {
                   handleClear(e);
                 }}
-                icon="futbol"
+                icon="times-circle"
               />
             </span>
           )}
