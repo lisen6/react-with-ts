@@ -109,16 +109,13 @@ $btn-border-radius: $border-radius !default;
 $btn-border-radius-lg: $border-radius-lg !default;
 $btn-border-radius-sm: $border-radius-sm !default;
 
-$btn-transition: color 0.15s ease-in-out,
-background-color 0.15 ease-in-out;
+$btn-transition: color 0.15s ease-in-out, background-color 0.15 ease-in-out;
 
 // menu
 $menu-border-width: $border-width !default;
-$menu-border-color: $border-color !default;
-$menu-box-shadow: inset 0 1px 0 rgba($white, 0.15),
-0 1px 1px;
-$menu-transition: color 0.15s ease-in-out,
-border-color 0.15 ease-in-out;
+$menu-border-color: #dcdfe6 !default;
+$menu-box-shadow: inset 0 1px 0 rgba($white, 0.15), 0 1px 1px;
+$menu-transition: color 0.15s ease-in-out, #dcdfe6 0.15 ease-in-out;
 
 // menu-item
 $menu-item-padding-y: 0.5rem !default;
@@ -131,8 +128,8 @@ $menu-item-disabled-color: $gray-600 !default;
 $panel-item-padding-y: 16px !default;
 $panel-item-padding-x: 16px !default;
 $panel-item-border-width: 1px !default;
-$panel-item-border-color: #ccc !default;
-$panel-item-background: #d9d9d9 !default;
+$panel-item-border-color: #dcdfe6 !default;
+$panel-item-background: #f5f7fa !default;
 
 // collapse => panel-content-default
 $panel-item-not-active-height: 0 !default;
@@ -143,11 +140,13 @@ $panel-item-active-opacity: 1 !default;
 $panel-item-transition: height 0.3s;
 
 // icon
-$theme-colors: (primary: $blue,
+$theme-colors: (
+  primary: $blue,
   secondary: $gray-600,
   success: $green,
   info: $cyan,
   warning: $yellow,
   danger: $red,
   light: $gray-100,
-  dark: $gray-800)
+  dark: $gray-800,
+);

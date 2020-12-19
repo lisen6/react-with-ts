@@ -24,13 +24,12 @@ export const CollapseContext = createContext<ICollapseContext>({
   defaultActiveKey: [],
 });
 
-
 /**
  * ## 引用方法
  * ~~~js
  * import { Collapse } from 'vikingShip'
  * ~~~
- * 
+ *
  */
 export const Collapse: React.FC<CollapseProps> = (props) => {
   const {
@@ -67,7 +66,7 @@ export const Collapse: React.FC<CollapseProps> = (props) => {
   };
 
   return (
-    <div style={{ border: "solid 1px #ccc" }}>
+    <div style={{ border: "solid 1px #dcdfe6" }}>
       <CollapseContext.Provider value={passedContext}>
         {renderChild()}
       </CollapseContext.Provider>
