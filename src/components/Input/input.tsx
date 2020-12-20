@@ -42,6 +42,7 @@ export const Input: FC<InputProps> = (props) => {
     size,
     addonBefore,
     addonAfter,
+    value: propsValue,
     onChange,
     suffix,
     prefix,
@@ -79,7 +80,7 @@ export const Input: FC<InputProps> = (props) => {
   // input组件只能是受控 || 非受控。不能同时出现这两个属性
   if ("value" in props) {
     delete restProps.defaultValue;
-    restProps.value = fixControlledValue(props.value);
+    // restProps.value = fixControlledValue(props.value);
   }
 
   const handleChange = (e: any) => {
@@ -116,7 +117,7 @@ export const Input: FC<InputProps> = (props) => {
     return (
       <>
         <>
-          {restProps.value && clearable && !showPassword && (
+          {propsValue && clearable && !showPassword && (
             <span className={clearableNames}>
               <Icon
                 onClick={(e) => {
@@ -126,7 +127,7 @@ export const Input: FC<InputProps> = (props) => {
               />
             </span>
           )}
-          {restProps.value && showPassword && (
+          {propsValue && showPassword && (
             <span className={suffixNames}>
               <Icon
                 onClick={(e) => {
