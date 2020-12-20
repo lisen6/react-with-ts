@@ -1,5 +1,6 @@
 import React, {
   useState,
+  useRef,
   FC,
   ReactElement,
   InputHTMLAttributes,
@@ -13,8 +14,8 @@ type InputSize = "lg" | "sm";
 
 export interface InputProps
   extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    "size" | "prefix" | "suffix" | "onChange"
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "size" | "prefix" | "suffix" | "onChange"
   > {
   /** 是否可禁用 */
   disabled?: boolean;
@@ -33,6 +34,7 @@ export interface InputProps
   /** 输入框尾部图标 */
   prefix?: IconProp;
   value?: string;
+  defaultValue?: string;
   onChange?: (value: string, e?: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -43,6 +45,7 @@ export const Input: FC<InputProps> = (props) => {
     addonBefore,
     addonAfter,
     value: propsValue,
+    defaultValue,
     onChange,
     suffix,
     prefix,
@@ -54,6 +57,10 @@ export const Input: FC<InputProps> = (props) => {
 
   // 用于控制显示是否显示密码框
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const [lock, setLock] = useState(false)
+
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const names = classNames("viking-input-wrapper", {
     [`input-size-${size}`]: size,
@@ -79,96 +86,88 @@ export const Input: FC<InputProps> = (props) => {
 
   // input组件只能是受控 || 非受控。不能同时出现这两个属性
   if ("value" in props) {
-    delete restProps.defaultValue;
+    // delete restProps.defaultValue;
     // restProps.value = fixControlledValue(props.value);
   }
 
-  const handleChange = (e: any) => {
-    if (onChange) {
-      const value = e.target.value;
-      onChange(value, e);
-    }
-  };
 
   const handleClear = (e: any) => {
-    if (onChange) {
-      onChange("", e);
+    onChange?.("", e)
+    if (inputRef.current) {
+      inputRef.current.value = ''
     }
   };
 
   const handlePassword = (e: any) => {
     setPasswordVisible(!passwordVisible);
   };
-  const renderComponentWithPrefix = () => {
-    if (addonBefore) return;
-    return (
-      <>
-        {prefix && (
-          <div className={prefixNames}>
-            <Icon icon={prefix} title={`title`} />
-          </div>
-        )}
-      </>
-    );
-  };
 
-  const renderComponentWithSuffix = () => {
-    if (addonAfter) return;
-    return (
-      <>
-        <>
-          {propsValue && clearable && !showPassword && (
-            <span className={clearableNames}>
-              <Icon
-                onClick={(e) => {
-                  handleClear(e);
-                }}
-                icon="times-circle"
-              />
-            </span>
-          )}
-          {propsValue && showPassword && (
-            <span className={suffixNames}>
-              <Icon
-                onClick={(e) => {
-                  handlePassword(e);
-                }}
-                icon={passwordVisible ? "eye-slash" : "eye"}
-              />
-            </span>
-          )}
-        </>
-        {suffix && !showPassword && !clearable && (
-          <div className={suffixNames}>
-            <Icon icon={suffix} title={`title`} />
-          </div>
-        )}
-      </>
-    );
-  };
+  const renderInput = () => {
+    const renderComponentWithPrefix = () => {
+      return prefix && <div className={prefixNames}>
+        <Icon icon={prefix} title={`title`} />
+      </div>
+    }
+
+    const renderComponentWithSuffix = () => {
+
+      return suffix && <div className={suffixNames}>
+        <Icon icon={suffix} title={`title`} />
+      </div>
+    }
+    return <div className="icon-wrapper">
+      {renderComponentWithPrefix()}
+      <input
+        className="viking-input-inner"
+        {...innerProps}
+        {...inputEvents}
+        defaultValue={defaultValue}
+      />
+      {renderComponentWithSuffix()}
+    </div>
+  }
+
+
+  const innerProps = {
+    disabled: disabled,
+    type:
+      showPassword
+        ? passwordVisible
+          ? "text"
+          : "password"
+        : restProps.type
+    ,
+    ...restProps
+  }
+
+  const inputEvents = {
+    onCompositionStart(e: any) {
+      if (e.type === "compositionstart") {
+        setLock(true)
+      }
+    },
+    onCompositionEnd(e: any) {
+      setLock(false)
+      const value = e.target.value;
+      onChange?.(value, e);
+    },
+    onChange(e: any) {
+      const value = e.target.value;
+      if (inputRef.current) {
+        inputRef.current.value = value
+      }
+      if (!lock) {
+        onChange?.(value, e);
+      }
+    }
+  }
 
   return (
     <div className={names} style={style}>
       {addonBefore && (
         <div className="input-group__addonBefore">{addonBefore}</div>
       )}
-      {renderComponentWithPrefix()}
-      <input
-        className="viking-input-inner"
-        disabled={disabled}
-        type={
-          showPassword
-            ? passwordVisible
-              ? "text"
-              : "password"
-            : restProps.type
-        }
-        onChange={(e) => {
-          handleChange(e);
-        }}
-        {...restProps}
-      />
-      {renderComponentWithSuffix()}
+      {renderInput()}
       {addonAfter && (
         <div className="input-group__addonAfter">{addonAfter}</div>
       )}

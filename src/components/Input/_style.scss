@@ -3,6 +3,7 @@
   position: relative;
   font-size: 14px;
   display: inline-block;
+
   &.is-disabled {
     .viking-input-inner {
       background-color: #f5f7fa;
@@ -11,6 +12,7 @@
       cursor: not-allowed;
     }
   }
+
   .viking-input-inner {
     display: inline-block;
     width: 100%;
@@ -27,29 +29,38 @@
     font-size: inherit;
     outline: none;
     transition: border 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+
     &:focus {
       outline: none;
       border-color: #409eff;
     }
   }
+
   &.input--prefix {
     .viking-input-inner {
       padding-left: 30px;
     }
-    .input__prefix {
-      position: absolute;
-      height: 100%;
-      left: 10px;
-      top: 0;
-      line-height: 40px;
-      text-align: center;
-      color: #c0c4cc;
-      transition: all 0.3s;
-      z-index: 900;
-      .icon {
+
+    .icon-wrapper {
+      position: relative;
+      width: 100%;
+
+      .input__prefix {
+        position: absolute;
+        height: 100%;
+        left: 10px;
+        top: 0;
+        line-height: 40px;
+        text-align: center;
         color: #c0c4cc;
-        font-size: 14px;
-        transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+        transition: all 0.3s;
+        z-index: 900;
+
+        .icon {
+          color: #c0c4cc;
+          font-size: 14px;
+          transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
       }
     }
   }
@@ -58,6 +69,7 @@
     .viking-input-inner {
       padding-right: 30px;
     }
+
     .input__suffix {
       position: absolute;
       height: 100%;
@@ -68,6 +80,7 @@
       color: #c0c4cc;
       transition: all 0.3s;
       z-index: 900;
+
       .icon {
         color: #c0c4cc;
         font-size: 14px;
@@ -79,6 +92,7 @@
 
   &.input-group {
     display: flex;
+
     &.input-group-addonBefore {
       .input-group__addonBefore {
         display: flex;
@@ -96,11 +110,13 @@
         padding: 0 20px;
         white-space: nowrap;
       }
+
       .viking-input-inner {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
       }
     }
+
     &.input-group-addonAfter {
       .input-group__addonAfter {
         display: flex;
@@ -118,6 +134,7 @@
         padding: 0 20px;
         white-space: nowrap;
       }
+
       .viking-input-inner {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;

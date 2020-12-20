@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef, useEffect } from "react";
+import React, { useContext, useState, useRef, useEffect, useCallback } from "react";
 import classNames from "classnames";
 import Icon from "../Icon/Icon";
 import { CollapseContext } from "./Collapse";
@@ -17,17 +17,21 @@ export interface PanelProps {
 export const Panel: React.FC<PanelProps> = (props) => {
   const { header, index, showArrow, children, style, className } = props;
 
-  const outLayerRef = useRef(null);
-  const innerLayerRef = useRef(null);
+  const outLayerRef = useRef<HTMLDivElement>(null);
+
+  const innerLayerRef = useRef<HTMLSpanElement>(null);
 
   const context = useContext(CollapseContext);
 
   const { defaultActiveKey, accordion, collapsible } = context;
 
-  const isOpened = index ? defaultActiveKey.includes(index) : false;
+  const [value, setValue] = useState(typeof defaultActiveKey === 'undefined' ? [] : defaultActiveKey)
+
+  const isOpened = index ? value.includes(index) : false;
+
   const [panelOpen, setPanelOpen] = useState(isOpened);
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = useCallback((e: React.MouseEvent) => {
     if (collapsible === "disabled") {
       e.preventDefault();
       return;
@@ -35,25 +39,22 @@ export const Panel: React.FC<PanelProps> = (props) => {
     e.stopPropagation();
     setPanelOpen(!panelOpen);
 
-    if (index && isOpened && defaultActiveKey) {
-      context.defaultActiveKey = context.defaultActiveKey.filter(
+    if (index && value.includes(index)) {
+      console.log(value.filter(
         (item) => item !== index
-      );
+      ))
+      setValue(value.filter(
+        (item) => item !== index
+      ))
     } else {
-      index && context.defaultActiveKey.push(index);
+      index && setValue(value.concat(index));
     }
 
-    if (
-      context.onChange &&
-      typeof index === "string" &&
-      context.defaultActiveKey &&
-      !collapsible
-    ) {
-      context.onChange(
-        context.defaultActiveKey.sort((a, b) => parseInt(a) - parseInt(b))
-      );
-    }
-  };
+    console.log(value)
+    context.onChange?.(
+      value.sort((a, b) => parseInt(a) - parseInt(b))
+    );
+  }, [value]);
 
   const HeadClasses = classNames("Panel-head", {
     "is-disabled": collapsible,
@@ -70,12 +71,14 @@ export const Panel: React.FC<PanelProps> = (props) => {
   const ContentClasses = classNames("Panel-text");
 
   useEffect(() => {
-    const childElement: any = innerLayerRef.current;
-    const parentElement: any = outLayerRef.current;
-    if (childElement.getBoundingClientRect().height > 300) {
+    const childElement = innerLayerRef.current;
+    const parentElement = outLayerRef.current;
+    if (childElement
+      && childElement.getBoundingClientRect().height > 300
+      && parentElement) {
       parentElement.style.maxHeight = isOpened
-        ? childElement.getBoundingClientRect().height + "px"
-        : 0;
+        ? childElement?.getBoundingClientRect().height + "px"
+        : '0';
     }
   }, [isOpened]);
 
