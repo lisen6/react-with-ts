@@ -12,12 +12,12 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import classNames from "classnames";
 import Icon from "../Icon/Icon";
 
-type InputSize = "lg" | "sm";
+type InputSize = "medium" | "small";
 
 export interface InputProps
   extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    "size" | "prefix" | "suffix" | "onChange"
+  InputHTMLAttributes<HTMLInputElement>,
+  "size" | "prefix" | "suffix" | "onChange"
   > {
   /** 是否可禁用 */
   disabled?: boolean;
@@ -29,14 +29,15 @@ export interface InputProps
   addonAfter?: string | ReactElement;
   /** 是否支持可清空 */
   clearable?: boolean;
-  /** 是否支持显示密码 */
-  showPassword?: boolean;
   /** 输入框首部图标 */
   suffix?: IconProp;
   /** 输入框尾部图标 */
   prefix?: IconProp;
+  /** 输入框值 */
   value?: string;
+  /** 输入框默认值 */
   defaultValue?: string;
+  /** 改变的时候触发回调函数 */
   onChange?: (value: string, e?: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -54,7 +55,6 @@ export const Input: FC<InputProps> = (props) => {
     suffix,
     prefix,
     clearable,
-    showPassword,
     style,
     ...restProps
   } = props;
@@ -72,46 +72,35 @@ export const Input: FC<InputProps> = (props) => {
     "input-group": addonBefore || addonAfter,
     "input-group-addonAfter": !!addonAfter,
     "input-group-addonBefore": !!addonBefore,
-    "input--suffix": !!suffix || !!clearable || !!showPassword,
+    "input--suffix": !!suffix || !!clearable,
     "input--prefix": !!prefix,
   });
 
   const prefixNames = classNames("input__prefix");
-  const clearableNames = classNames("input__suffix", "is-clear");
   const suffixNames = classNames("input__suffix");
-
-  const handleClear = (e: any) => {
-    const target = inputRef.current;
-    if (target) {
-      // e.target = target;
-      // e.currentTarget = target;
-      target.value = "";
-    }
-    onChange?.("", e);
-  };
-
-  const handlePassword = (e: any) => {
-    setPasswordVisible(!passwordVisible);
-  };
 
   const innerProps = {
     disabled: disabled,
-    type: showPassword
-      ? passwordVisible
-        ? "text"
-        : "password"
-      : restProps.type,
+    type: 'text',
     ...restProps,
   };
 
+  const handleClear = (e: any) => {
+    if (!disabled) {
+      const target = inputRef.current;
+      if (target) {
+        target.value = "";
+      }
+      onChange?.("", e);
+    }
+  };
+
   const innerOnChange = (e: any) => {
-    console.log(e);
     if (typeof propsValue !== "undefined") {
       if (e.type === "compositionstart") {
         lock.current = true;
         return;
       }
-
       if (e.type === "compositionend") {
         lock.current = false;
       }
@@ -153,22 +142,33 @@ export const Input: FC<InputProps> = (props) => {
     };
 
     const renderComponentWithSuffix = () => {
+      const showClear = clearable && !disabled && String(inputRef.current?.value).length > 0
       return (
-        suffix && (
-          <div className={suffixNames}>
-            <Icon
+        <div className={suffixNames}>
+          {
+            showClear && <Icon
+              style={{ cursor: 'pointer' }}
+              onClick={(e) => {
+                handleClear(e);
+              }}
+              icon="times-circle"
+              title={`title`}
+            />
+          }
+          {
+            suffix && <Icon
               onClick={(e) => {
                 handleClear(e);
               }}
               icon={suffix}
               title={`title`}
             />
-          </div>
-        )
-      );
+          }
+        </div>
+      )
     };
     return (
-      <div className="icon-wrapper">
+      <div className="inner-input-wrapper">
         {renderComponentWithPrefix()}
         <input
           className="viking-input-inner"

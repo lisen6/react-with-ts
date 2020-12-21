@@ -25,24 +25,26 @@ export const Panel: React.FC<PanelProps> = (props) => {
 
   const { defaultActiveKey, accordion, collapsible } = context;
 
-  const [value, setValue] = useState(typeof defaultActiveKey === 'undefined' ? [] : defaultActiveKey)
+  const defaultValue = typeof defaultActiveKey === 'undefined' ? [] : defaultActiveKey
+  const [value, setValue] = useState(defaultValue)
 
   const isOpened = index ? value.includes(index) : false;
 
   const [panelOpen, setPanelOpen] = useState(isOpened);
 
-  const handleClick = useCallback((e: React.MouseEvent) => {
+  console.log(value, 'value0')
+  const handleClick = (e: React.MouseEvent) => {
     if (collapsible === "disabled") {
       e.preventDefault();
       return;
     }
     e.stopPropagation();
-    setPanelOpen(!panelOpen);
 
+    console.log(value, index, index && value.includes(index), 'index')
     if (index && value.includes(index)) {
       console.log(value.filter(
         (item) => item !== index
-      ))
+      ), 'filter')
       setValue(value.filter(
         (item) => item !== index
       ))
@@ -50,11 +52,11 @@ export const Panel: React.FC<PanelProps> = (props) => {
       index && setValue(value.concat(index));
     }
 
-    console.log(value)
     context.onChange?.(
-      value.sort((a, b) => parseInt(a) - parseInt(b))
+      value.sort((a: string, b: string) => parseInt(a) - parseInt(b))
     );
-  }, [value]);
+    setPanelOpen(!panelOpen);
+  };
 
   const HeadClasses = classNames("Panel-head", {
     "is-disabled": collapsible,

@@ -65,14 +65,13 @@ function App() {
         <Collapse
           defaultActiveKey={collapseValue}
           onChange={(val: string[]) => {
-            console.log(val, "val");
             setCollapseValue(val);
           }}
         >
           <Panel header="this is panel header 1" index="1">
             我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1
             <Collapse
-              defaultActiveKey={["1"]}
+              // defaultActiveKey={["1"]}
               onChange={(index: string[]) =>
                 console.log(index, "显示已展开的面板2")
               }
@@ -97,13 +96,14 @@ function App() {
 
       <div className="Input-wrapper">
         <Input
-          style={{ width: 380 }}
-          name="userName"
+          style={{ width: 380, marginLeft: 10 }}
+          // disabled
+          size="medium"
           clearable
-          suffix="eye"
-          prefix="eye"
-          addonBefore={"123"}
-          addonAfter={"456"}
+          // suffix="search"
+          // prefix="coffee"
+          addonBefore={"https://"}
+          addonAfter={".com"}
           onChange={(val) => {
             console.log(val);
             setInputValue(val);
