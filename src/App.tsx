@@ -14,7 +14,7 @@ import Icon from "./components/Icon/Icon";
 import Input from "./components/Input/input";
 
 function App() {
-  const [collapseValue, setCollapseValue] = useState(['1'])
+  const [collapseValue, setCollapseValue] = useState(["1"]);
   const [inputValue, setInputValue] = useState("lisen.6");
 
   return (
@@ -65,8 +65,8 @@ function App() {
         <Collapse
           defaultActiveKey={collapseValue}
           onChange={(val: string[]) => {
-            console.log(val, 'val')
-            setCollapseValue(val)
+            console.log(val, "val");
+            setCollapseValue(val);
           }}
         >
           <Panel header="this is panel header 1" index="1">
@@ -100,11 +100,8 @@ function App() {
           style={{ width: 380 }}
           name="userName"
           clearable
-
           suffix="eye"
           prefix="eye"
-          // showPassword
-          value={inputValue}
           addonBefore={"123"}
           addonAfter={"456"}
           onChange={(val) => {

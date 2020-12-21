@@ -1,8 +1,10 @@
 import React, {
   useState,
+  useEffect,
   useRef,
   FC,
   ReactElement,
+  FocusEventHandler,
   InputHTMLAttributes,
   ChangeEvent,
 } from "react";
@@ -14,8 +16,8 @@ type InputSize = "lg" | "sm";
 
 export interface InputProps
   extends Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  "size" | "prefix" | "suffix" | "onChange"
+    React.InputHTMLAttributes<HTMLInputElement>,
+    "size" | "prefix" | "suffix" | "onChange"
   > {
   /** 是否可禁用 */
   disabled?: boolean;
@@ -47,6 +49,8 @@ export const Input: FC<InputProps> = (props) => {
     value: propsValue,
     defaultValue,
     onChange,
+    onBlur,
+    onFocus,
     suffix,
     prefix,
     clearable,
@@ -58,9 +62,9 @@ export const Input: FC<InputProps> = (props) => {
   // 用于控制显示是否显示密码框
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const [lock, setLock] = useState(false)
+  const lock = useRef(false);
 
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const names = classNames("viking-input-wrapper", {
     [`input-size-${size}`]: size,
@@ -76,25 +80,10 @@ export const Input: FC<InputProps> = (props) => {
   const clearableNames = classNames("input__suffix", "is-clear");
   const suffixNames = classNames("input__suffix");
 
-  // 保证state属性初始化的时候  值不为undefined
-  const fixControlledValue = (value: any) => {
-    if (typeof value === "undefined" || value === null) {
-      return "";
-    }
-    return value;
-  };
-
-  // input组件只能是受控 || 非受控。不能同时出现这两个属性
-  if ("value" in props) {
-    // delete restProps.defaultValue;
-    // restProps.value = fixControlledValue(props.value);
-  }
-
-
   const handleClear = (e: any) => {
-    onChange?.("", e)
+    onChange?.("", e);
     if (inputRef.current) {
-      inputRef.current.value = ''
+      inputRef.current.value = "";
     }
   };
 
@@ -102,65 +91,102 @@ export const Input: FC<InputProps> = (props) => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const renderInput = () => {
-    const renderComponentWithPrefix = () => {
-      return prefix && <div className={prefixNames}>
-        <Icon icon={prefix} title={`title`} />
-      </div>
-    }
-
-    const renderComponentWithSuffix = () => {
-
-      return suffix && <div className={suffixNames}>
-        <Icon icon={suffix} title={`title`} />
-      </div>
-    }
-    return <div className="icon-wrapper">
-      {renderComponentWithPrefix()}
-      <input
-        className="viking-input-inner"
-        {...innerProps}
-        {...inputEvents}
-        defaultValue={defaultValue}
-      />
-      {renderComponentWithSuffix()}
-    </div>
-  }
-
-
   const innerProps = {
     disabled: disabled,
-    type:
-      showPassword
-        ? passwordVisible
-          ? "text"
-          : "password"
-        : restProps.type
-    ,
-    ...restProps
-  }
+    type: showPassword
+      ? passwordVisible
+        ? "text"
+        : "password"
+      : restProps.type,
+    ...restProps,
+  };
+
+  const innerOnChange = (e: any) => {
+    console.log(e);
+    if (typeof propsValue !== "undefined") {
+      if (e.type === "compositionstart") {
+        lock.current = true;
+        return;
+      }
+
+      if (e.type === "compositionend") {
+        lock.current = false;
+      }
+      if (!lock.current && inputRef.current) {
+        const v = e.target.value;
+        inputRef.current.value = propsValue;
+        onChange?.(v, e);
+      }
+    } else {
+      onChange?.(e.target.value, e);
+    }
+  };
+
+  const innerOnBlur: FocusEventHandler<HTMLInputElement> = (e) => {
+    onBlur?.(e);
+  };
+
+  const innerOnFocus: FocusEventHandler<HTMLInputElement> = (e) => {
+    onFocus?.(e);
+  };
 
   const inputEvents = {
-    onCompositionStart(e: any) {
-      if (e.type === "compositionstart") {
-        setLock(true)
-      }
-    },
-    onCompositionEnd(e: any) {
-      setLock(false)
-      const value = e.target.value;
-      onChange?.(value, e);
-    },
-    onChange(e: any) {
-      const value = e.target.value;
-      if (inputRef.current) {
-        inputRef.current.value = value
-      }
-      if (!lock) {
-        onChange?.(value, e);
-      }
+    onCompositionStart: innerOnChange,
+    onCompositionEnd: innerOnChange,
+    onChange: innerOnChange,
+    onBlur: innerOnBlur,
+    onFocus: innerOnFocus,
+  };
+
+  const renderInput = () => {
+    const renderComponentWithPrefix = () => {
+      return (
+        prefix && (
+          <div className={prefixNames}>
+            <Icon icon={prefix} title={`title`} />
+          </div>
+        )
+      );
+    };
+
+    const renderComponentWithSuffix = () => {
+      return (
+        suffix && (
+          <div className={suffixNames}>
+            <Icon
+              onClick={(e) => {
+                handleClear(e);
+              }}
+              icon={suffix}
+              title={`title`}
+            />
+          </div>
+        )
+      );
+    };
+    return (
+      <div className="icon-wrapper">
+        {renderComponentWithPrefix()}
+        <input
+          className="viking-input-inner"
+          {...innerProps}
+          {...inputEvents}
+          defaultValue={defaultValue}
+        />
+        {renderComponentWithSuffix()}
+      </div>
+    );
+  };
+
+  useEffect(() => {
+    if (
+      typeof propsValue !== "undefined" &&
+      propsValue !== null &&
+      inputRef.current
+    ) {
+      inputRef.current.value = propsValue;
     }
-  }
+  }, [propsValue]);
 
   return (
     <div className={names} style={style}>
