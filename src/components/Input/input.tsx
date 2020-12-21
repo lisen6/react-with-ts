@@ -81,10 +81,13 @@ export const Input: FC<InputProps> = (props) => {
   const suffixNames = classNames("input__suffix");
 
   const handleClear = (e: any) => {
-    onChange?.("", e);
-    if (inputRef.current) {
-      inputRef.current.value = "";
+    const target = inputRef.current;
+    if (target) {
+      // e.target = target;
+      // e.currentTarget = target;
+      target.value = "";
     }
+    onChange?.("", e);
   };
 
   const handlePassword = (e: any) => {
@@ -171,6 +174,7 @@ export const Input: FC<InputProps> = (props) => {
           className="viking-input-inner"
           {...innerProps}
           {...inputEvents}
+          ref={inputRef}
           defaultValue={defaultValue}
         />
         {renderComponentWithSuffix()}
