@@ -74,7 +74,6 @@ function App() {
           defaultActiveKey={collapseValue}
           accordion
           onChange={(val: string[]) => {
-            console.log(val, 11111)
             setCollapseValue(val);
           }}
         >
