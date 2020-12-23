@@ -13,10 +13,18 @@ import Icon from "./components/Icon/Icon";
 
 import Input from "./components/Input/input";
 
+import AutoComplete from './components/AutoComplete/autoComplete'
+
 function App() {
   const [collapseValue, setCollapseValue] = useState(["1"]);
+
   const [inputValue, setInputValue] = useState("lisen.6");
 
+  const larkers = ['1111', '2222', '3333', '4444'];
+  const handleFetch = (query: string) => {
+    console.log(query)
+    return larkers.filter(item => item.includes(query))
+  }
   return (
     <>
       <div className="Button-wrapper">
@@ -64,13 +72,15 @@ function App() {
       <div className="Collapse-wrapper" style={{ maxWidth: 800 }}>
         <Collapse
           defaultActiveKey={collapseValue}
+          accordion
           onChange={(val: string[]) => {
+            console.log(val, 11111)
             setCollapseValue(val);
           }}
         >
           <Panel header="this is panel header 1" index="1">
             我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1
-            <Collapse
+            {/* <Collapse
               // defaultActiveKey={["1"]}
               onChange={(index: string[]) =>
                 console.log(index, "显示已展开的面板2")
@@ -79,7 +89,7 @@ function App() {
               <Panel header="this is panel header 2" index="1">
                 我是children2
               </Panel>
-            </Collapse>
+            </Collapse> */}
           </Panel>
           <Panel header="this is panel header 2" index="2">
             我是children2
@@ -102,8 +112,8 @@ function App() {
           clearable
           // suffix="search"
           // prefix="coffee"
-          addonBefore={"https://"}
-          addonAfter={".com"}
+          // addonBefore={"https://"}
+          // addonAfter={".com"}
           onChange={(val) => {
             console.log(val);
             setInputValue(val);
@@ -112,6 +122,9 @@ function App() {
         />
         <br />
         <span>{inputValue}</span>
+      </div>
+      <div className="autoComplete-wrapper">
+        <AutoComplete fetchSuggestions={handleFetch} onSelect={(data) => { console.log(data) }} />
       </div>
     </>
   );

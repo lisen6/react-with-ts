@@ -41,7 +41,7 @@ export interface InputProps
   onChange?: (value: string, e?: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const Input: FC<InputProps> = (props) => {
+const Input: FC<InputProps> = (props) => {
   const {
     disabled,
     size,
@@ -58,9 +58,6 @@ export const Input: FC<InputProps> = (props) => {
     style,
     ...restProps
   } = props;
-
-  // 用于控制显示是否显示密码框
-  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const lock = useRef(false);
 

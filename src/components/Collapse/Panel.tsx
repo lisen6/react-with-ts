@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef, useEffect, useCallback } from "react";
+import React, { useContext, useState, useRef, useEffect, useCallback, useLayoutEffect } from "react";
 import classNames from "classnames";
 import Icon from "../Icon/Icon";
 import { CollapseContext } from "./Collapse";
@@ -23,16 +23,10 @@ export const Panel: React.FC<PanelProps> = (props) => {
 
   const context = useContext(CollapseContext);
 
-  const { defaultActiveKey, accordion, collapsible } = context;
-
-  const defaultValue = typeof defaultActiveKey === 'undefined' ? [] : defaultActiveKey
-  const [value, setValue] = useState(defaultValue)
+  const { value, setValue, accordion, collapsible } = context;
 
   const isOpened = index ? value.includes(index) : false;
 
-  const [panelOpen, setPanelOpen] = useState(isOpened);
-
-  console.log(value, 'value0')
   const handleClick = (e: React.MouseEvent) => {
     if (collapsible === "disabled") {
       e.preventDefault();
@@ -40,22 +34,18 @@ export const Panel: React.FC<PanelProps> = (props) => {
     }
     e.stopPropagation();
 
-    console.log(value, index, index && value.includes(index), 'index')
-    if (index && value.includes(index)) {
-      console.log(value.filter(
-        (item) => item !== index
-      ), 'filter')
-      setValue(value.filter(
-        (item) => item !== index
-      ))
-    } else {
-      index && setValue(value.concat(index));
+    // 手风琴模式
+    if (accordion) {
+      setValue([index])
+      return
     }
 
-    context.onChange?.(
-      value.sort((a: string, b: string) => parseInt(a) - parseInt(b))
-    );
-    setPanelOpen(!panelOpen);
+    // 判断是否已经展开
+    if (isOpened) {
+      setValue(value.filter((item) => item !== index))
+    } else {
+      index && setValue([...value, index]);
+    }
   };
 
   const HeadClasses = classNames("Panel-head", {
@@ -63,22 +53,26 @@ export const Panel: React.FC<PanelProps> = (props) => {
   });
 
   const ChildClasses = classNames("Panel-content", className, {
-    "is-active": panelOpen,
+    "is-active": isOpened,
   });
 
   const IconClasses = classNames("Panel-icon", {
-    "is-active": panelOpen,
+    "is-active": isOpened,
   });
 
   const ContentClasses = classNames("Panel-text");
 
   useEffect(() => {
+    context.onChange?.(
+      value.sort((a: string, b: string) => parseInt(a) - parseInt(b))
+    );
+  }, [value])
+
+  useEffect(() => {
     const childElement = innerLayerRef.current;
     const parentElement = outLayerRef.current;
-    if (childElement
-      && childElement.getBoundingClientRect().height > 300
-      && parentElement) {
-      parentElement.style.maxHeight = isOpened
+    if (childElement && parentElement) {
+      parentElement.style.height = isOpened
         ? childElement?.getBoundingClientRect().height + "px"
         : '0';
     }

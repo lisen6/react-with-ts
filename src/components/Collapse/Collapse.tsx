@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { useState, createContext } from "react";
 // import { PanelProps } from "./Panel";
 
 type onChangeCallback = (val: string[]) => void;
@@ -14,14 +14,15 @@ export interface CollapseProps {
 }
 
 interface ICollapseContext {
-  defaultActiveKey: string[];
+  value: string[],
+  setValue?: any;
   onChange?: onChangeCallback;
   accordion?: Boolean;
   collapsible?: string;
 }
 
 export const CollapseContext = createContext<ICollapseContext>({
-  defaultActiveKey: [],
+  value: []
 });
 
 /**
@@ -40,13 +41,15 @@ export const Collapse: React.FC<CollapseProps> = (props) => {
     accordion,
   } = props;
 
+  const defaultValue = typeof defaultActiveKey === 'undefined' ? [] : defaultActiveKey
+  const [value, setValue] = useState(defaultValue)
+
   const handleChange = (index: string[]) => {
-    if (onChange) {
-      onChange(index);
-    }
+    onChange?.(index);
   };
   const passedContext: ICollapseContext = {
-    defaultActiveKey: defaultActiveKey || [],
+    value,
+    setValue,
     onChange: handleChange,
     accordion,
     collapsible,
