@@ -13,18 +13,65 @@ import Icon from "./components/Icon/Icon";
 
 import Input from "./components/Input/input";
 
-import AutoComplete from './components/AutoComplete/autoComplete'
+import AutoComplete, {
+  DataSourceType,
+} from "./components/AutoComplete/autoComplete";
 
 function App() {
   const [collapseValue, setCollapseValue] = useState(["1"]);
 
   const [inputValue, setInputValue] = useState("lisen.6");
 
-  const larkers = ['1111', '2222', '3333', '4444'];
-  const handleFetch = (query: string) => {
-    console.log(query)
-    return larkers.filter(item => item.includes(query))
+  // const larkers = ["1111", "2222", "3333", "4444"];
+  // const handleFetch = (query: string) => {
+  //   return larkers
+  //     .filter((item) => item.includes(query))
+  //     .map((item) => ({ value: item }));
+  // };
+
+  interface larkersProps {
+    name?: string;
+    value: string;
+    [propName: string]: any;
   }
+  const larkers = [
+    {
+      name: "lisen1",
+      value: "111",
+    },
+    {
+      name: "lisen2",
+      value: "222",
+    },
+    {
+      name: "lisen3",
+      value: "333",
+    },
+  ];
+
+  // const handleFetch = (query: string) => {
+  //   return larkers.filter((lark) => lark.name.includes(query));
+  // };
+
+  const handleFetch = (query: string) => {
+    return fetch(`https://api.github.com/search/users?q=${query}`)
+      .then((res) => res.json())
+      .then((data) => {
+        const formatItems = data.items
+          .slice(0, 10)
+          .map((item: any) => ({ ...item, value: item.login }));
+        return formatItems;
+      });
+  };
+
+  const renderOptions = (item: DataSourceType<larkersProps>) => {
+    return (
+      <>
+        <span>Name: {item.login}</span> &nbsp;
+        <span>Value: {item.value}</span>
+      </>
+    );
+  };
   return (
     <>
       <div className="Button-wrapper">
@@ -122,9 +169,17 @@ function App() {
         <br />
         <span>{inputValue}</span>
       </div>
-      <div className="autoComplete-wrapper">
-        <AutoComplete fetchSuggestions={handleFetch} onSelect={(data) => { console.log(data) }} />
+      <div className="AutoComplete-wrapper" style={{ maxWidth: 240 }}>
+        <AutoComplete
+          style={{ width: 240 }}
+          fetchSuggestions={handleFetch}
+          renderOptions={renderOptions}
+          onSelect={(data) => {
+            console.log(data);
+          }}
+        />
       </div>
+      <div style={{ height: 300 }}>11111</div>
     </>
   );
 }

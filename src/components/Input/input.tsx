@@ -16,8 +16,8 @@ type InputSize = "medium" | "small";
 
 export interface InputProps
   extends Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  "size" | "prefix" | "suffix" | "onChange"
+    InputHTMLAttributes<HTMLInputElement>,
+    "size" | "prefix" | "suffix" | "onChange"
   > {
   /** 是否可禁用 */
   disabled?: boolean;
@@ -63,6 +63,8 @@ const Input: FC<InputProps> = (props) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const [focused, setFocused] = useState(false);
+
   const names = classNames("viking-input-wrapper", {
     [`input-size-${size}`]: size,
     "is-disabled": disabled,
@@ -78,11 +80,12 @@ const Input: FC<InputProps> = (props) => {
 
   const innerProps = {
     disabled: disabled,
-    type: 'text',
+    type: "text",
     ...restProps,
   };
 
   const handleClear = (e: any) => {
+    setFocused(true);
     if (!disabled) {
       const target = inputRef.current;
       if (target) {
@@ -112,10 +115,12 @@ const Input: FC<InputProps> = (props) => {
   };
 
   const innerOnBlur: FocusEventHandler<HTMLInputElement> = (e) => {
+    setFocused(false);
     onBlur?.(e);
   };
 
   const innerOnFocus: FocusEventHandler<HTMLInputElement> = (e) => {
+    setFocused(true);
     onFocus?.(e);
   };
 
@@ -139,30 +144,31 @@ const Input: FC<InputProps> = (props) => {
     };
 
     const renderComponentWithSuffix = () => {
-      const showClear = clearable && !disabled && String(inputRef.current?.value).length > 0
+      const showClear =
+        clearable && !disabled && String(inputRef.current?.value).length > 0;
       return (
         <div className={suffixNames}>
-          {
-            showClear && <Icon
-              style={{ cursor: 'pointer' }}
+          {showClear && (
+            <Icon
+              style={{ cursor: "pointer" }}
               onClick={(e) => {
                 handleClear(e);
               }}
               icon="times-circle"
               title={`title`}
             />
-          }
-          {
-            suffix && <Icon
+          )}
+          {suffix && (
+            <Icon
               onClick={(e) => {
                 handleClear(e);
               }}
               icon={suffix}
               title={`title`}
             />
-          }
+          )}
         </div>
-      )
+      );
     };
     return (
       <div className="inner-input-wrapper">

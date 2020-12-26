@@ -1,0 +1,48 @@
+.viking-autoComplete {
+  position: relative;
+  .viking-select-dropdown-wrapper {
+    position: absolute;
+    z-index: 2000;
+    box-sizing: border-box;
+    overflow: auto;
+    max-height: 274px;
+    min-width: 100%;
+    margin-top: 5px;
+    border: solid 1px #e4e7ed;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    .viking-select-dropdown {
+      padding: 6px 0;
+      box-sizing: border-box;
+      .suggestion-item {
+        max-width: 240px;
+        height: 34px;
+        line-height: 34px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        padding: 0 20px;
+
+        box-sizing: border-box;
+        cursor: pointer;
+        &:not(.item-highlighted):hover {
+          background-color: #f5f7fa;
+          color: black;
+        }
+      }
+    }
+  }
+  .autoComplete-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100px;
+  }
+
+  .item-highlighted {
+    background: $primary;
+    color: $white;
+  }
+}

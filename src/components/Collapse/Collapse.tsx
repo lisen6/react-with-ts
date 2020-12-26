@@ -14,7 +14,7 @@ export interface CollapseProps {
 }
 
 interface ICollapseContext {
-  value: string[],
+  value: string[];
   setValue?: any;
   onChange?: onChangeCallback;
   accordion?: Boolean;
@@ -22,7 +22,7 @@ interface ICollapseContext {
 }
 
 export const CollapseContext = createContext<ICollapseContext>({
-  value: []
+  value: [],
 });
 
 /**
@@ -41,8 +41,9 @@ export const Collapse: React.FC<CollapseProps> = (props) => {
     accordion,
   } = props;
 
-  const defaultValue = typeof defaultActiveKey === 'undefined' ? [] : defaultActiveKey
-  const [value, setValue] = useState(defaultValue)
+  const defaultValue =
+    typeof defaultActiveKey === "undefined" ? [] : defaultActiveKey;
+  const [value, setValue] = useState(defaultValue);
 
   const handleChange = (index: string[]) => {
     onChange?.(index);
@@ -69,7 +70,7 @@ export const Collapse: React.FC<CollapseProps> = (props) => {
   };
 
   return (
-    <div style={{ border: "solid 1px #dcdfe6" }}>
+    <div className="viking-Collapse">
       <CollapseContext.Provider value={passedContext}>
         {renderChild()}
       </CollapseContext.Provider>
