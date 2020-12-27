@@ -1,4 +1,11 @@
-import React, { useContext, useState, useRef, useEffect, useCallback, useLayoutEffect } from "react";
+import React, {
+  useContext,
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useLayoutEffect,
+} from "react";
 import classNames from "classnames";
 import Icon from "../Icon/Icon";
 import { CollapseContext } from "./Collapse";
@@ -17,17 +24,18 @@ export interface PanelProps {
 export const Panel: React.FC<PanelProps> = (props) => {
   const { header, index, showArrow, children, style, className } = props;
 
-  const outLayerRef = useRef<HTMLDivElement>(null);
-
-  const innerLayerRef = useRef<HTMLSpanElement>(null);
-
   const context = useContext(CollapseContext);
 
   const { value, setValue, accordion, collapsible } = context;
 
+  const outLayerRef = useRef<HTMLDivElement>(null);
+
+  const innerLayerRef = useRef<HTMLSpanElement>(null);
+
+  // 判断是否处于打开模式
   const isOpened = index ? value.includes(index) : false;
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (collapsible === "disabled") {
       e.preventDefault();
       return;
@@ -36,13 +44,13 @@ export const Panel: React.FC<PanelProps> = (props) => {
 
     // 手风琴模式
     if (accordion) {
-      setValue([index])
-      return
+      setValue([index]);
+      return;
     }
 
     // 判断是否已经展开
     if (isOpened) {
-      setValue(value.filter((item) => item !== index))
+      setValue(value.filter((item) => item !== index));
     } else {
       index && setValue([...value, index]);
     }
@@ -66,7 +74,7 @@ export const Panel: React.FC<PanelProps> = (props) => {
     context.onChange?.(
       value.sort((a: string, b: string) => parseInt(a) - parseInt(b))
     );
-  }, [value])
+  }, [value]);
 
   useEffect(() => {
     const childElement = innerLayerRef.current;
@@ -74,7 +82,7 @@ export const Panel: React.FC<PanelProps> = (props) => {
     if (childElement && parentElement) {
       parentElement.style.height = isOpened
         ? childElement?.getBoundingClientRect().height + "px"
-        : '0';
+        : "0";
     }
   }, [isOpened]);
 

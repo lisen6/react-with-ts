@@ -58,6 +58,7 @@
     "@storybook/react": "^6.1.10",
     "@types/react-transition-group": "^4.4.0",
     "@types/storybook__addon-info": "^5.2.3",
+    "axios": "^0.21.1",
     "customize-cra": "^1.0.0",
     "prettier": "^2.2.1",
     "react-app-rewired": "^2.1.7",
