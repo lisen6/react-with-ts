@@ -17,10 +17,15 @@ import AutoComplete, {
   DataSourceType,
 } from "./components/AutoComplete/autoComplete";
 
+import Switch from './components/Switch/switch'
+
 function App() {
-  const [collapseValue, setCollapseValue] = useState(["1"]);
+  const [collapseValue, setCollapseValue] = useState<string[]>([]);
 
   const [inputValue, setInputValue] = useState("lisen.6");
+
+  const [switchValue, setSwitchValue] = useState(true)
+  const [switchDisabled, setSwitchDisabled] = useState(false)
 
   // const larkers = ["1111", "2222", "3333", "4444"];
   // const handleFetch = (query: string) => {
@@ -180,6 +185,16 @@ function App() {
         />
       </div>
       <div style={{ height: 300 }}>11111</div>
+      <div className="Switch-wrapper">
+        <Switch
+          defaultChecked={switchValue}
+          disabled={switchDisabled}
+          activeColor="blue"
+          inactiveColor="black"
+          size="small"
+          onChange={setSwitchValue} />
+        <Button onClick={() => setSwitchDisabled(!switchDisabled)}>{JSON.stringify(switchValue)}</Button>
+      </div>
     </>
   );
 }

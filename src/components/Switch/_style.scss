@@ -1,0 +1,91 @@
+.viking-switch {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  font-size: 14px;
+  height: 20px;
+  line-height: 20px;
+  vertical-align: middle;
+  margin: 20px 20px 20px 0;
+  cursor: pointer;
+
+  .viking-switch__input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0;
+  }
+
+  .viking-switch__core {
+    width: 40px;
+    margin: 0;
+    display: inline-block;
+    height: 20px;
+    border: solid 1px #dcdfe6;
+    outline: none;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background: #dcdfe6;
+    transition: border-color .3s background-color .3s;
+    vertical-align: middle;
+    background-color: $red;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      border-radius: 100%;
+      transition: all 0.3s;
+      width: 16px;
+      height: 16px;
+      background-color: #fff;
+    }
+  }
+
+  &.is-disabled {
+    cursor: not-allowed;
+
+    .viking-switch__core {
+      background-color: #dcdfe6;
+    }
+  }
+
+  &.is-checked {
+    .viking-switch__core {
+      background-color: $green;
+
+      &::after {
+        left: 100%;
+        margin-left: -18px;
+      }
+    }
+  }
+
+  &.viking-switch-small {
+    font-size: 12px;
+    height: 16px;
+    line-height: 16px;
+
+    .viking-switch__core {
+      width: 28px;
+      height: 16px;
+
+      &:after {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    &.is-checked {
+      .viking-switch__core {
+        background-color: $green;
+
+        &::after {
+          margin-left: -14px;
+        }
+      }
+    }
+  }
+}

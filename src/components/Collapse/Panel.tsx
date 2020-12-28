@@ -33,7 +33,8 @@ export const Panel: React.FC<PanelProps> = (props) => {
   const innerLayerRef = useRef<HTMLSpanElement>(null);
 
   // 判断是否处于打开模式
-  const isOpened = index ? value.includes(index) : false;
+  // 手风琴模式下传了 0个参数 || N个参数。只判断第一个
+  const isOpened = index ? accordion ? value[0] === index : value.includes(index) : false;
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (collapsible === "disabled") {

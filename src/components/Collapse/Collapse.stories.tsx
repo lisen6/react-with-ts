@@ -23,22 +23,14 @@ const defaultOpenCollapse = () => (
   </Collapse>
 );
 
-const nestingCollapse = () => (
+const accordionCollapse = () => (
   <Collapse
     defaultActiveKey={["1", "2"]}
+    accordion
     onChange={(index) => console.log(index, "显示已展开的面板")}
   >
     <Panel header="this is panel header 1" index="1">
       我是children1我是children1我是children1我是children1
-      <Collapse
-        defaultActiveKey={["1"]}
-        // collapsible="disabled"
-        onChange={(index) => console.log(index, "显示已展开的面板")}
-      >
-        <Panel header="this is panel header 1" index="1">
-          我是children1我是children1我是children1
-        </Panel>
-      </Collapse>
     </Panel>
     <Panel header="this is panel header 2" index="2">
       我是children2
@@ -69,5 +61,5 @@ const disabledCollapse = () => (
 
 storiesOf("Collapse Component", module)
   .add("默认展开的Collapse", defaultOpenCollapse)
-  .add("嵌套面板的Collapse", nestingCollapse)
+  .add("手风琴模式的Collapse", accordionCollapse)
   .add('禁止收缩的Collapse', disabledCollapse)
