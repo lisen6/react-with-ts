@@ -19,25 +19,25 @@ export interface InputProps
     InputHTMLAttributes<HTMLInputElement>,
     "size" | "prefix" | "suffix" | "onChange"
   > {
-  /** 是否可禁用 */
+  /** 是否禁用状态，默认为 false */
   disabled?: boolean;
-  /** 输入框大小 */
+  /** 控件大小 */
   size?: InputSize;
-  /** 输入框前置元素 */
+  /** 带标签的 input，设置前置标签 */
   addonBefore?: string | ReactElement;
-  /** 输入框后置元素 */
+  /** 带标签的 input，设置后置标签 */
   addonAfter?: string | ReactElement;
-  /** 是否支持可清空 */
+  /** 可以点击清除图标删除内容 */
   clearable?: boolean;
-  /** 输入框首部图标 */
-  suffix?: IconProp;
-  /** 输入框尾部图标 */
+  /** 带有前缀图标的 input */
   prefix?: IconProp;
-  /** 输入框值 */
+  /** 带有后缀图标的 input */
+  suffix?: IconProp;
+  /** 输入框内容 */
   value?: string;
-  /** 输入框默认值 */
+  /** 输入框默认内容 */
   defaultValue?: string;
-  /** 改变的时候触发回调函数 */
+  /** 输入框内容变化时的回调 */
   onChange?: (value: string, e?: ChangeEvent<HTMLInputElement>) => void;
 }
 

@@ -4,9 +4,9 @@ import React, { useState, createContext } from "react";
 type onChangeCallback = (val: string[]) => void;
 
 export interface CollapseProps {
-  /** 收缩的回调函数 */
+  /** 当前激活面板改变时触发 */
   onChange?: onChangeCallback;
-  /** 默认展开的数组 */
+  /** 当前激活 tab 面板的 key */
   defaultActiveKey?: string[];
   /** 手风琴模式, 是否每次只激活一个tab */
   accordion?: Boolean;
