@@ -1,7 +1,14 @@
-import React, { FC, useState, useEffect, MouseEvent, ChangeEvent, useCallback } from 'react'
-import classnames from 'classnames'
+import React, {
+  FC,
+  useState,
+  useEffect,
+  MouseEvent,
+  ChangeEvent,
+  useCallback,
+} from "react";
+import classnames from "classnames";
 
-type SwitchSize = 'default' | 'small';
+type SwitchSize = "default" | "small";
 
 export interface SwitchProps {
   /** 是否禁用 */
@@ -21,45 +28,58 @@ export interface SwitchProps {
 }
 
 export const Switch: FC<SwitchProps> = (props) => {
-  const { disabled, size, activeColor, inactiveColor, defaultChecked, checked, onChange } = props;
+  const {
+    disabled,
+    size,
+    activeColor,
+    inactiveColor,
+    defaultChecked,
+    checked,
+    onChange,
+  } = props;
 
-  const propsValue = defaultChecked ? !!defaultChecked : !!checked
+  const propsValue = defaultChecked ? !!defaultChecked : !!checked;
 
-  const [isCheck, setIsCheck] = useState(propsValue)
+  const [value, setValue] = useState(propsValue);
 
-  const classes = classnames('viking-switch', {
-    'is-checked': isCheck,
-    'is-disabled': disabled,
-    [`viking-switch-${size}`]: size === 'small'
-  })
+  const classes = classnames("viking-switch", {
+    "is-checked": value,
+    "is-disabled": disabled,
+    [`viking-switch-${size}`]: size === "small",
+  });
 
-  const handleChange = useCallback((e: ChangeEvent<HTMLElement>) => {
-    if (!disabled) {
-      setIsCheck(!isCheck)
-    }
-  }, [isCheck, disabled])
-
-  const handleClick = useCallback((e: MouseEvent<HTMLElement>) => {
-    if (!disabled) {
-      setIsCheck(!isCheck)
-    }
-  }, [isCheck, disabled])
+  const handleClick = useCallback(
+    (e: MouseEvent<HTMLElement>) => {
+      if (!disabled) {
+        setValue(!value);
+      }
+    },
+    [value, disabled]
+  );
 
   const styleComputed = () => {
-    return !!isCheck ? (activeColor || '') : (inactiveColor || '')
-  }
+    return !!value ? activeColor || "" : inactiveColor || "";
+  };
 
   useEffect(() => {
-    !disabled && onChange?.(isCheck)
-  }, [isCheck, disabled])
+    !disabled && onChange?.(value);
+  }, [value, disabled]);
 
   return (
-    <div className={classes} >
-      <input type="checkbox" checked={!!isCheck} onChange={handleChange} className="viking-switch__input" />
-      <span style={{ backgroundColor: styleComputed() }} className="viking-switch__core" onClick={handleClick}></span>
+    <div className={classes}>
+      <input
+        type="checkbox"
+        checked={!!value}
+        onChange={() => !disabled && onChange?.(!value)}
+        onClick={handleClick}
+        className="viking-switch__input"
+      />
+      <span
+        style={{ backgroundColor: styleComputed() }}
+        className="viking-switch__core"
+      ></span>
     </div>
-  )
-}
-
+  );
+};
 
 export default Switch;
