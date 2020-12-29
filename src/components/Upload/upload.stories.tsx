@@ -53,9 +53,9 @@ const SimpleUpload = () => {
       // headers={{ "X-Power-By": "shift" }}
       accept=".jpg"
       multiple
-      // drag
+      drag
     >
-      123
+      拖拽上传
     </Upload>
   );
 };

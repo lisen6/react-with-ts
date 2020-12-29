@@ -14,6 +14,11 @@ export const Dragger: FC<DraggerProps> = (props) => {
     "is-dragOver": dragOver,
   });
 
+  const handleDrop = (e: DragEvent<HTMLElement>) => {
+    e.preventDefault()
+    onFile?.(e.dataTransfer.files)
+  }
+
   const handleDrag = (e: DragEvent<HTMLElement>, over: boolean) => {
     console.log(1, over ? "我是over" : "我是leave");
     e.preventDefault();
@@ -23,7 +28,7 @@ export const Dragger: FC<DraggerProps> = (props) => {
   return (
     <div
       className={dragClass}
-      onDragEnter={(e) => console.log("我被触发了")}
+      onDrop={(e) => handleDrop(e)}
       onDragOver={(e) => handleDrag(e, true)}
       onDragLeave={(e) => handleDrag(e, false)}
     >

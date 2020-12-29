@@ -115,9 +115,13 @@
         white-space: nowrap;
       }
 
-      .viking-input-inner {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
+      .inner-input-wrapper {
+        flex: 1;
+
+        .viking-input-inner {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
       }
     }
 

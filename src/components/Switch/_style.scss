@@ -30,7 +30,6 @@
     background: #dcdfe6;
     transition: border-color 0.3s background-color 0.3s;
     vertical-align: middle;
-    background-color: $red;
 
     &:after {
       content: "";
@@ -46,7 +45,9 @@
   }
 
   &.is-disabled {
-    cursor: not-allowed;
+    .viking-switch__input {
+      cursor: not-allowed;
+    }
 
     .viking-switch__core {
       background-color: #dcdfe6;
@@ -55,7 +56,7 @@
 
   &.is-checked {
     .viking-switch__core {
-      background-color: $green;
+      background-color: $blue;
 
       &::after {
         left: 100%;
@@ -81,7 +82,7 @@
 
     &.is-checked {
       .viking-switch__core {
-        background-color: $green;
+        background-color: $blue;
 
         &::after {
           margin-left: -14px;

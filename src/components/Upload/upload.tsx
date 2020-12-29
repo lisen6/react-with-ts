@@ -105,7 +105,7 @@ export const Upload: FC<UploadProps> = (props) => {
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files) return;
-    uploadFile(files);
+    uploadFiles(files);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -122,7 +122,7 @@ export const Upload: FC<UploadProps> = (props) => {
   };
 
   // 上传文件: 判断beforeUpload生命周期是否存在。存在就执行。
-  const uploadFile = (files: FileList) => {
+  const uploadFiles = (files: FileList) => {
     let postFiles = Array.from(files);
     postFiles.forEach((file) => {
       if (!beforeUpload) {
@@ -209,22 +209,7 @@ export const Upload: FC<UploadProps> = (props) => {
             style={{ display: "inline-block" }}
             onClick={handleClick}
           >
-            {drag ? <Dragger>{children}</Dragger> : children}
-            <input
-              type="file"
-              ref={fileInputRef}
-              accept={accept}
-              multiple={multiple}
-              onChange={handleFileChange}
-              className="viking-file-input"
-              style={{ display: "none" }}
-            />
-          </div>
-        ) : (
-          <>
-            <Button btnType="primary" onClick={handleClick}>
-              Upload File
-            </Button>
+            {drag ? <Dragger onFile={(files) => { uploadFiles(files) }}>{children}</Dragger> : children}
             <input
               type="file"
               ref={fileInputRef}
@@ -235,8 +220,24 @@ export const Upload: FC<UploadProps> = (props) => {
               style={{ display: "none" }}
             />
             <UploadList fileList={fileList} onRemove={handleRemove} />
-          </>
-        )}
+          </div>
+        ) : (
+            <>
+              <Button btnType="primary" onClick={handleClick}>
+                Upload File
+            </Button>
+              <input
+                type="file"
+                ref={fileInputRef}
+                accept={accept}
+                multiple={multiple}
+                onChange={handleFileChange}
+                className="viking-file-input"
+                style={{ display: "none" }}
+              />
+              <UploadList fileList={fileList} onRemove={handleRemove} />
+            </>
+          )}
       </>
     </div>
   );

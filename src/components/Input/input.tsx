@@ -16,8 +16,8 @@ type InputSize = "medium" | "small";
 
 export interface InputProps
   extends Omit<
-    InputHTMLAttributes<HTMLInputElement>,
-    "size" | "prefix" | "suffix" | "onChange"
+  InputHTMLAttributes<HTMLInputElement>,
+  "size" | "prefix" | "suffix" | "onChange"
   > {
   /** 是否禁用状态，默认为 false */
   disabled?: boolean;
@@ -129,7 +129,7 @@ const Input: FC<InputProps> = (props) => {
     onCompositionEnd: innerOnChange,
     onChange: innerOnChange,
     onBlur: innerOnBlur,
-    onFocus: innerOnFocus,
+    onFocus: innerOnFocus
   };
 
   const renderInput = () => {
@@ -145,7 +145,7 @@ const Input: FC<InputProps> = (props) => {
 
     const renderComponentWithSuffix = () => {
       const showClear =
-        clearable && !disabled && String(inputRef.current?.value).length > 0;
+        clearable && !disabled && inputRef.current && String(inputRef.current?.value).length > 0;
       return (
         <div className={suffixNames}>
           {showClear && (
@@ -185,6 +185,7 @@ const Input: FC<InputProps> = (props) => {
     );
   };
 
+  console.log(inputRef.current)
   useEffect(() => {
     if (
       typeof propsValue !== "undefined" &&

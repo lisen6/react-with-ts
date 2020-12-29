@@ -124,7 +124,7 @@ function App() {
       <div className="Collapse-wrapper" style={{ maxWidth: 800 }}>
         <Collapse
           defaultActiveKey={collapseValue}
-          accordion
+          // accordion
           onChange={(val: string[]) => {
             setCollapseValue(val);
           }}
@@ -145,7 +145,7 @@ function App() {
           <Panel header="this is panel header 2" index="2">
             我是children2
           </Panel>
-          <Panel showArrow={false} header="this is panel header 3" index="3">
+          <Panel header="this is panel header 3" index="3">
             我是children3
           </Panel>
         </Collapse>
@@ -186,12 +186,13 @@ function App() {
       </div>
       <div style={{ height: 300 }}>11111</div>
       <div className="Switch-wrapper">
+        lisen
         <Switch
           defaultChecked={switchValue}
           disabled={switchDisabled}
-          activeColor="blue"
-          inactiveColor="black"
-          size="small"
+          // activeColor="blue"
+          // inactiveColor="black"
+          // size="small"
           onChange={setSwitchValue}
         />
         <Button onClick={() => setSwitchDisabled(!switchDisabled)}>

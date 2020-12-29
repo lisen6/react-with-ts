@@ -1,8 +1,10 @@
 .viking-Collapse {
   border: solid $panel-item-border-width $panel-item-border-color;
   border-bottom: none;
+
   .collapse-item {
     border-bottom: solid $panel-item-border-width $panel-item-border-color;
+
     .Panel-head {
       display: flex;
       align-items: center;
@@ -16,12 +18,12 @@
 
       svg {
         margin-right: 10px;
-        transform: rotate(-90deg);
+        transform: rotate(-180deg);
         transform-origin: center;
         transition: transform 0.3s;
 
         &.is-active {
-          transform: rotate(0);
+          transform: rotate(-90deg);
         }
       }
     }

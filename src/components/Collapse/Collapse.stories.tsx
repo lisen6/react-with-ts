@@ -17,7 +17,7 @@ const defaultOpenCollapse = () => (
     <Panel header="this is panel header 2" index="2">
       我是children2
     </Panel>
-    <Panel showArrow={false} header="this is panel header 3" index="3">
+    <Panel header="this is panel header 3" index="3">
       我是children3
     </Panel>
   </Collapse>
@@ -35,7 +35,7 @@ const accordionCollapse = () => (
     <Panel header="this is panel header 2" index="2">
       我是children2
     </Panel>
-    <Panel showArrow={false} header="this is panel header 3" index="3">
+    <Panel header="this is panel header 3" index="3">
       我是children3
     </Panel>
   </Collapse>
@@ -53,7 +53,7 @@ const disabledCollapse = () => (
     <Panel header="this is panel header 2" index="2">
       我是children2
     </Panel>
-    <Panel showArrow={false} header="this is panel header 3" index="3">
+    <Panel header="this is panel header 3" index="3">
       我是children3
     </Panel>
   </Collapse>

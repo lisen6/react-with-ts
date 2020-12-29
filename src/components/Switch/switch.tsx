@@ -3,7 +3,6 @@ import React, {
   useState,
   useEffect,
   MouseEvent,
-  ChangeEvent,
   useCallback,
 } from "react";
 import classnames from "classnames";
@@ -50,36 +49,40 @@ export const Switch: FC<SwitchProps> = (props) => {
 
   const handleClick = useCallback(
     (e: MouseEvent<HTMLElement>) => {
-      if (!disabled) {
-        setValue(!value);
-      }
+      setValue(!value);
     },
-    [value, disabled]
+    [value]
   );
 
   const styleComputed = () => {
-    return !!value ? activeColor || "" : inactiveColor || "";
+    if (!disabled) {
+      return !!value ? { backgroundColor: activeColor } : { backgroundColor: inactiveColor };
+    }
+    return !!value ? { backgroundColor: activeColor, opacity: 0.5 } : { backgroundColor: inactiveColor, opacity: 0.5 };
   };
 
   useEffect(() => {
-    !disabled && onChange?.(value);
-  }, [value, disabled]);
+    onChange?.(value);
+  }, [value]);
 
   return (
     <div className={classes}>
       <input
         type="checkbox"
+        disabled={!!disabled}
         checked={!!value}
         onChange={() => !disabled && onChange?.(!value)}
         onClick={handleClick}
         className="viking-switch__input"
       />
       <span
-        style={{ backgroundColor: styleComputed() }}
+        style={styleComputed()}
         className="viking-switch__core"
-      ></span>
+      />
     </div>
   );
 };
+
+Switch.displayName = 'Switch'
 
 export default Switch;
