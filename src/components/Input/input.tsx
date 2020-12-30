@@ -16,8 +16,8 @@ type InputSize = "medium" | "small";
 
 export interface InputProps
   extends Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  "size" | "prefix" | "suffix" | "onChange"
+    InputHTMLAttributes<HTMLInputElement>,
+    "size" | "prefix" | "suffix" | "onChange"
   > {
   /** 是否禁用状态，默认为 false */
   disabled?: boolean;
@@ -78,12 +78,6 @@ const Input: FC<InputProps> = (props) => {
   const prefixNames = classNames("input__prefix");
   const suffixNames = classNames("input__suffix");
 
-  const innerProps = {
-    disabled: disabled,
-    type: "text",
-    ...restProps,
-  };
-
   const handleClear = (e: any) => {
     setFocused(true);
     if (!disabled) {
@@ -124,12 +118,18 @@ const Input: FC<InputProps> = (props) => {
     onFocus?.(e);
   };
 
+  const innerProps = {
+    disabled: disabled,
+    type: "text",
+    ...restProps,
+  };
+
   const inputEvents = {
     onCompositionStart: innerOnChange,
     onCompositionEnd: innerOnChange,
     onChange: innerOnChange,
     onBlur: innerOnBlur,
-    onFocus: innerOnFocus
+    onFocus: innerOnFocus,
   };
 
   const renderInput = () => {
@@ -145,27 +145,19 @@ const Input: FC<InputProps> = (props) => {
 
     const renderComponentWithSuffix = () => {
       const showClear =
-        clearable && !disabled && inputRef.current && String(inputRef.current?.value).length > 0;
+        clearable && String(inputRef.current?.value || "").length > 0;
       return (
         <div className={suffixNames}>
-          {showClear && (
+          {showClear && !disabled && (
             <Icon
               style={{ cursor: "pointer" }}
-              onClick={(e) => {
-                handleClear(e);
-              }}
+              onClick={handleClear}
               icon="times-circle"
               title={`title`}
             />
           )}
           {suffix && (
-            <Icon
-              onClick={(e) => {
-                handleClear(e);
-              }}
-              icon={suffix}
-              title={`title`}
-            />
+            <Icon onClick={handleClear} icon={suffix} title={`title`} />
           )}
         </div>
       );
@@ -185,7 +177,6 @@ const Input: FC<InputProps> = (props) => {
     );
   };
 
-  console.log(inputRef.current)
   useEffect(() => {
     if (
       typeof propsValue !== "undefined" &&

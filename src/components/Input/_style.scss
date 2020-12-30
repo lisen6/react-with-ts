@@ -1,6 +1,5 @@
 .viking-input-wrapper {
-  width: 180px;
-
+  max-width: 600px;
   position: relative;
   font-size: 14px;
   display: inline-block;
@@ -17,7 +16,7 @@
   .viking-input-inner {
     display: inline-block;
     width: 100%;
-    @include Input-size(40px, 40px);
+    @include Input-size(32px, 32px);
     padding: 0 15px;
     border-radius: 4px;
     border: solid 1px #dcdfe6;
@@ -46,7 +45,7 @@
       height: 100%;
       left: 10px;
       top: 0;
-      @include Input-size(0, 40px);
+      @include Input-size(0, 32px);
       text-align: center;
       color: #c0c4cc;
       transition: all 0.3s;
@@ -74,7 +73,7 @@
         height: 100%;
         right: 10px;
         top: 0;
-        @include Input-size(0, 40px);
+        @include Input-size(0, 32px);
         text-align: center;
         color: #c0c4cc;
         transition: all 0.3s;
@@ -85,7 +84,7 @@
           font-size: 14px;
           transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 
-          +.icon {
+          + .icon {
             margin-left: 5px;
           }
         }
@@ -156,13 +155,13 @@
 
   .viking-input-inner {
     font-size: inherit;
-    @include Input-size(36px, 36px)
+    @include Input-size(28px, 28px);
   }
 
   &.input--prefix {
     .inner-input-wrapper {
       .input__prefix {
-        @include Input-size(36px, 36px)
+        @include Input-size(28px, 28px);
       }
     }
   }
@@ -170,7 +169,7 @@
   &.input--suffix {
     .inner-input-wrapper {
       .input__suffix {
-        @include Input-size(36px, 36px)
+        @include Input-size(36px, 36px);
       }
     }
   }
@@ -181,13 +180,13 @@
 
   .viking-input-inner {
     font-size: inherit;
-    @include Input-size(28px, 28px)
+    @include Input-size(28px, 28px);
   }
 
   &.input--prefix {
     .inner-input-wrapper {
       .input__prefix {
-        @include Input-size(28px, 28px)
+        @include Input-size(28px, 28px);
       }
     }
   }
@@ -195,7 +194,7 @@
   &.input--suffix {
     .inner-input-wrapper {
       .input__suffix {
-        @include Input-size(28px, 28px)
+        @include Input-size(28px, 28px);
       }
     }
   }
