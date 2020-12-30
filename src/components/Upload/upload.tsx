@@ -210,6 +210,7 @@ export const Upload: FC<UploadProps> = (props) => {
             onClick={handleClick}
           >
             {drag ? <Dragger onFile={(files) => { uploadFiles(files) }}>{children}</Dragger> : children}
+            <UploadList fileList={fileList} onRemove={handleRemove} />
             <input
               type="file"
               ref={fileInputRef}
@@ -219,7 +220,6 @@ export const Upload: FC<UploadProps> = (props) => {
               className="viking-file-input"
               style={{ display: "none" }}
             />
-            <UploadList fileList={fileList} onRemove={handleRemove} />
           </div>
         ) : (
             <>

@@ -60,7 +60,7 @@
   }
 }
 
-@mixin Input-size($height, $line-height) {
+@mixin Input-size($height) {
   height: $height;
-  line-height: $line-height;
+  line-height: $height;
 }

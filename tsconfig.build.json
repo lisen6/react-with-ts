@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    // 输出目录
+    "outDir": "build",
+    // 输出的代码类型
+    "module": "esnext",
+    // 确定使用的es版本(polyfill)
+    "target": "ES5",
+    // 为每一个js文件生成d.ts文件
+    "declaration": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    // 支持import default
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "src"
+  ],
+  // 两个**符号代表任意长度
+  "exclude": [
+    "src/**/*.test.tsx",
+    "src/**/*.stories.tsx"
+  ]
+}

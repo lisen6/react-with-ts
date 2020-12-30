@@ -16,8 +16,8 @@ type InputSize = "medium" | "small";
 
 export interface InputProps
   extends Omit<
-    InputHTMLAttributes<HTMLInputElement>,
-    "size" | "prefix" | "suffix" | "onChange"
+  InputHTMLAttributes<HTMLInputElement>,
+  "size" | "prefix" | "suffix" | "onChange"
   > {
   /** 是否禁用状态，默认为 false */
   disabled?: boolean;
@@ -150,14 +150,13 @@ const Input: FC<InputProps> = (props) => {
         <div className={suffixNames}>
           {showClear && !disabled && (
             <Icon
-              style={{ cursor: "pointer" }}
+              className={"clear-icon"}
               onClick={handleClear}
               icon="times-circle"
-              title={`title`}
             />
           )}
           {suffix && (
-            <Icon onClick={handleClear} icon={suffix} title={`title`} />
+            <Icon onClick={handleClear} icon={suffix} />
           )}
         </div>
       );
