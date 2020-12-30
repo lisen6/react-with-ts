@@ -42,7 +42,7 @@ export const Panel: React.FC<PanelProps> = (props) => {
 
     // 手风琴模式
     if (accordion) {
-      setValue([index]);
+      isOpened ? setValue([]) : setValue([index]);
       return;
     }
 

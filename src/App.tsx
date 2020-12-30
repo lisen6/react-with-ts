@@ -124,7 +124,7 @@ function App() {
       <div className="Collapse-wrapper" style={{ maxWidth: 800 }}>
         <Collapse
           defaultActiveKey={collapseValue}
-          // accordion
+          accordion
           onChange={(val: string[]) => {
             setCollapseValue(val);
           }}
