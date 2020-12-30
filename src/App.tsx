@@ -131,8 +131,7 @@ function App() {
         >
           <Panel header="this is panel header 1" index="1">
             我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1我是children1
-            {/* <Collapse
-              // defaultActiveKey={["1"]}
+            <Collapse
               onChange={(index: string[]) =>
                 console.log(index, "显示已展开的面板2")
               }
@@ -140,7 +139,7 @@ function App() {
               <Panel header="this is panel header 2" index="1">
                 我是children2
               </Panel>
-            </Collapse> */}
+            </Collapse>
           </Panel>
           <Panel header="this is panel header 2" index="2">
             我是children2
@@ -184,7 +183,7 @@ function App() {
           }}
         />
       </div>
-      <div style={{ height: 300 }}>11111</div>
+      <div style={{ height: 200 }}>11111</div>
       <div className="Switch-wrapper">
         lisen
         <Switch

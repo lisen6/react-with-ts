@@ -1,11 +1,4 @@
-import React, {
-  useContext,
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  useLayoutEffect,
-} from "react";
+import React, { useContext, useRef, useEffect, useCallback } from "react";
 import classNames from "classnames";
 import Icon from "../Icon/Icon";
 import { CollapseContext } from "./Collapse";
@@ -34,7 +27,11 @@ export const Panel: React.FC<PanelProps> = (props) => {
 
   // 判断是否处于打开模式
   // 手风琴模式下传了 0个参数 || N个参数。只判断第一个
-  const isOpened = index ? accordion ? value[0] === index : value.includes(index) : false;
+  const isOpened = index
+    ? accordion
+      ? value[0] === index
+      : value.includes(index)
+    : false;
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (collapsible === "disabled") {
@@ -71,21 +68,25 @@ export const Panel: React.FC<PanelProps> = (props) => {
 
   const ContentClasses = classNames("Panel-text");
 
+  // const recalculateHeight = useCallback(() => {
+  //   const childElement = innerLayerRef.current;
+  //   const parentElement = outLayerRef.current;
+  //   if (childElement && parentElement) {
+  //     parentElement.style.height = isOpened
+  //       ? childElement?.getBoundingClientRect().height + "px"
+  //       : "0";
+  //   }
+  // }, [isOpened, innerLayerRef.current, outLayerRef.current]);
+
   useEffect(() => {
     context.onChange?.(
       value.sort((a: string, b: string) => parseInt(a) - parseInt(b))
     );
   }, [value]);
 
-  useEffect(() => {
-    const childElement = innerLayerRef.current;
-    const parentElement = outLayerRef.current;
-    if (childElement && parentElement) {
-      parentElement.style.height = isOpened
-        ? childElement?.getBoundingClientRect().height + "px"
-        : "0";
-    }
-  }, [isOpened]);
+  // useEffect(() => {
+  //   // recalculateHeight();
+  // }, [recalculateHeight]);
 
   return (
     <div className="collapse-item">

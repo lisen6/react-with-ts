@@ -30,12 +30,13 @@
 
     .Panel-content {
       box-sizing: border-box;
-      height: 0;
+      max-height: 0;
       overflow: hidden;
-      transition: height 0.2s;
+      transition: all 0.2s ease-out;
 
       &.is-active {
-        // height: 50px;
+        max-height: 550px;
+        transition: all 0.2s ease-in;
       }
 
       .Panel-text {
