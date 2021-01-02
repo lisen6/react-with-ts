@@ -1,6 +1,5 @@
 import React, { createContext, useState } from "react";
 import classNames from "classnames";
-import { MenuItemProps } from './menuItem'
 
 type MenuMode = "horizontal" | "vertical";
 type SelectCallback = (selectedIndex: string) => void;

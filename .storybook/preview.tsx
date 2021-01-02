@@ -1,6 +1,6 @@
 import React from "react";
 import "../src/styles/index.scss";
-import { addDecorator, addParameters } from "@storybook/react";
+import { addDecorator, addParameters, configure } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 
 export const parameters = {
@@ -15,6 +15,16 @@ const wrapperStyle = {
 const storyWrapper = (storyFn) => <div style={wrapperStyle}>{storyFn()}</div>;
 
 addDecorator(storyWrapper);
-addDecorator(withInfo);
-
+addDecorator(withInfo as any);
 addParameters({ info: { inline: true, header: false } });
+
+const loaderFn = () => {
+  const allExports = [require('../src/welcome.stories.tsx')];
+  const req = require.context('../src/components', true, /\.stories\.tsx$/)
+  req.keys().forEach(fname => allExports.push(req(fname)));
+  return allExports
+}
+
+configure(loaderFn, module)
+
+

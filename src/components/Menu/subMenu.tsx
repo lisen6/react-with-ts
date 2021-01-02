@@ -3,8 +3,6 @@ import classNames from "classnames";
 import { MenuContext } from "./menu";
 import Icon from "../Icon/Icon";
 
-import Transition from "../Transition/transition";
-// import { CSSTransition } from 'react-transition-group'
 export interface SubMenuProps {
   /** 菜单项的索引。不能重复 */
   index?: string;
@@ -44,20 +42,20 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
   const clickEvents =
     context.mode === "vertical"
       ? {
-          onClick: handleClick,
-        }
+        onClick: handleClick,
+      }
       : {};
 
   const hoverEvents =
     context.mode !== "vertical"
       ? {
-          onMouseEnter: (e: React.MouseEvent) => {
-            handleMouse(e, true);
-          },
-          onMouseLeave: (e: React.MouseEvent) => {
-            handleMouse(e, false);
-          },
-        }
+        onMouseEnter: (e: React.MouseEvent) => {
+          handleMouse(e, true);
+        },
+        onMouseLeave: (e: React.MouseEvent) => {
+          handleMouse(e, false);
+        },
+      }
       : {};
   const renderChildren = () => {
     const subMenuClasses = classNames("submenu", {

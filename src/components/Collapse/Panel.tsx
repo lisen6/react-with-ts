@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect, useCallback } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import classNames from "classnames";
 import Icon from "../Icon/Icon";
 import { CollapseContext } from "./Collapse";
