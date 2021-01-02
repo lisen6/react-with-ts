@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     // 输出目录
-    "outDir": "build",
+    "outDir": "dist",
     // 输出的代码类型
     "module": "esnext",
     // 确定使用的es版本(polyfill)

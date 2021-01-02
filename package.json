@@ -1,47 +1,61 @@
 {
-  "name": "vikingship",
+  "name": "react-fe",
   "version": "0.1.0",
-  "private": true,
-  "main": "build/index.js",
-  "module": "build/index.js",
-  "types": "build/index.d.ts",
+  "description": "React components library",
+  "author": "Sen Li",
+  "private": false,
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "keywords": [
+    "Component",
+    "UI",
+    "React"
+  ],
+  "homepage": "https://github.com/vayne1Q/react-with-ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vayne1Q/react-with-ts"
+  },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
-    "@commitlint/cli": "^11.0.0",
-    "@commitlint/config-conventional": "^11.0.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.13",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/classnames": "^2.2.11",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.53",
-    "@types/react-dom": "^16.9.8",
     "babel-loader": "8.1.0",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
-    "node-sass": "^4.14.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "4.0.0",
     "react-transition-group": "^4.4.1",
-    "sass": "^1.29.0",
-    "sass-loader": "^10.1.0",
-    "typescript": "4.0.3",
     "web-vitals": "^0.2.4"
+  },
+  "peerDependencies": {
+    "react": ">= 17.0.1",
+    "react-dom": ">= 17.0.1"
   },
   "scripts": {
     "dev": "react-scripts start",
-    "dev-chain": "react-app-rewired start",
-    "clean": "rimraf ./build",
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public",
+    "clean": "rimraf ./dist",
+    "lint": "eslint --ext js,ts,tsx src --max-warnings 30",
     "build": "npm run clean && npm run build-ts && npm run build-css",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "test:nowatch": "cross-env CI=true react-scripts test",
     "build-ts": "tsc -p tsconfig.build.json",
-    "build-css": "node-sass ./src/styles/index.scss ./build/index.css",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-css": "node-sass ./src/styles/index.scss ./dist/index.css",
+    "prepublish": "npm run test:nowatch && npm run lint &&npm run build"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test:nowatch && npm run lint"
+    }
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "browserslist": {
     "production": [
@@ -63,13 +77,28 @@
     "@storybook/node-logger": "^6.1.10",
     "@storybook/preset-create-react-app": "^3.1.5",
     "@storybook/react": "^6.1.10",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/classnames": "^2.2.11",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.53",
+    "@types/react-dom": "^16.9.8",
     "@types/react-transition-group": "^4.4.0",
     "@types/storybook__addon-info": "^5.2.3",
-    "axios": "^0.21.1",
     "customize-cra": "^1.0.0",
+    "husky": "^4.3.6",
+    "node-sass": "^4.14.1",
     "prettier": "^2.2.1",
+    "react": "^17.0.1",
     "react-app-rewired": "^2.1.7",
     "react-docgen-typescript-loader": "^3.7.2",
-    "rimraf": "^3.0.2"
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.0",
+    "rimraf": "^3.0.2",
+    "sass": "^1.29.0",
+    "sass-loader": "^10.1.0",
+    "typescript": "4.0.3"
   }
 }

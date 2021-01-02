@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, cleanup } from '@testing-library/react'
-import Button, { ButtonType } from './button'
+import Button from './button'
 
 afterEach(cleanup)
 
@@ -15,7 +15,7 @@ describe('test Button component', () => {
 
   test('should render a link when btnType equals link and href is provided', () => {
     const wrapper = render(
-      <Button href="www.baidu.com" btnType={ButtonType.Link}>
+      <Button href="www.baidu.com" btnType="link">
         Nice
       </Button>
     )
