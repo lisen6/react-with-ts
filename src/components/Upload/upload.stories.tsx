@@ -2,6 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { Upload, UploadFile } from "./upload";
+import Icon from "../Icon/Icon";
 
 const defaultFileList: UploadFile[] = [
   {
@@ -40,7 +41,7 @@ const filePromise = (file: File) => {
   return Promise.resolve(newFile);
 };
 
-const SimpleUpload = () => {
+const ClickUpload = () => {
   return (
     <Upload
       // action="https://jsonplaceholder.typicode.com/posts/"
@@ -49,15 +50,45 @@ const SimpleUpload = () => {
       defaultFileList={defaultFileList}
       onRemove={action("removed")}
       name="fileName"
-      // data={{ key: "val" }}
-      // headers={{ "X-Power-By": "shift" }}
+      data={{ key: "testValue" }}
+      headers={{ "X-Power-By": "shift" }}
+      accept=".jpg"
+      multiple
+    />
+  );
+};
+
+const DragUpload = () => {
+  return (
+    <Upload
+      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+      onChange={action("change")}
+      // defaultFileList={defaultFileList}
+      onRemove={action("removed")}
+      name="fileName"
+      data={{ key: "val" }}
+      headers={{ "X-Power-By": "shift" }}
       accept=".jpg"
       multiple
       drag
     >
-      拖拽上传
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Icon icon="upload" theme="primary" size="4x" />
+        <span style={{ marginTop: 15 }}>
+          将文件拖到此处，或<span style={{ color: "#409eff" }}>点击上传</span>
+        </span>
+      </div>
     </Upload>
   );
 };
 
-storiesOf("Upload component", module).add("Upload", SimpleUpload);
+storiesOf("Upload component", module)
+  .add("点击上传", ClickUpload)
+  .add("拖拽上传", DragUpload);

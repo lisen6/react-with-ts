@@ -21,6 +21,7 @@
         transform: rotate(-180deg);
         transform-origin: center;
         transition: transform 0.3s;
+        color: #ccc;
 
         &.is-active {
           transform: rotate(-90deg);
