@@ -9,7 +9,7 @@
   vertical-align: middle;
   background-image: none;
   border: $btn-border-width solid transparent;
-  @include Button-size($btn-padding-y,
+  @include button-size($btn-padding-y,
     $btn-padding-x,
     $btn-font-size,
     $border-radius);
@@ -33,29 +33,29 @@
 }
 
 .btn-lg {
-  @include Button-size($btn-padding-y-lg,
+  @include button-size($btn-padding-y-lg,
     $btn-padding-x-lg,
     $btn-font-size,
     $border-radius);
 }
 
 .btn-sm {
-  @include Button-size($btn-padding-y-sm,
+  @include button-size($btn-padding-y-sm,
     $btn-padding-x-sm,
     $btn-font-size-sm,
     $border-radius);
 }
 
 .btn-primary {
-  @include Button-style($primary, $primary, $white);
+  @include button-style($primary, $primary, $white);
 }
 
 .btn-danger {
-  @include Button-style($danger, $danger, $white);
+  @include button-style($danger, $danger, $white);
 }
 
 .btn-default {
-  @include Button-style($white,
+  @include button-style($white,
     $gray-400,
     $body-color,
     $white,

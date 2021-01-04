@@ -1,12 +1,13 @@
 .menu {
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   padding-left: 0;
-  border-bottom: $menu-border-width solid $menu-border-color;
-  // box-shadow: $menu-box-shadow;
+  margin-bottom: 30px;
   list-style: none;
+  border-bottom: $menu-border-width solid $menu-border-color;
+  box-shadow: $menu-box-shadow;
 
-  .menu-item {
+  >.menu-item {
     padding: $menu-item-padding-y $menu-item-padding-x;
     cursor: pointer;
     transition: $menu-transition;
@@ -18,49 +19,38 @@
 
     &.is-disabled {
       color: $menu-item-disabled-color;
-      cursor: default;
       pointer-events: none;
+      cursor: default;
     }
 
     &.is-active,
     &:hover {
       color: $menu-item-active-color;
-      border-bottom: $menu-item-active-border-width solid
-        $menu-item-active-color;
+      border-bottom: $menu-item-active-border-width solid $menu-item-active-color;
     }
   }
 
   .submenu-item {
     position: relative;
-    padding: $menu-item-padding-y $menu-item-padding-x;
 
     .submenu-title {
       display: flex;
       align-items: center;
     }
 
-    ul {
-      box-sizing: border-box;
-      background: $white;
-      padding-top: 0.5rem;
-
-      li {
-        list-style: none;
-      }
-    }
-
     .arrow-icon {
+      transition: transform .25s ease-in-out;
       margin-left: 3px;
-      transition: transform 0.3s ease-out;
     }
 
     &:hover {
       .arrow-icon {
-        transform: rotate(-180deg);
+        transform: rotate(180deg);
       }
     }
   }
 
+  // 覆盖垂直模式时的hover状态
   .is-vertical {
     .arrow-icon {
       transform: rotate(0deg) !important;
@@ -69,16 +59,19 @@
 
   .is-vertical.is-opened {
     .arrow-icon {
-      transform: rotate(-180deg) !important;
+      transform: rotate(180deg) !important;
     }
   }
 
-  .submenu {
+  .menu-submenu {
+    opacity: 0;
+    // display: none;
     list-style: none;
     padding-left: 0;
     white-space: nowrap;
-    display: none;
+    transition: opacity 0.4s ease-in;
 
+    // transition: $menu-transition;
     .menu-item {
       padding: $menu-item-padding-y $menu-item-padding-x;
       cursor: pointer;
@@ -92,32 +85,25 @@
     }
   }
 
-  .menu-opened {
+  .menu-submenu.menu-opened {
     display: block;
+    opacity: 1;
   }
 }
 
 .menu-horizontal {
-  > .menu-item {
+  >.menu-item {
     border-bottom: $menu-item-active-border-width solid transparent;
-    position: relative;
   }
 
-  .submenu {
+  .menu-submenu {
     position: absolute;
     background: $white;
     z-index: 100;
-    top: calc(100%);
-    left: -5%;
-    border: 1px solid $gray-400;
-
-    > .menu-item {
-      border-bottom: $menu-item-active-border-width solid transparent;
-      &.is-active {
-        border-bottom: $menu-item-active-border-width solid
-          $menu-item-active-color;
-      }
-    }
+    top: calc(100% + 8px);
+    left: 0;
+    border: $menu-border-width solid $menu-border-color;
+    box-shadow: $submenu-box-shadow;
   }
 }
 
@@ -126,20 +112,12 @@
   border-bottom: 0;
   border-right: $menu-border-width solid $menu-border-color;
 
-  .submenu {
-    position: relative;
-    background: $white;
-    z-index: 100;
-    top: 0;
-    padding-top: $menu-item-padding-y;
-  }
-
   .menu-item {
     border-left: $menu-item-active-border-width solid transparent;
 
     &.is-active,
     &:hover {
-      border-bottom: 0px;
+      border-bottom: 0;
       border-left: $menu-item-active-border-width solid $menu-item-active-color;
     }
   }

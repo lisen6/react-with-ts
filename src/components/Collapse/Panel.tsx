@@ -91,7 +91,7 @@ export const Panel: React.FC<PanelProps> = (props) => {
   return (
     <div className="collapse-item">
       <div onClick={handleClick} className={HeadClasses}>
-        {showArrow && <Icon icon="chevron-left" className={IconClasses} />}
+        {showArrow && <Icon icon="chevron-left" className={IconClasses} size="1x" />}
         {header}
       </div>
 

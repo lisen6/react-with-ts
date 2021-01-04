@@ -82,7 +82,7 @@ const DragUpload = () => {
       >
         <Icon icon="upload" theme="primary" size="4x" />
         <span style={{ marginTop: 15 }}>
-          将文件拖到此处，或<span style={{ color: "#409eff" }}>点击上传</span>
+          将文件拖到此处，或<span style={{ color: "#409eff" }}> 点击上传 </span>
         </span>
       </div>
     </Upload>

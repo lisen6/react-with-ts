@@ -1,29 +1,34 @@
-import React, { Children } from 'react'
-import classNames from 'classnames'
-import { CSSTransition } from 'react-transition-group'
-import { CSSTransitionProps } from 'react-transition-group/CSSTransition'
+import React from 'react';
+import { CSSTransition } from 'react-transition-group';
+import { CSSTransitionProps } from 'react-transition-group/CSSTransition';
 
-export type AnimationName = 'zoom-in-top' | 'zoom-in-bottom' | 'zoom-in-left' | 'zoom-in-right'
+type AnimationName = 'zoom-in-top' | 'zoom-in-left' | 'zoom-in-bottom' | 'zoom-in-right';
 
-export interface TransitionProps {
-  animation?: AnimationName;
-  className?: string;
+
+// 额外加属性
+
+// 旧版本这种写法 @types/react-transition-group 4.2.3
+// interface TransitionProps extends CSSTransitionProps {
+//     animation?: AnimationName,
+//     wrapper? : boolean,
+// }
+// @types/react-transition-group 4.2.4 以后
+type TransitionProps = CSSTransitionProps & {
+  animation?: AnimationName,
+  wrapper?: boolean, // 是否外面加一层嵌套 因为有的组件本身有动画 如果加 Transition 就不起作用
 }
-
-type ITransitionProps = TransitionProps & CSSTransitionProps
-
-const Transition: React.FC<ITransitionProps> = (props) => {
-  const { children, className, animation, ...restProps } = props;
+const Transition: React.FC<TransitionProps> = (props) => {
+  const { children, classNames, animation, wrapper, ...restProps } = props;
   return (
-    <CSSTransition {...restProps} className={className ? className : animation}>
-      {children}
+    <CSSTransition classNames={classNames ? classNames : animation} {...restProps}>
+      {wrapper ? <div>{children}</div> : children}
     </CSSTransition>
-  )
-}
+  );
+};
 
 Transition.defaultProps = {
+  unmountOnExit: true,
   appear: true,
-  unmountOnExit: true
-}
+};
 
-export default Transition
+export default Transition;

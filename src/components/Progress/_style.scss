@@ -1,12 +1,14 @@
 .viking-progress-bar {
   width: 100%;
   box-sizing: border-box;
+
   .viking-progress-bar-outer {
     position: relative;
-    border-radius: $progress-border-radius;
+    border-radius: 100px;
     background-color: $progress-bg;
     overflow: hidden;
   }
+
   .viking-progress-bar-inner {
     position: absolute;
     left: 0;
@@ -15,16 +17,19 @@
     justify-content: flex-end;
     align-items: center;
     height: 100%;
-    border-radius: $progress-border-radius;
+    border-radius: 100px;
     line-height: 1;
     transition: $progress-bar-transition;
+
     .inner-text {
       color: $progress-bar-color;
       font-size: $progress-font-size;
       margin: 0 5px;
     }
   }
-  @each $key, $val in $theme-colors {
+
+  @each $key,
+  $val in $theme-colors {
     .color-#{$key} {
       background-color: $val;
     }
