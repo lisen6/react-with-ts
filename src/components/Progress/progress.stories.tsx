@@ -5,7 +5,7 @@ import Progress from "./progress";
 import Button from '../Button/button'
 
 const simpleProgress = () => {
-  return <Progress percentage={10} showText={false} />
+  return <Progress style={{ width: 500 }} percentage={10} showText={false} />
 }
 
 
@@ -38,11 +38,11 @@ const customColorMethod = (percentage: any) => {
   }
 }
 const customColorsProgress = () => {
-  return <>
+  return <div style={{ width: 500 }}>
     <Progress customColors={`#17a2b8`} style={{ marginTop: 10 }} percentage={20} theme="secondary" strokeHeight={20} />
     <Progress customColors={customColors} style={{ marginTop: 10 }} percentage={40} theme="secondary" strokeHeight={20} />
     <Progress customColors={customColorMethod} style={{ marginTop: 10 }} percentage={60} theme="dark" strokeHeight={20} />
-  </>
+  </div>
 }
 
 storiesOf('Progress component', module)

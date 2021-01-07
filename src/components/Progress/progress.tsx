@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { ThemeProps } from "../Icon/Icon";
 
 interface colorProps {
@@ -25,7 +25,7 @@ export const Progress: FC<ProgressProps> = (props) => {
 
   const [barColor, setBarColor] = useState<string>('')
 
-  useEffect(() => {
+  const renderDiffColorProgress = useCallback(() => {
     if (typeof customColors === 'string') {
       setBarColor(customColors)
     } else if (Array.isArray(customColors)) {
@@ -37,9 +37,12 @@ export const Progress: FC<ProgressProps> = (props) => {
       }
       setBarColor(renderColor)
     } else if (typeof customColors === 'function') {
-      let renderColor = customColors(percentage)
-      setBarColor(renderColor)
+      setBarColor(customColors(percentage))
     }
+  }, [percentage, customColors])
+
+  useEffect(() => {
+    renderDiffColorProgress()
   }, [percentage, customColors])
 
   return (
