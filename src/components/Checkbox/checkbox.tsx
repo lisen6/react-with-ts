@@ -23,51 +23,48 @@ export interface OptionProps
   value?: any;
   [key: string]: any;
 }
-export interface RadioProps extends OptionProps {
+
+export interface CheckboxProps extends OptionProps {
   value?: any;
   defaultValue?: any;
   onChange?: (val: any, e: ChangeEvent) => void;
   options?: OptionProps[];
 }
 
-interface RadioInnerProps extends Omit<RadioProps, "onChange"> {
+interface CheckboxInnerProps extends Omit<CheckboxProps, "onChange"> {
   kind?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InnerRadio: FC<RadioInnerProps> = (props) => {
-  const { disabled, label, value, kind, onChange } = props;
+const Option: FC<OptionProps> = (props) => null;
+
+const InnerCheckbox: FC<CheckboxInnerProps> = (props) => {
+  const { disabled, label, value, onChange } = props;
 
   const inputRef = useRef<HTMLInputElement>(null!);
 
-  const labelClass = classNames("viking-radio", {
+  const labelClass = classNames("viking-checkbox", {
     "is-checked": !!value,
     "is-disabled": !!disabled,
-    "viking-radio-button": kind === "button",
   });
 
   return (
     <label className={labelClass} onMouseLeave={() => inputRef.current.blur()}>
       <input
-        className="viking-radio__original"
+        className="viking-checkbox__original"
         ref={inputRef}
-        type="radio"
+        type="checkbox"
         checked={!!value}
         disabled={disabled}
         onChange={onChange}
       />
-      <span className="viking-radio__input" />
-      <span className="viking-radio__label">{label}</span>
+      <span className="viking-checkbox__input" />
+      <span className="viking-checkbox__label">{label}</span>
     </label>
   );
 };
 
-// 单选按钮组
-const Option: FC<OptionProps> = (props) => null;
-
-const ButtonOption: FC<OptionProps> = (props) => null;
-
-export const Radio: FC<RadioProps> = (props) => {
+export const Checkbox: FC<CheckboxProps> = (props) => {
   let {
     label,
     checked,
@@ -98,9 +95,6 @@ export const Radio: FC<RadioProps> = (props) => {
         if (isValidElement(child) && child?.type === Option) {
           return Object.assign({ kind: "default" }, child.props);
         }
-        if (isValidElement(child) && child?.type === ButtonOption) {
-          return Object.assign({ kind: "button" }, child.props);
-        }
       }),
     [children]
   );
@@ -112,7 +106,7 @@ export const Radio: FC<RadioProps> = (props) => {
   /**
    * if Single
    */
-  const onSingleRadioChange = useCallback(
+  const onSingleCheckboxChange = useCallback(
     (e) => {
       if (typeof propsValue === "undefined") {
         setValue(e.target.checked);
@@ -122,16 +116,16 @@ export const Radio: FC<RadioProps> = (props) => {
     [propsValue, onChange]
   );
 
-  const singleRadio = useMemo(() => {
+  const singleCheckbox = useMemo(() => {
     return (
-      <InnerRadio
+      <InnerCheckbox
         disabled={disabled}
         label={label}
         value={value}
-        onChange={onSingleRadioChange}
+        onChange={onSingleCheckboxChange}
       />
     );
-  }, [disabled, value, label, onSingleRadioChange]);
+  }, [disabled, value, label, onSingleCheckboxChange]);
 
   /**
    * if Group
@@ -151,14 +145,24 @@ export const Radio: FC<RadioProps> = (props) => {
     return _opt;
   }, [options, childrenOptions, disabled]);
 
-  const onGroupRadioChange = useCallback(
+  const onGroupCheckboxChange = useCallback(
     (index, optionValue, e) => {
-      if (typeof propsValue === "undefined") {
-        setValue(typeof optionValue === "undefined" ? index : optionValue);
+      const v = value ? [...value] : [];
+      let _v = typeof optionValue === "undefined" ? index : optionValue;
+
+      const i = v.findIndex((it: any) => it === _v);
+      if (i === -1) {
+        v.push(_v);
+      } else {
+        v.splice(i, 1);
       }
-      onChange?.(typeof optionValue === "undefined" ? index : optionValue, e);
+
+      if (typeof propsValue === "undefined") {
+        setValue([...v]);
+      }
+      onChange?.([...v], e);
     },
-    [propsValue, onChange]
+    [propsValue, value, onChange]
   );
 
   const group = useMemo(
@@ -168,17 +172,17 @@ export const Radio: FC<RadioProps> = (props) => {
           ? renderOption(opt, index)
           : opt.children || opt.label;
         return (
-          <InnerRadio
+          <InnerCheckbox
             key={index}
             disabled={!!opt.disabled}
             value={
               typeof opt.value === "undefined"
-                ? value === index
-                : value === opt.value
+                ? value?.includes(index)
+                : value?.includes(opt.value)
             }
             label={_label}
             kind={opt.kind}
-            onChange={(e) => onGroupRadioChange(index, opt.value, e)}
+            onChange={(e) => onGroupCheckboxChange(index, opt.value, e)}
           />
         );
       }),
@@ -188,9 +192,9 @@ export const Radio: FC<RadioProps> = (props) => {
   return (
     <>
       {isSingle(options, childrenOptions) ? (
-        singleRadio
+        singleCheckbox
       ) : (
-        <div className="viking-radio-group">{group}</div>
+        <div className="viking-checkbox-group">{group}</div>
       )}
     </>
   );
@@ -200,13 +204,10 @@ function isSingle(options: any, childrenOptions: any) {
   return !options?.length && !childrenOptions?.length;
 }
 
+Checkbox.displayName = "Checkbox";
+
 Option.displayName = "Option";
 
-ButtonOption.displayName = "Button";
+Checkbox.Option = Option;
 
-Radio.displayName = "Radio";
-
-Radio.Option = Option;
-Radio.Button = ButtonOption;
-
-export default Radio;
+export default Checkbox;

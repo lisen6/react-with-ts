@@ -8,4 +8,4 @@ import Switch from "./switch";
 //   return <Switch />;
 // };
 
-// storiesOf("Switch component", module).add("基础Switch", () => <Switch />);
+// storiesOf("Switch Component", module).add("基础Switch", () => <Switch />);

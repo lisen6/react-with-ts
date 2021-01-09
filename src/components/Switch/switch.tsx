@@ -1,10 +1,4 @@
-import React, {
-  FC,
-  useState,
-  useEffect,
-  MouseEvent,
-  useCallback,
-} from "react";
+import React, { FC, useState, useEffect, MouseEvent, useCallback } from "react";
 import classnames from "classnames";
 
 type SwitchSize = "default" | "small";
@@ -56,9 +50,13 @@ export const Switch: FC<SwitchProps> = (props) => {
 
   const styleComputed = () => {
     if (!disabled) {
-      return !!value ? { backgroundColor: activeColor } : { backgroundColor: inactiveColor };
+      return !!value
+        ? { backgroundColor: activeColor }
+        : { backgroundColor: inactiveColor };
     }
-    return !!value ? { backgroundColor: activeColor, opacity: 0.5 } : { backgroundColor: inactiveColor, opacity: 0.5 };
+    return !!value
+      ? { backgroundColor: activeColor, opacity: 0.5 }
+      : { backgroundColor: inactiveColor, opacity: 0.5 };
   };
 
   useEffect(() => {
@@ -75,14 +73,11 @@ export const Switch: FC<SwitchProps> = (props) => {
         onClick={handleClick}
         className="viking-switch__input"
       />
-      <span
-        style={styleComputed()}
-        className="viking-switch__core"
-      />
+      <span style={styleComputed()} className="viking-switch__core" />
     </div>
   );
 };
 
-Switch.displayName = 'Switch'
+Switch.displayName = "Switch";
 
 export default Switch;

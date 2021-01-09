@@ -15,12 +15,11 @@ export const Dragger: FC<DraggerProps> = (props) => {
   });
 
   const handleDrop = (e: DragEvent<HTMLElement>) => {
-    e.preventDefault()
-    onFile?.(e.dataTransfer.files)
-  }
+    e.preventDefault();
+    onFile?.(e.dataTransfer.files);
+  };
 
   const handleDrag = (e: DragEvent<HTMLElement>, over: boolean) => {
-    console.log(1, over ? "我是over" : "我是leave");
     e.preventDefault();
     setDragOver(over);
   };

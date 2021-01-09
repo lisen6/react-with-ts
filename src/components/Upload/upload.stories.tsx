@@ -89,6 +89,6 @@ const DragUpload = () => {
   );
 };
 
-storiesOf("Upload component", module)
+storiesOf("Upload Component", module)
   .add("点击上传", ClickUpload)
   .add("拖拽上传", DragUpload);

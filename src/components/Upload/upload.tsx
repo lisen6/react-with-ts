@@ -167,7 +167,6 @@ export const Upload: FC<UploadProps> = (props) => {
         },
         withCredentials,
         onUploadProgress(e) {
-          console.log(e, "event");
           let percentage = Math.round((e.loaded * 100) / e.total) || 0;
           if (percentage < 100) {
             updateFileList(_file, { percentage, status: "uploading" });
@@ -178,7 +177,6 @@ export const Upload: FC<UploadProps> = (props) => {
         },
       })
       .then((res) => {
-        console.log(res);
         updateFileList(_file, { status: "success", response: res.data });
         if (onSuccess) {
           onSuccess(res.data, file);
@@ -188,7 +186,6 @@ export const Upload: FC<UploadProps> = (props) => {
         }
       })
       .catch((err) => {
-        console.log(err);
         updateFileList(_file, { status: "error", error: err });
         if (onError) {
           onError(err, file);
@@ -199,7 +196,6 @@ export const Upload: FC<UploadProps> = (props) => {
       });
   };
 
-  console.log(fileList);
   return (
     <div className="viking-upload-component">
       <>
@@ -209,7 +205,17 @@ export const Upload: FC<UploadProps> = (props) => {
             style={{ display: "inline-block" }}
             onClick={handleClick}
           >
-            {drag ? <Dragger onFile={(files) => { uploadFiles(files) }}>{children}</Dragger> : children}
+            {drag ? (
+              <Dragger
+                onFile={(files) => {
+                  uploadFiles(files);
+                }}
+              >
+                {children}
+              </Dragger>
+            ) : (
+              children
+            )}
             <UploadList fileList={fileList} onRemove={handleRemove} />
             <input
               type="file"
@@ -222,22 +228,22 @@ export const Upload: FC<UploadProps> = (props) => {
             />
           </div>
         ) : (
-            <>
-              <Button btnType="primary" onClick={handleClick}>
-                Upload File
+          <>
+            <Button btnType="primary" onClick={handleClick}>
+              Upload File
             </Button>
-              <input
-                type="file"
-                ref={fileInputRef}
-                accept={accept}
-                multiple={multiple}
-                onChange={handleFileChange}
-                className="viking-file-input"
-                style={{ display: "none" }}
-              />
-              <UploadList fileList={fileList} onRemove={handleRemove} />
-            </>
-          )}
+            <input
+              type="file"
+              ref={fileInputRef}
+              accept={accept}
+              multiple={multiple}
+              onChange={handleFileChange}
+              className="viking-file-input"
+              style={{ display: "none" }}
+            />
+            <UploadList fileList={fileList} onRemove={handleRemove} />
+          </>
+        )}
       </>
     </div>
   );
