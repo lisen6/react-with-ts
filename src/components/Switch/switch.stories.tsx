@@ -1,11 +1,17 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
+import Switch from './switch2'
 
-import Switch from "./switch";
+const Basic = () => {
+  return <Switch />
+}
 
-// const simpleSwitch = () => {
-//   return <Switch />;
-// };
+const DisabledSwitch = () => {
+  return <Switch disabled={true} />
+}
 
-// storiesOf("Switch Component", module).add("基础Switch", () => <Switch />);
+const CustomActiveColor = () => {
+  return <Switch activeColor="#E6A23C" inactiveColor="#F56C6C" />
+}
+
+storiesOf('Switch Component', module).add('基础Switch', Basic).add('禁用状态Switch', DisabledSwitch).add('自定义颜色', CustomActiveColor)

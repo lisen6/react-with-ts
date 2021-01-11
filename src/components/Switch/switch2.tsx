@@ -61,7 +61,7 @@ export const Switch: FC<SwitchProps> = (props) => {
 
   useEffect(() => {
     onChange?.(value);
-  }, [value]);
+  }, [onChange, value]);
 
   return (
     <div className={classes}>

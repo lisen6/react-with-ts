@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
 import Progress from "./progress";
 import Button from "../Button/button";
 
-const simpleProgress = () => {
+const SimpleProgress = () => {
   return <Progress style={{ width: 500 }} percentage={10} showText={false} />;
 };
 
-const diffThemeProgress = () => {
+const DiffThemeProgress = () => {
   return (
     <div style={{ width: 500 }}>
       <Progress percentage={10} theme="primary" strokeHeight={20} />
@@ -62,35 +61,49 @@ const customColorMethod = (percentage: any) => {
     return "#67c23a";
   }
 };
-const customColorsProgress = () => {
+const CustomColorsProgress = () => {
+  const [value, setValue] = useState(20)
+  const [value2, setValue2] = useState(40)
+  const [value3, setValue3] = useState(60)
   return (
     <div style={{ width: 500 }}>
       <Progress
         customColors={`#17a2b8`}
         style={{ marginTop: 10 }}
-        percentage={20}
+        percentage={value}
         theme="secondary"
         strokeHeight={20}
       />
       <Progress
         customColors={customColors}
         style={{ marginTop: 10 }}
-        percentage={40}
+        percentage={value2}
         theme="secondary"
         strokeHeight={20}
       />
       <Progress
         customColors={customColorMethod}
         style={{ marginTop: 10 }}
-        percentage={60}
+        percentage={value3}
         theme="dark"
         strokeHeight={20}
       />
+      <br />
+      <Button size="sm" onClick={() => {
+        setValue(value + 10)
+        setValue2(value2 + 10)
+        setValue3(value3 + 10)
+      }}>增加</Button>
+      <Button size="sm" onClick={() => {
+        setValue(value - 10)
+        setValue2(value2 - 10)
+        setValue3(value3 - 10)
+      }}>减少</Button>
     </div>
   );
 };
 
 storiesOf("Progress Component", module)
-  .add("线形进度条", simpleProgress)
-  .add("百分比内显", diffThemeProgress)
-  .add("自定义颜色", customColorsProgress);
+  .add("线形进度条", SimpleProgress)
+  .add("百分比内显", DiffThemeProgress)
+  .add("自定义颜色", CustomColorsProgress);

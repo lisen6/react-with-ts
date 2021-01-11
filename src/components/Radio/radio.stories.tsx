@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
 import Radio from "./radio";
 import Button from "../Button/button";
 
@@ -108,5 +107,5 @@ const RadioGroup = () => {
 };
 
 storiesOf("Radio Component", module)
-  .add("Basic", BasicRadio)
-  .add("Radio Group", RadioGroup);
+  .add("基础Radio", BasicRadio)
+  .add("单选框组", RadioGroup);

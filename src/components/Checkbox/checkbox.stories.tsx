@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
 
 import Checkbox from "./checkbox";
 import Button from "../Button/button";
@@ -29,7 +28,6 @@ const BasicCheckbox = () => {
 
 const CheckboxGroup = () => {
   const [value, setValue] = useState();
-  const [value2, setValue2] = useState();
   return (
     <>
       <div>
@@ -55,5 +53,5 @@ const CheckboxGroup = () => {
 };
 
 storiesOf("Checkbox Component", module)
-  .add("Basic", BasicCheckbox)
-  .add("checkbox Group", CheckboxGroup);
+  .add("基础Checkbox", BasicCheckbox)
+  .add("多选框组", CheckboxGroup);

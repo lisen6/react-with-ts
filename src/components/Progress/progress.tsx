@@ -43,7 +43,7 @@ export const Progress: FC<ProgressProps> = (props) => {
 
   useEffect(() => {
     renderDiffColorProgress()
-  }, [percentage, customColors])
+  }, [renderDiffColorProgress, percentage, customColors])
 
   return (
     <div className="viking-progress-bar" style={style}>
