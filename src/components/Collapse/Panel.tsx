@@ -21,10 +21,6 @@ export const Panel: React.FC<PanelProps> = (props) => {
 
   const { value, setValue, accordion, collapsible } = context;
 
-  const outLayerRef = useRef<HTMLDivElement>(null);
-
-  const innerLayerRef = useRef<HTMLSpanElement>(null);
-
   // 判断是否处于打开模式
   // 手风琴模式下传了 0个参数 || N个参数。只判断第一个
   const isOpened = index
@@ -34,23 +30,18 @@ export const Panel: React.FC<PanelProps> = (props) => {
     : false;
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (collapsible === "disabled") {
-      e.preventDefault();
-      return;
-    }
-    e.stopPropagation();
+    if (collapsible === "disabled") return
 
     // 手风琴模式
     if (accordion) {
       isOpened ? setValue([]) : setValue([index]);
-      return;
-    }
-
-    // 判断是否已经展开
-    if (isOpened) {
-      setValue(value.filter((item) => item !== index));
     } else {
-      index && setValue([...value, index]);
+      // 非手风琴模式
+      if (isOpened) {
+        setValue(value.filter((item) => item !== index));
+      } else {
+        setValue([...value, index]);
+      }
     }
   };
 
@@ -66,27 +57,9 @@ export const Panel: React.FC<PanelProps> = (props) => {
     "is-active": isOpened,
   });
 
-  const ContentClasses = classNames("Panel-text");
-
-  // const recalculateHeight = useCallback(() => {
-  //   const childElement = innerLayerRef.current;
-  //   const parentElement = outLayerRef.current;
-  //   if (childElement && parentElement) {
-  //     parentElement.style.height = isOpened
-  //       ? childElement?.getBoundingClientRect().height + "px"
-  //       : "0";
-  //   }
-  // }, [isOpened, innerLayerRef.current, outLayerRef.current]);
-
   useEffect(() => {
-    context.onChange?.(
-      value.sort((a: string, b: string) => parseInt(a) - parseInt(b))
-    );
+    context.onChange?.(value);
   }, [value]);
-
-  // useEffect(() => {
-  //   // recalculateHeight();
-  // }, [recalculateHeight]);
 
   return (
     <div className="collapse-item">
@@ -95,8 +68,8 @@ export const Panel: React.FC<PanelProps> = (props) => {
         {header}
       </div>
 
-      <div ref={outLayerRef} className={ChildClasses} style={style}>
-        <span className={ContentClasses} ref={innerLayerRef}>
+      <div className={ChildClasses} style={style}>
+        <span className={`Panel-text`}>
           {children}
         </span>
       </div>
