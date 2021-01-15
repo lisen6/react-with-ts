@@ -15,8 +15,8 @@ import classNames from "classnames";
 
 export interface OptionProps
   extends Omit<
-  InputHTMLAttributes<Element>,
-  "value" | "defaultValue" | "onChange"
+    InputHTMLAttributes<Element>,
+    "value" | "defaultValue" | "onChange"
   > {
   disabled?: boolean;
   label?: ReactNode;
@@ -194,8 +194,8 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
       {isSingle(options, childrenOptions) ? (
         singleCheckbox
       ) : (
-          <div className="viking-checkbox-group">{group}</div>
-        )}
+        <div className="viking-checkbox-group">{group}</div>
+      )}
     </>
   );
 };
@@ -208,6 +208,6 @@ Checkbox.displayName = "Checkbox";
 
 Option.displayName = "Option";
 
-Checkbox.Option = Option;
-
-export default Checkbox;
+export default Object.assign(Checkbox, {
+  Option,
+});

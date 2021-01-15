@@ -206,7 +206,7 @@ ButtonOption.displayName = "Button";
 
 Radio.displayName = "Radio";
 
-Radio.Option = Option;
-Radio.Button = ButtonOption;
-
-export default Radio;
+export default Object.assign(Radio, {
+  Option,
+  Button: ButtonOption,
+});
