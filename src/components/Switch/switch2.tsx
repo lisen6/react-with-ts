@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, MouseEvent, useCallback } from "react";
+import React, { FC, useState, useEffect, MouseEvent, useCallback, ChangeEvent } from "react";
 import classnames from "classnames";
 
 type SwitchSize = "default" | "small";
@@ -17,7 +17,8 @@ export interface SwitchProps {
   /** 是否选中 */
   checked?: boolean;
   /** switch 状态发生变化时的回调函数 */
-  onChange?: (isTrue: boolean) => void;
+  onChange?: (isTrue: boolean, e?: ChangeEvent) => void;
+  onClick?: (val: boolean, e?: MouseEvent) => void;
 }
 
 export const Switch: FC<SwitchProps> = (props) => {
@@ -28,6 +29,7 @@ export const Switch: FC<SwitchProps> = (props) => {
     inactiveColor,
     defaultChecked,
     checked,
+    onClick,
     onChange,
   } = props;
 
@@ -44,6 +46,7 @@ export const Switch: FC<SwitchProps> = (props) => {
   const handleClick = useCallback(
     (e: MouseEvent<HTMLElement>) => {
       setValue(!value);
+      onClick?.(!value, e)
     },
     [value]
   );
@@ -69,7 +72,7 @@ export const Switch: FC<SwitchProps> = (props) => {
         type="checkbox"
         disabled={!!disabled}
         checked={!!value}
-        onChange={() => !disabled && onChange?.(!value)}
+        onChange={(e) => !disabled && onChange?.(!value, e)}
         onClick={handleClick}
         className="viking-switch__input"
       />

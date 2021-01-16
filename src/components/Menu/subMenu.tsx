@@ -1,4 +1,4 @@
-import React, { useContext, useState, FunctionComponentElement } from 'react';
+import React, { useContext, useState } from 'react';
 import classNames from 'classnames';
 import { MenuContext } from './menu';
 import Icon from '../Icon/Icon';

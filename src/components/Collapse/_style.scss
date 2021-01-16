@@ -1,51 +1,102 @@
 .viking-Collapse {
+  max-width: 800px;
   border: solid $panel-item-border-width $panel-item-border-color;
   border-bottom: none;
 
-  .collapse-item {
-    border-bottom: solid $panel-item-border-width $panel-item-border-color;
+  &.collapse-icon-position-left {
+    .collapse-item {
+      border-bottom: solid $panel-item-border-width $panel-item-border-color;
 
-    .Panel-head {
-      display: flex;
-      align-items: center;
-      padding: $panel-item-padding-y $panel-item-padding-x;
-      background: $panel-item-background;
-      cursor: pointer;
+      .Panel-head {
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: 12px 16px 12px 40px;
+        background: $panel-item-background;
+        cursor: pointer;
 
-      &.is-disabled {
-        cursor: not-allowed;
-      }
+        &.is-disabled {
+          cursor: not-allowed;
+          opacity: 0.5;
+        }
 
-      svg {
-        margin-right: 10px;
-        transform: rotate(-180deg);
-        transform-origin: center;
-        transition: transform 0.3s;
-        color: #ccc;
+        svg {
+          position: absolute;
+          left: 16px;
+          transform: rotate(-180deg);
+          transform-origin: center;
+          transition: transform 0.3s;
+          color: #ccc;
 
-        &.is-active {
-          transform: rotate(-90deg);
+          &.is-active {
+            transform: rotate(-90deg);
+          }
+        }
+
+        .viking-collapse-extra {
+          margin-left: auto;
         }
       }
     }
+  }
 
-    .Panel-content {
-      box-sizing: border-box;
-      max-height: 0;
-      overflow: hidden;
-      transition: all 0.2s ease-out;
+  &.collapse-icon-position-right {
+    .collapse-item {
+      border-bottom: solid $panel-item-border-width $panel-item-border-color;
 
-      &.is-active {
-        max-height: 500px;
-        transition: all 0.2s ease-in;
+      .Panel-head {
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: 12px 40px 12px 16px;
+        background: $panel-item-background;
+        cursor: pointer;
+
+        &.is-disabled {
+          cursor: not-allowed;
+          opacity: 0.5;
+        }
+
+        svg {
+          position: absolute;
+          right: 16px;
+          left: auto;
+          transform: rotate(-180deg);
+          transform-origin: center;
+          transition: transform 0.3s;
+          color: #ccc;
+
+          &.is-active {
+            transform: rotate(-90deg);
+          }
+        }
+
+        .viking-collapse-extra {
+          margin-left: auto;
+        }
       }
+    }
+  }
 
-      .Panel-text {
-        display: inline-block;
-        width: calc(100% - 32px);
-        border-top: solid $panel-item-border-width $panel-item-border-color;
-        padding: $panel-item-padding-y $panel-item-padding-x;
-      }
+
+
+
+  .Panel-content {
+    box-sizing: border-box;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.2s ease-out;
+
+    &.is-active {
+      max-height: 500px;
+      transition: all 0.2s ease-in;
+    }
+
+    .Panel-text {
+      display: inline-block;
+      width: 100%;
+      border-top: solid $panel-item-border-width $panel-item-border-color;
+      padding: $panel-item-padding-y $panel-item-padding-x;
     }
   }
 }

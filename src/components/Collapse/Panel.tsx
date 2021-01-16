@@ -1,71 +1,65 @@
-import React, { useContext, useRef, useEffect } from "react";
+import React, { FC, useState, useEffect } from "react";
 import classNames from "classnames";
 import Icon from "../Icon/Icon";
-import { CollapseContext } from "./Collapse";
 
 export interface PanelProps {
-  /** 头部标题 */
+  /** 面板头内容 */
   header?: string;
-  /** 默认展开索引 */
-  index?: string;
-  /** 是否显示箭头图标 */
+  /** 对应 activeKey */
+  activeKey?: string;
+  /** 是否展示当前面板上的箭头 */
   showArrow?: Boolean;
   className?: string;
+  isActive?: boolean;
+  /** 禁止状态 */
+  disabled?: boolean;
+  /** 自定义渲染每个面板右上角的内容 */
+  extra?: React.ReactNode;
+  onItemClick?: (val: string, e?: MouseEvent) => void;
   style?: React.CSSProperties;
 }
 
-export const Panel: React.FC<PanelProps> = (props) => {
-  const { header, index, showArrow, children, style, className } = props;
+const Panel: FC<PanelProps> = (props) => {
+  const { header, activeKey, isActive: isOpened, showArrow = true, style, className, disabled, extra, onItemClick, children } = props;
 
-  const context = useContext(CollapseContext);
+  let [isActive, setIsActive] = useState(isOpened)
 
-  const { value, setValue, accordion, collapsible } = context;
 
-  // 判断是否处于打开模式
-  // 手风琴模式下传了 0个参数 || N个参数。只判断第一个
-  const isOpened = index
-    ? accordion
-      ? value[0] === index
-      : value.includes(index)
-    : false;
-
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (collapsible === "disabled") return
-
-    // 手风琴模式
-    if (accordion) {
-      isOpened ? setValue([]) : setValue([index]);
-    } else {
-      // 非手风琴模式
-      if (isOpened) {
-        setValue(value.filter((item) => item !== index));
-      } else {
-        setValue([...value, index]);
-      }
-    }
-  };
 
   const HeadClasses = classNames("Panel-head", {
-    "is-disabled": collapsible,
+    "is-disabled": disabled,
   });
 
   const ChildClasses = classNames("Panel-content", className, {
-    "is-active": isOpened,
+    "is-active": isActive,
   });
 
   const IconClasses = classNames("Panel-icon", {
-    "is-active": isOpened,
+    "is-active": isActive,
   });
 
+  const handleClick = (e: MouseEvent) => {
+    onItemClick?.(activeKey as string, e)
+    !disabled && setIsActive(!isActive)
+  }
+
+  const renderIcon = () => {
+    return showArrow && <Icon icon="chevron-left" className={IconClasses} size="1x" />
+  }
+
   useEffect(() => {
-    context.onChange?.(value);
-  }, [value]);
+    setIsActive(isOpened)
+  }, [isOpened])
+
 
   return (
     <div className="collapse-item">
-      <div onClick={handleClick} className={HeadClasses}>
-        {showArrow && <Icon icon="chevron-left" className={IconClasses} size="1x" />}
+      <div onClick={(e: any) => handleClick(e)} className={HeadClasses}>
+        {renderIcon()}
         {header}
+        <div className="viking-collapse-extra">
+          {extra}
+        </div>
       </div>
 
       <div className={ChildClasses} style={style}>
@@ -78,8 +72,10 @@ export const Panel: React.FC<PanelProps> = (props) => {
 };
 
 Panel.displayName = "Panel";
+
 Panel.defaultProps = {
   showArrow: true,
+  disabled: false
 };
 
 export default Panel;
