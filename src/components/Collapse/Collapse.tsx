@@ -42,12 +42,9 @@ export const Collapse: FC<CollapseProps> = (props) => {
   })
 
   const onClickItem = (activeValue: any) => {
-    console.log(defaultActiveKey, activeValue, '我是active')
     const i = value.includes(activeValue);
     if (accordion) {
-      console.log(i, '找到了没')
       let result = i ? [] : [activeValue]
-      console.log(result)
       setValue(result)
       onChange?.(result)
     } else {
