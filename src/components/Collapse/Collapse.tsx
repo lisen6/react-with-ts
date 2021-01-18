@@ -1,55 +1,56 @@
-import React, { useState, FC, Children, useEffect, } from "react";
+import React, { useState, FC, Children, useEffect } from 'react'
 import Panel from './Panel'
 
 import classNames from 'classnames'
 
-type onChangeCallback = (val: string[]) => void;
+type onChangeCallback = (val: string[]) => void
+
+type positionType = 'left' | 'right'
 
 export interface CollapseProps {
   /** 初始化选中面板的 key */
-  defaultActiveKey?: Array<string | number> | string | number;
+  defaultActiveKey?: Array<string | number> | string | number
   /** 手风琴模式, 是否每次只激活一个tab */
-  accordion?: Boolean;
+  accordion?: Boolean
   /** 设置图标位置 */
-  expandIconPosition?: 'left' | 'right'
+  expandIconPosition?: positionType
   /** 当前激活面板改变时触发 */
-  onChange?: onChangeCallback;
+  onChange?: onChangeCallback
 }
 
-
-/**
- * ## 引用方法
- * ~~~js
- * import { Collapse } from 'vikingShip'
- * ~~~
- *
- */
 export const Collapse: FC<CollapseProps> = (props) => {
   let {
     defaultActiveKey,
     accordion,
     expandIconPosition = 'left',
     onChange,
-    children,
-  } = props;
+    children
+  } = props
 
-  defaultActiveKey = accordion ? [(defaultActiveKey as any)?.[0]] : defaultActiveKey
+  defaultActiveKey = accordion
+    ? [(defaultActiveKey as any)?.[0]]
+    : defaultActiveKey
 
-  const [value, setValue] = useState<any>(typeof defaultActiveKey === "undefined" ? [] : defaultActiveKey);
+  const [value, setValue] = useState<any>(
+    typeof defaultActiveKey === 'undefined' ? [] : defaultActiveKey
+  )
 
   const CollapseClasses = classNames('viking-Collapse', {
-    [`collapse-icon-position-${expandIconPosition}`]: ['left', 'right'].includes(expandIconPosition)
+    [`collapse-icon-position-${expandIconPosition}`]: [
+      'left',
+      'right'
+    ].includes(expandIconPosition)
   })
 
   const onClickItem = (activeValue: any) => {
-    const i = value.includes(activeValue);
+    const i = value.includes(activeValue)
     if (accordion) {
       let result = i ? [] : [activeValue]
       setValue(result)
       onChange?.(result)
     } else {
       if (i) {
-        value.splice(i, 1);
+        value.splice(i, 1)
       } else {
         value.push(activeValue)
       }
@@ -60,16 +61,22 @@ export const Collapse: FC<CollapseProps> = (props) => {
 
   const getItems = () => {
     return Children?.map(children, (panel: any, panelIndex: number) => {
-
-      let { header, children, activeKey, showArrow, extra, disabled } = panel.props
+      let {
+        header,
+        children,
+        activeKey,
+        showArrow,
+        extra,
+        disabled
+      } = panel.props
 
       activeKey = activeKey || panelIndex
 
-      let isActive = false;
+      let isActive = false
       if (accordion) {
-        isActive = value?.[0] === activeKey;
+        isActive = value?.[0] === activeKey
       } else {
-        isActive = value?.includes(activeKey);
+        isActive = value?.includes(activeKey)
       }
 
       const props = {
@@ -80,39 +87,28 @@ export const Collapse: FC<CollapseProps> = (props) => {
         accordion,
         disabled,
         extra,
-        onItemClick: disabled ? () => { } : () => onClickItem(activeKey),
+        onItemClick: disabled ? () => {} : () => onClickItem(activeKey)
       }
 
-      return <Panel
-        {...props}
-      >
-        {children}
-      </Panel>
+      return <Panel {...props}>{children}</Panel>
     })
   }
 
-
   useEffect(() => {
-    typeof defaultActiveKey !== "undefined" && setValue(defaultActiveKey)
+    typeof defaultActiveKey !== 'undefined' && setValue(defaultActiveKey)
   }, [defaultActiveKey])
 
   useEffect(() => {
     setValue(value)
   }, [value])
 
-  return (
-    <div className={CollapseClasses}>
-      {getItems()}
-    </div>
-  );
-};
+  return <div className={CollapseClasses}>{getItems()}</div>
+}
 
 Collapse.defaultProps = {
   defaultActiveKey: []
-};
+}
 
-Panel.displayName = "Panel"
+Panel.displayName = 'Panel'
 
-export default Object.assign(Collapse, {
-  Panel
-});
+export default Collapse
