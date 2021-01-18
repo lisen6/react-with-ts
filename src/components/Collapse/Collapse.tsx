@@ -28,11 +28,15 @@ export const Collapse: FC<CollapseProps> = (props) => {
   } = props
 
   defaultActiveKey = accordion
-    ? [(defaultActiveKey as any)?.[0]]
+    ? (defaultActiveKey as any)?.[0]
     : defaultActiveKey
 
   const [value, setValue] = useState<any>(
-    typeof defaultActiveKey === 'undefined' ? [] : defaultActiveKey
+    typeof defaultActiveKey === 'undefined'
+      ? []
+      : typeof defaultActiveKey == 'string'
+      ? [defaultActiveKey]
+      : defaultActiveKey
   )
 
   const CollapseClasses = classNames('viking-Collapse', {
@@ -46,6 +50,7 @@ export const Collapse: FC<CollapseProps> = (props) => {
     const i = value.indexOf(activeValue)
     if (accordion) {
       let result = i !== -1 ? [] : [activeValue]
+      setValue(result)
       onChange?.(result)
     } else {
       if (i !== -1) {
@@ -53,6 +58,7 @@ export const Collapse: FC<CollapseProps> = (props) => {
       } else {
         value.push(activeValue)
       }
+      setValue([...value])
       onChange?.([...value])
     }
   }
@@ -95,10 +101,6 @@ export const Collapse: FC<CollapseProps> = (props) => {
   useEffect(() => {
     typeof defaultActiveKey !== 'undefined' && setValue(defaultActiveKey)
   }, [defaultActiveKey])
-
-  useEffect(() => {
-    setValue(value)
-  }, [value])
 
   return <div className={CollapseClasses}>{getItems()}</div>
 }

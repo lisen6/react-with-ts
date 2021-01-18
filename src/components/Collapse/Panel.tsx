@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from 'react'
 import classNames from 'classnames'
-import Icon from '../Icon/Icon'
+import { I } from '@pd/pd'
+import { Down } from '@pd/pd/es/icons/ctrl'
 
 export interface PanelProps {
   /** 面板头内容 */
@@ -47,26 +48,22 @@ const Panel: FC<PanelProps> = (props) => {
     'is-active': isActive
   })
 
-  const handleClick = (e: MouseEvent) => {
-    onItemClick?.(activeKey as string, e)
-    !disabled && setIsActive(!isActive)
-  }
-
   const renderIcon = () => {
-    return (
-      showArrow && (
-        <Icon icon="chevron-left" className={IconClasses} size="1x" />
-      )
-    )
+    return showArrow && <I size="small" icon={Down} className={IconClasses} />
   }
 
   useEffect(() => {
-    setIsActive(isOpened)
+    !disabled && setIsActive(isOpened)
   }, [isOpened])
 
   return (
     <div className="collapse-item">
-      <div onClick={(e: any) => handleClick(e)} className={HeadClasses}>
+      <div
+        onClick={(e: any) => {
+          onItemClick?.(activeKey!, e)
+        }}
+        className={HeadClasses}
+      >
         {renderIcon()}
         {header}
         <div className="viking-collapse-extra">{extra}</div>
