@@ -9,7 +9,7 @@ type positionType = 'left' | 'right'
 
 export interface CollapseProps {
   /** 初始化选中面板的 key */
-  defaultActiveKey?: Array<string | number> | string | number
+  defaultActiveKey?: Array<string>
   /** 手风琴模式, 是否每次只激活一个tab */
   accordion?: Boolean
   /** 设置图标位置 */
@@ -43,18 +43,16 @@ export const Collapse: FC<CollapseProps> = (props) => {
   })
 
   const onClickItem = (activeValue: any) => {
-    const i = value.includes(activeValue)
+    const i = value.indexOf(activeValue)
     if (accordion) {
-      let result = i ? [] : [activeValue]
-      setValue(result)
+      let result = i !== -1 ? [] : [activeValue]
       onChange?.(result)
     } else {
-      if (i) {
+      if (i !== -1) {
         value.splice(i, 1)
       } else {
         value.push(activeValue)
       }
-      setValue(value)
       onChange?.([...value])
     }
   }
