@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react'
 import classNames from 'classnames'
-import { I } from '@pd/pd'
-import { Down } from '@pd/pd/es/icons/ctrl'
+import Icon from '../Icon/Icon'
+
 
 export interface PanelProps {
   /** 面板头内容 */
@@ -49,7 +49,7 @@ const Panel: FC<PanelProps> = (props) => {
   })
 
   const renderIcon = () => {
-    return showArrow && <I size="small" icon={Down} className={IconClasses} />
+    return showArrow && <Icon icon="chevron-left" className={IconClasses} size="1x" />
   }
 
   useEffect(() => {

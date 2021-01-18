@@ -156,7 +156,7 @@ const Input: FC<InputProps> = (props) => {
             />
           )}
           {suffix && (
-            <Icon onClick={handleClear} icon={suffix} />
+            <Icon onClick={handleClear} className="suffix-icon" icon={suffix} />
           )}
         </div>
       );

@@ -17,7 +17,7 @@ const clearableInput = () => {
 
 const renderInputwithIcon = () => {
   return (
-    <Input placeholder="请输入内容" prefix="search" suffix="user-circle" />
+    <Input placeholder="请输入内容" clearable prefix="search" suffix="user-circle" />
   );
 };
 

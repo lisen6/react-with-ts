@@ -94,6 +94,7 @@
         position: absolute;
         right: 10px;
         top: 0;
+        width: 14px;
         @include Input-size(32px);
         text-align: center;
         color: #c0c4cc;
@@ -107,12 +108,18 @@
         }
 
         .icon {
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
           color: #c0c4cc;
           font-size: 14px;
+          background: #fff;
           transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+          z-index: 100;
 
           +.icon {
-            margin-left: 5px;
+            z-index: 99
           }
         }
       }

@@ -1,0 +1,44 @@
+.viking-alert {
+  box-sizing: border-box;
+  margin: 0;
+  color: rgba(0, 0, 0, .85);
+  font-size: 14px;
+  line-height: 1.5715;
+  list-style: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  border-radius: 2px;
+  margin-bottom: 16px;
+
+
+  .viking-alert-content {
+    flex: 1;
+
+    .viking-alert-message {
+      color: rgba(0, 0, 0, .85)
+    }
+
+    .viking-alert-description {
+      align-items: flex-start;
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+
+  .viking-alert-close-icon {
+    align-self: flex-start;
+    margin-left: auto;
+    padding: 0;
+    font-size: 12px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    svg {
+      color: rgba(0, 0, 0, .45);
+    }
+  }
+}
