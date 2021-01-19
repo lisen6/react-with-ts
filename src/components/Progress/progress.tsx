@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, forwardRef, HTMLAttributes } from "react";
 import { ThemeProps } from "../Icon/Icon";
 
 interface colorProps {
@@ -6,7 +6,7 @@ interface colorProps {
   percentage: number;
   [key: string]: any
 }
-export interface ProgressProps {
+export interface ProgressProps extends HTMLAttributes<HTMLElement> {
   /** 百分比（必填）*/
   percentage: number;
   /** 进度条的高度 */
@@ -20,8 +20,8 @@ export interface ProgressProps {
   customColors?: string | Array<colorProps> | Function;
 }
 
-export const Progress: FC<ProgressProps> = (props) => {
-  const { percentage, strokeHeight, showText, style, theme, customColors } = props;
+export const Progress = forwardRef<HTMLDivElement, ProgressProps>((props, ref) => {
+  const { percentage, strokeHeight, showText, style, theme, customColors, ...restProps } = props;
 
   const [barColor, setBarColor] = useState<string>('')
 
@@ -46,7 +46,7 @@ export const Progress: FC<ProgressProps> = (props) => {
   }, [renderDiffColorProgress, percentage, customColors])
 
   return (
-    <div className="viking-progress-bar" style={style}>
+    <div className="viking-progress-bar" style={style} ref={ref} {...restProps}>
       <div
         className="viking-progress-bar-outer"
         style={{ height: `${strokeHeight}px` }}
@@ -60,12 +60,12 @@ export const Progress: FC<ProgressProps> = (props) => {
       </div>
     </div>
   );
-};
+});
 
 Progress.defaultProps = {
   strokeHeight: 15,
   showText: true,
-  theme: "primary",
+  theme: 'primary',
 };
 
 export default Progress;

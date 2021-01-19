@@ -10,13 +10,14 @@ import React, {
   ReactNode,
   isValidElement,
   InputHTMLAttributes,
+  forwardRef,
 } from "react";
 import classNames from "classnames";
 
 export interface OptionProps
   extends Omit<
-    InputHTMLAttributes<Element>,
-    "value" | "defaultValue" | "onChange"
+  InputHTMLAttributes<Element>,
+  "value" | "defaultValue" | "onChange"
   > {
   disabled?: boolean;
   label?: ReactNode;
@@ -38,8 +39,8 @@ interface CheckboxInnerProps extends Omit<CheckboxProps, "onChange"> {
 
 const Option: FC<OptionProps> = (props) => null;
 
-const InnerCheckbox: FC<CheckboxInnerProps> = (props) => {
-  const { disabled, label, value, onChange } = props;
+const InnerCheckbox = forwardRef<HTMLInputElement, CheckboxInnerProps>((props, ref) => {
+  const { disabled, label, value, onChange, ...restProps } = props;
 
   const inputRef = useRef<HTMLInputElement>(null!);
 
@@ -57,14 +58,15 @@ const InnerCheckbox: FC<CheckboxInnerProps> = (props) => {
         checked={!!value}
         disabled={disabled}
         onChange={onChange}
+        {...restProps}
       />
       <span className="viking-checkbox__input" />
       <span className="viking-checkbox__label">{label}</span>
     </label>
   );
-};
+});
 
-export const Checkbox: FC<CheckboxProps> = (props) => {
+export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
   let {
     label,
     checked,
@@ -76,6 +78,7 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
     renderOption,
     children,
     onChange,
+    ...restProps
   } = props;
 
   propsValue = typeof propsValue === "undefined" ? checked : propsValue;
@@ -120,9 +123,11 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
     return (
       <InnerCheckbox
         disabled={disabled}
+        ref={ref}
         label={label}
         value={value}
         onChange={onSingleCheckboxChange}
+        {...restProps}
       />
     );
   }, [disabled, value, label, onSingleCheckboxChange]);
@@ -182,7 +187,8 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
             }
             label={_label}
             kind={opt.kind}
-            onChange={(e) => onGroupCheckboxChange(index, opt.value, e)}
+            {...restProps}
+            onChange={(e: ChangeEvent) => onGroupCheckboxChange(index, opt.value, e)}
           />
         );
       }),
@@ -194,11 +200,11 @@ export const Checkbox: FC<CheckboxProps> = (props) => {
       {isSingle(options, childrenOptions) ? (
         singleCheckbox
       ) : (
-        <div className="viking-checkbox-group">{group}</div>
-      )}
+          <div className="viking-checkbox-group" ref={ref}>{group}</div>
+        )}
     </>
   );
-};
+});
 
 function isSingle(options: any, childrenOptions: any) {
   return !options?.length && !childrenOptions?.length;

@@ -1,11 +1,11 @@
-import React, { FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
+import React, { ButtonHTMLAttributes, AnchorHTMLAttributes, forwardRef, HTMLAttributes } from "react";
 import classnames from "classnames";
 
 type ButtonSize = "lg" | "sm";
 
 type ButtonType = "primary" | "default" | "danger" | "link";
 
-export interface BaseButtonProps {
+export interface BaseButtonProps extends HTMLAttributes<HTMLElement> {
   className?: string;
   /** 是否禁用状态 */
   disabled?: boolean;
@@ -31,18 +31,17 @@ export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>;
  * import { Button } from 'vikingShip'
  * ~~~
  */
-export const Button: FC<ButtonProps> = (props) => {
+export const Button = forwardRef<HTMLButtonElement & HTMLAnchorElement, ButtonProps>((props, ref) => {
   const {
     btnType,
     disabled,
     size,
     children,
     href,
-    className,
     ...resetProps
   } = props;
 
-  const classes = classnames("btn", className, {
+  const classes = classnames("btn", {
     [`btn-${btnType}`]: btnType,
     [`btn-${size}`]: size,
     disabled: btnType === "link" && disabled,
@@ -50,22 +49,22 @@ export const Button: FC<ButtonProps> = (props) => {
 
   if (btnType === "link" && href) {
     return (
-      <a className={classes} href={href} {...resetProps}>
+      <a className={classes} href={href} ref={ref} {...resetProps}>
         {children}
       </a>
     );
   } else {
     return (
-      <button className={classes} disabled={disabled} {...resetProps}>
+      <button ref={ref} className={classes} disabled={disabled} {...resetProps}>
         {children}
       </button>
     );
   }
-};
+});
 
 Button.defaultProps = {
   disabled: false,
-  btnType: "default",
+  btnType: 'default'
 };
 
 export default Button;
