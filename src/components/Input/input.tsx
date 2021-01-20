@@ -2,11 +2,11 @@ import React, {
   useState,
   useEffect,
   useRef,
-  FC,
   ReactElement,
   FocusEventHandler,
   InputHTMLAttributes,
   ChangeEvent,
+  forwardRef,
 } from "react";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import classNames from "classnames";
@@ -41,7 +41,7 @@ export interface InputProps
   onChange?: (value: string, e?: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input: FC<InputProps> = (props) => {
+const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
     disabled,
     size,
@@ -162,7 +162,7 @@ const Input: FC<InputProps> = (props) => {
       );
     };
     return (
-      <div className="inner-input-wrapper">
+      <div className="inner-input-wrapper" ref={ref}>
         {renderComponentWithPrefix()}
         <input
           className="viking-input-inner"
@@ -197,6 +197,6 @@ const Input: FC<InputProps> = (props) => {
       )}
     </div>
   );
-};
+});
 
 export default Input;

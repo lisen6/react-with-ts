@@ -1,4 +1,4 @@
-import React, { useState, useRef, FC, ChangeEvent } from "react";
+import React, { useState, useRef, ChangeEvent, forwardRef, HTMLAttributes } from "react";
 
 import axios from "axios";
 import Button from "../Button/button";
@@ -18,7 +18,7 @@ export interface UploadFile {
   error?: any;
 }
 
-export interface UploadProps {
+export interface UploadProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange' | 'onError' | 'onProgress'> {
   /** 必选参数，上传的地址 */
   action: string;
   /** 接受上传的文件类型 */
@@ -51,7 +51,7 @@ export interface UploadProps {
   onRemove?: (file: UploadFile) => void;
 }
 
-export const Upload: FC<UploadProps> = (props) => {
+export const Upload = forwardRef<HTMLDivElement, UploadProps>((props, ref) => {
   const {
     action,
     name,
@@ -69,6 +69,7 @@ export const Upload: FC<UploadProps> = (props) => {
     onChange,
     onRemove,
     children,
+    ...restProps
   } = props;
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -197,7 +198,7 @@ export const Upload: FC<UploadProps> = (props) => {
   };
 
   return (
-    <div className="viking-upload-component">
+    <div className="viking-upload-component" ref={ref} {...restProps}>
       <>
         {drag ? (
           <div
@@ -214,8 +215,8 @@ export const Upload: FC<UploadProps> = (props) => {
                 {children}
               </Dragger>
             ) : (
-              children
-            )}
+                children
+              )}
             <UploadList fileList={fileList} onRemove={handleRemove} />
             <input
               type="file"
@@ -228,26 +229,26 @@ export const Upload: FC<UploadProps> = (props) => {
             />
           </div>
         ) : (
-          <>
-            <Button btnType="primary" onClick={handleClick}>
-              Upload File
+            <>
+              <Button btnType="primary" onClick={handleClick}>
+                Upload File
             </Button>
-            <input
-              type="file"
-              ref={fileInputRef}
-              accept={accept}
-              multiple={multiple}
-              onChange={handleFileChange}
-              className="viking-file-input"
-              style={{ display: "none" }}
-            />
-            <UploadList fileList={fileList} onRemove={handleRemove} />
-          </>
-        )}
+              <input
+                type="file"
+                ref={fileInputRef}
+                accept={accept}
+                multiple={multiple}
+                onChange={handleFileChange}
+                className="viking-file-input"
+                style={{ display: "none" }}
+              />
+              <UploadList fileList={fileList} onRemove={handleRemove} />
+            </>
+          )}
       </>
     </div>
   );
-};
+});
 
 Upload.defaultProps = {
   name: "file",

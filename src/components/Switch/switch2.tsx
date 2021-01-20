@@ -1,9 +1,9 @@
-import React, { FC, useState, useEffect, MouseEvent, useCallback, ChangeEvent } from "react";
+import React, { useState, useEffect, MouseEvent, useCallback, ChangeEvent, forwardRef, HTMLAttributes } from "react";
 import classnames from "classnames";
 
 type SwitchSize = "default" | "small";
 
-export interface SwitchProps {
+export interface SwitchProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange' | 'onClick'> {
   /** 是否禁用 */
   disabled?: boolean;
   /** switch尺寸 */
@@ -21,7 +21,7 @@ export interface SwitchProps {
   onClick?: (val: boolean, e?: MouseEvent) => void;
 }
 
-export const Switch: FC<SwitchProps> = (props) => {
+export const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
   const {
     disabled,
     size,
@@ -31,6 +31,7 @@ export const Switch: FC<SwitchProps> = (props) => {
     checked,
     onClick,
     onChange,
+    ...restProps
   } = props;
 
   const propsValue = defaultChecked ? !!defaultChecked : !!checked;
@@ -69,17 +70,19 @@ export const Switch: FC<SwitchProps> = (props) => {
   return (
     <div className={classes}>
       <input
+        ref={ref}
         type="checkbox"
         disabled={!!disabled}
         checked={!!value}
         onChange={(e) => !disabled && onChange?.(!value, e)}
         onClick={handleClick}
         className="viking-switch__input"
+        {...restProps}
       />
       <span style={styleComputed()} className="viking-switch__core" />
     </div>
   );
-};
+});
 
 Switch.displayName = "Switch";
 

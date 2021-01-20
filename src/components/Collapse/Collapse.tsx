@@ -1,4 +1,4 @@
-import React, { useState, FC, Children, useEffect } from 'react'
+import React, { useState, Children, useEffect, forwardRef, HTMLAttributes } from 'react'
 import Panel from './Panel'
 
 import classNames from 'classnames'
@@ -7,7 +7,7 @@ type onChangeCallback = (val: string[]) => void
 
 type positionType = 'left' | 'right'
 
-export interface CollapseProps {
+export interface CollapseProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
   /** 初始化选中面板的 key */
   defaultActiveKey?: Array<string>
   /** 手风琴模式, 是否每次只激活一个tab */
@@ -18,13 +18,14 @@ export interface CollapseProps {
   onChange?: onChangeCallback
 }
 
-export const Collapse: FC<CollapseProps> = (props) => {
+export const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, ref) => {
   let {
     defaultActiveKey,
     accordion,
     expandIconPosition = 'left',
     onChange,
-    children
+    children,
+    ...restProps
   } = props
 
   defaultActiveKey = accordion
@@ -35,8 +36,8 @@ export const Collapse: FC<CollapseProps> = (props) => {
     typeof defaultActiveKey === 'undefined'
       ? []
       : typeof defaultActiveKey == 'string'
-      ? [defaultActiveKey]
-      : defaultActiveKey
+        ? [defaultActiveKey]
+        : defaultActiveKey
   )
 
   const CollapseClasses = classNames('viking-Collapse', {
@@ -91,7 +92,7 @@ export const Collapse: FC<CollapseProps> = (props) => {
         accordion,
         disabled,
         extra,
-        onItemClick: disabled ? () => {} : () => onClickItem(activeKey)
+        onItemClick: disabled ? () => { } : () => onClickItem(activeKey)
       }
 
       return <Panel {...props}>{children}</Panel>
@@ -102,8 +103,8 @@ export const Collapse: FC<CollapseProps> = (props) => {
     typeof defaultActiveKey !== 'undefined' && setValue([...defaultActiveKey])
   }, [defaultActiveKey])
 
-  return <div className={CollapseClasses}>{getItems()}</div>
-}
+  return <div className={CollapseClasses} ref={ref} {...restProps}>{getItems()}</div>
+})
 
 Collapse.defaultProps = {
   defaultActiveKey: []

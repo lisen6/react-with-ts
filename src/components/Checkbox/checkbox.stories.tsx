@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { storiesOf } from "@storybook/react";
 
 import Checkbox from "./checkbox";
@@ -28,11 +28,14 @@ const BasicCheckbox = () => {
 
 const CheckboxGroup = () => {
   const [value, setValue] = useState();
+
+  const ref = useRef(null)
+  useEffect(() => console.log(ref), [])
   return (
     <>
       <div>
         <h6>checkbox Group</h6>
-        <Checkbox value={value} onChange={setValue}>
+        <Checkbox ref={ref} value={value} onChange={setValue}>
           <Checkbox.Option>A. aaaaaaa</Checkbox.Option>
           <Checkbox.Option>B. bbbbbbb</Checkbox.Option>
           <Checkbox.Option>C. ccccccc</Checkbox.Option>

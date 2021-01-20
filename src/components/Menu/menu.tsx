@@ -1,11 +1,11 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, forwardRef, HTMLAttributes } from 'react';
 import ClassNames from 'classnames';
 import { MenuItemProps } from './menuItem';
 
 type MenuMode = 'horizontal' | 'vertical';
 type SelectCallback = (selectedIndex: string) => void;
 
-export interface MenuProps {
+export interface MenuProps extends Omit<HTMLAttributes<HTMLElement>, 'onSelect'> {
   /** 默认选中的菜单项 */
   defaultIndex?: string;
   /** 横向 || 竖向 */
@@ -27,9 +27,9 @@ interface IMenuContent {
 
 export const MenuContext = createContext<IMenuContent>({ index: '0' });
 
-const Menu: React.FC<MenuProps> = (props) => {
+const Menu = forwardRef<HTMLUListElement, MenuProps>((props, ref) => {
 
-  const { className, mode, style, children, defaultIndex, onSelect, defaultOpenSubMenus } = props;
+  const { className, mode, children, defaultIndex, onSelect, defaultOpenSubMenus, ...restProps } = props;
 
   const [currentIndex, setIndex] = useState(defaultIndex);
 
@@ -63,11 +63,11 @@ const Menu: React.FC<MenuProps> = (props) => {
   };
 
   return (
-    <ul className={classStyle} style={style} data-testid="test-menu">
+    <ul className={classStyle} data-testid="test-menu" ref={ref} {...restProps}>
       <MenuContext.Provider value={passedContext}>{renderChildren()}</MenuContext.Provider>
     </ul>
   );
-};
+});
 
 Menu.defaultProps = {
   defaultIndex: '0',

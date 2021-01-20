@@ -12,6 +12,9 @@
   border-radius: 2px;
   margin-bottom: 16px;
 
+  .viking-alert-icon {
+    margin-right: 8px;
+  }
 
   .viking-alert-content {
     flex: 1;
@@ -29,7 +32,7 @@
 
   .viking-alert-close-icon {
     align-self: flex-start;
-    margin-left: auto;
+    margin-left: 8px;
     padding: 0;
     font-size: 12px;
     background-color: transparent;
@@ -39,6 +42,47 @@
 
     svg {
       color: rgba(0, 0, 0, .45);
+    }
+
+    .viking-alert-close-text {
+      color: rgba(0, 0, 0, .45);
+      transition: color .3s;
+    }
+
+    &:hover {
+      .viking-alert-close-text {
+        color: #333;
+      }
+    }
+  }
+
+  &.viking-alert-with-description {
+    align-items: flex-start;
+    padding: 15px 15px 15px 24px;
+
+    .viking-alert-icon {
+      margin-right: 15px;
+    }
+
+    .viking-alert-close-text {
+      color: rgba(0, 0, 0, .45);
+      transition: color .3s;
+    }
+  }
+
+  $theme-colors: ("success":#52c41a,
+    "info":#1890ff,
+    "warning":#faad14,
+    "error": #ff4d4f);
+
+  @each $key,
+  $val in $theme-colors {
+    &.viking-alert-#{$key} {
+      .viking-alert-icon {
+        svg {
+          color: $val;
+        }
+      }
     }
   }
 }

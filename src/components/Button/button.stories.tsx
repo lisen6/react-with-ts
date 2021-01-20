@@ -4,11 +4,11 @@ import { action } from "@storybook/addon-actions";
 
 import Button from "./button";
 
-const defaultButton = () => (
+const DefaultButton = () => (
   <Button onClick={action("clicked")}>default Button</Button>
 );
 
-const buttonWithSize = () => (
+const ButtonWithSize = () => (
   <>
     <Button size="lg">large Button</Button>
     <Button>default Button</Button>
@@ -16,15 +16,15 @@ const buttonWithSize = () => (
   </>
 );
 
-const buttonWithType = () => (
-  <>
+const ButtonWithType = () => {
+  return <>
     <Button btnType="primary">primary Button</Button>
     <Button btnType="danger">danger Button</Button>
     <Button btnType="link" href="https://www.baidu.com">
       link Button
     </Button>
   </>
-);
+};
 
 storiesOf("Button Component", module)
   // .addDecorator(withInfo)
@@ -33,6 +33,6 @@ storiesOf("Button Component", module)
   //     inline: true,
   //   },
   // })
-  .add("默认的Button", defaultButton)
-  .add("不同大小的Button", buttonWithSize)
-  .add("不同主题的Button", buttonWithType);
+  .add("默认的Button", DefaultButton)
+  .add("不同大小的Button", ButtonWithSize)
+  .add("不同主题的Button", ButtonWithType);
