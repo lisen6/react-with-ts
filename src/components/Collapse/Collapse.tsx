@@ -58,8 +58,8 @@ export const Collapse: FC<CollapseProps> = (props) => {
       } else {
         value.push(activeValue)
       }
-      setValue([...value])
-      onChange?.([...value])
+      setValue(value)
+      onChange?.(value)
     }
   }
 
@@ -99,7 +99,7 @@ export const Collapse: FC<CollapseProps> = (props) => {
   }
 
   useEffect(() => {
-    typeof defaultActiveKey !== 'undefined' && setValue(defaultActiveKey)
+    typeof defaultActiveKey !== 'undefined' && setValue([...defaultActiveKey])
   }, [defaultActiveKey])
 
   return <div className={CollapseClasses}>{getItems()}</div>
