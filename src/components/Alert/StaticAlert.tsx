@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useState, useEffect, ReactNode, forwardRef, HTMLAttributes } from 'react'
+import React, { MouseEventHandler, FC, useEffect, useRef, ReactNode, HTMLAttributes, useState } from 'react'
 
 export const KINDS = {
   success: {
@@ -20,45 +20,39 @@ export const KINDS = {
 } as const
 
 export interface StaticAlertProps extends HTMLAttributes<Element> {
-  /**
-   * Specify one of the built-in appearances.
-   */
   kind?: 'success' | 'error' | 'info' | 'warning'
-  /**
-   * Specify one of the built-in theme.
-   */
-  // theme?: ThemeEnum
-  /**
-   * Indicate loading status.
-   */
   loading?: boolean
-  /**
-   * Specify the icon needed. (alias: `"up" | "down" | "plus" | "logo" | "spinner" | "smile"`; `SVGElement`; `() => SVGElement`; another `<I icon={xxx} />`)
-   */
-  // icon?: IconLikeType
-  /**
-   * If `true`, render a close icon.
-   */
   closable?: boolean
-  /**
-   *
-   */
   visible?: boolean
-  /**
-   * How long it should stay.
-   */
   duration?: number
-  /**
-   * Callback fired when the component requests to be closed.
-   */
   onClose?: MouseEventHandler
-  /**
-   * Action text.
-   */
   action?: ReactNode
-  /**
-   * Callback fired when the action requests to be clicked.
-   */
   onAction?: MouseEventHandler
 }
+
+const StaticAlert: FC<StaticAlertProps> = (props) => {
+  const { kind, loading, closable, visible: propsVisible, duration, onClose, action, onAction, children, ...restProps } = props;
+
+  const [visible, setVisible] = useState(propsVisible)
+
+  const timer = useRef<number>(null!)
+
+  useEffect(() => {
+    if (propsVisible && Number.isFinite(duration)) {
+      clearTimeout(timer.current)
+      timer.current = setTimeout(() => {
+        setVisible(false)
+      }, duration)
+    }
+    return () => clearTimeout(timer.current)
+  }, [propsVisible])
+
+  useEffect(() => {
+    setVisible(propsVisible)
+  }, [propsVisible])
+
+  return visible ? <div className="viking-message">{children}</div> : null
+}
+
+export default StaticAlert
 

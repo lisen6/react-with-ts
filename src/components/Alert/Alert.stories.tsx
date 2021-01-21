@@ -33,6 +33,7 @@ const BasicAlert = () => {
         操作
       </Button>
     }>Error Text</Alert>
+    <Button onClick={() => Alert.success(`我是新增的${new Date()}`)}>点击显示Alert</Button>
   </div>
 }
 

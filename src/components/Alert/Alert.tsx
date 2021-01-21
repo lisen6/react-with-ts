@@ -92,4 +92,4 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(({
   </div > : null
 })
 
-export default Object.assign(Alert, { methods });
+export default Object.assign(Alert, { ...methods });
