@@ -1,18 +1,25 @@
 .btn {
   position: relative;
   display: inline-block;
+  box-sizing: border-box;
   font-weight: $btn-font-weight;
-  line-height: $btn-line-height;
+  min-width: 80px;
+  height: 32px;
+  line-height: 1;
   color: $body-color;
   white-space: nowrap;
   text-align: center;
   vertical-align: middle;
   background-image: none;
-  border: $btn-border-width solid transparent;
-  @include button-size($btn-padding-y,
+  border: $btn-border-width solid #bbbfc480;
+  font-size: 14px;
+
+  @include button-size(
+    $btn-padding-y,
     $btn-padding-x,
     $btn-font-size,
-    $border-radius);
+    $border-radius
+  );
   cursor: pointer;
   transition: $btn-transition;
 
@@ -22,7 +29,7 @@
     opacity: $btn-disabled-opacity;
     box-shadow: none;
 
-    >* {
+    > * {
       pointer-events: none;
     }
   }
@@ -32,18 +39,13 @@
   }
 }
 
-.btn-lg {
-  @include button-size($btn-padding-y-lg,
-    $btn-padding-x-lg,
-    $btn-font-size,
-    $border-radius);
-}
-
-.btn-sm {
-  @include button-size($btn-padding-y-sm,
+.btn {
+  @include button-size(
+    $btn-padding-y-sm,
     $btn-padding-x-sm,
     $btn-font-size-sm,
-    $border-radius);
+    $border-radius
+  );
 }
 
 .btn-primary {
@@ -55,12 +57,41 @@
 }
 
 .btn-default {
-  @include button-style($white,
+  @include button-style(
+    $white,
     $gray-400,
     $body-color,
     $white,
     $primary,
-    $primary);
+    $primary
+  );
+}
+
+.btn-circle {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 1px 6px 0 rgba(31, 35, 41, 0.1);
+  @include button-size(0, 0, $btn-font-size-sm, 50%);
+}
+
+.btn-outline {
+  background: #ffffff;
+  @include button-size(0, 0, $btn-font-size-sm, $border-radius);
+  &.btn-primary {
+    @include button-style(#ffffff, $primary, $primary);
+    &:hover {
+      background: #e3ebfd;
+    }
+  }
+  &.btn-danger {
+    @include button-style(#ffffff, $danger, $danger);
+    &:hover {
+      background: #f9e3e2;
+    }
+  }
 }
 
 .btn-link {
@@ -68,22 +99,51 @@
   color: $btn-link-color;
   text-decoration: $link-decoration;
   box-shadow: none;
+  border: $btn-border-width solid transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
 
   &:hover {
     color: $btn-link-hover-color;
-    text-decoration: $link-hover-decoration;
+    // text-decoration: $link-hover-decoration;
   }
 
   &:focus,
   &[focus] {
-    text-decoration: $link-hover-decoration;
+    // text-decoration: $link-hover-decoration;
     box-shadow: none;
   }
 
   &.disabled,
   &[disabled] {
-    text-decoration: $link-decoration;
+    // text-decoration: $link-decoration;
     color: $btn-link-disabled-color;
     pointer-events: none;
   }
+}
+
+.btn-large {
+  @include button-size(
+    $btn-padding-y-lg,
+    $btn-padding-x-lg,
+    $btn-font-size,
+    $border-radius
+  );
+  min-width: 88px;
+  height: 40px;
+  font-size: 16px;
+}
+
+.btn-small {
+  @include button-size(
+    $btn-padding-y-sm,
+    $btn-padding-x-sm,
+    $btn-font-size,
+    $border-radius
+  );
+  min-width: 60px;
+  height: 28px;
+  font-size: 14px;
 }

@@ -1,0 +1,25 @@
+.viking-hr {
+  display: flex;
+  align-items: center;
+  hr {
+    flex: 1;
+    font-size: 0;
+    border: none;
+    border-bottom: solid 1px;
+    border-bottom-color: #bbbfc480;
+  }
+  .hr-content {
+    padding: 0 12px;
+    color: #646a73;
+  }
+  &.hrLeft {
+    hr:first-child {
+      flex: none;
+    }
+  }
+  &.hrRight {
+    hr:last-child {
+      flex: none;
+    }
+  }
+}

@@ -1,40 +1,41 @@
-import React, { useState } from "react";
-import { storiesOf } from "@storybook/react";
-import Radio from "./radio";
-import Button from "../Button/button";
+import React, { useState } from 'react'
+import { storiesOf } from '@storybook/react'
+import Radio from './radio'
+import Button from '../Button/button'
+import Hr from '../Hr/Hr'
 
 const BasicRadio = () => {
-  const [value, setValue] = useState(false);
+  const [value, setValue] = useState(false)
   return (
     <>
       <div>
-        <h6>非受控组件</h6>
+        <Hr>非受控组件</Hr>
         <Radio label="Basic" onChange={(val, e) => console.log(val, e, 1)} />
       </div>
       <div style={{ marginTop: 30 }}>
-        <h6>受控组件</h6>
+        <Hr>受控组件</Hr>
         <Radio
           label="Basic"
           value={value}
           onChange={(val, e) => console.log(val, e)}
         />
         <br />
-        <Button btnType="primary" size="sm" onClick={() => setValue(!value)}>
-          {value ? "unchecked" : "checked"}
+        <Button theme="primary" onClick={() => setValue(!value)}>
+          {value ? 'unchecked' : 'checked'}
         </Button>
         <br />
         <span>value: {JSON.stringify(value)}</span>
       </div>
     </>
-  );
-};
+  )
+}
 
 const RadioGroup = () => {
-  const [value, setValue] = useState(undefined);
-  const [value2, setValue2] = useState(undefined);
-  const [value3, setValue3] = useState(undefined);
-  const [value4, setValue4] = useState(undefined);
-  const [value5, setValue5] = useState(undefined);
+  const [value, setValue] = useState(undefined)
+  const [value2, setValue2] = useState(undefined)
+  const [value3, setValue3] = useState(undefined)
+  const [value4, setValue4] = useState(undefined)
+  const [value5, setValue5] = useState(undefined)
   return (
     <div>
       <div>
@@ -61,9 +62,9 @@ const RadioGroup = () => {
         <h6>自定义value</h6>
         <Radio
           options={[
-            { label: "A. aaaaaaa", value: "我是AAA" },
-            { label: "B. bbbbbbb", value: "我是BBB" },
-            { label: "C. ccccccc", value: "我是CCC" },
+            { label: 'A. aaaaaaa', value: '我是AAA' },
+            { label: 'B. bbbbbbb', value: '我是BBB' },
+            { label: 'C. ccccccc', value: '我是CCC' }
           ]}
           onChange={setValue2}
         />
@@ -74,9 +75,9 @@ const RadioGroup = () => {
         <h6>自定义Options</h6>
         <Radio
           options={[
-            { label: "A. aaaaaaa", value: "皮卡皮", name: "皮卡丘" },
-            { label: "B. bbbbbbb", value: "种子种子", name: "妙蛙种子" },
-            { label: "C. ccccccc", value: "杰尼杰尼", name: "杰尼龟" },
+            { label: 'A. aaaaaaa', value: '皮卡皮', name: '皮卡丘' },
+            { label: 'B. bbbbbbb', value: '种子种子', name: '妙蛙种子' },
+            { label: 'C. ccccccc', value: '杰尼杰尼', name: '杰尼龟' }
           ]}
           renderOption={(val: any) => `${val.name}`}
           onChange={setValue3}
@@ -89,13 +90,13 @@ const RadioGroup = () => {
         <Radio
           options={[
             {
-              label: "A. aaaaaaa",
+              label: 'A. aaaaaaa',
               disabled: true,
-              value: "皮卡皮",
-              name: "皮卡丘",
+              value: '皮卡皮',
+              name: '皮卡丘'
             },
-            { label: "B. bbbbbbb", value: "种子种子", name: "妙蛙种子" },
-            { label: "C. ccccccc", value: "杰尼杰尼", name: "杰尼龟" },
+            { label: 'B. bbbbbbb', value: '种子种子', name: '妙蛙种子' },
+            { label: 'C. ccccccc', value: '杰尼杰尼', name: '杰尼龟' }
           ]}
           renderOption={(val: any) => `${val.name}`}
           onChange={setValue4}
@@ -103,9 +104,9 @@ const RadioGroup = () => {
         <span>value: {JSON.stringify(value4)}</span>
       </div>
     </div>
-  );
-};
+  )
+}
 
-storiesOf("Radio Component", module)
-  .add("基础Radio", BasicRadio)
-  .add("单选框组", RadioGroup);
+storiesOf('Radio', module)
+  .add('基础Radio', BasicRadio)
+  .add('单选框组', RadioGroup)

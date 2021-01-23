@@ -1,47 +1,50 @@
 // config
-@import "./variables";
+@import './variables';
 
 // layout
-@import "./reboot";
+@import './reboot';
 
 // mixin
-@import "./mixin";
+@import './mixin';
 
 // button
-@import "../components/Button/style";
+@import '../components/Button/style';
 
 // menu
-@import "../components/Menu/style";
+@import '../components/Menu/style';
 
 // collapse
-@import "../components/Collapse/style";
+@import '../components/Collapse/style';
 
 // icon
-@import "../components/Icon/style";
+@import '../components/Icon/style';
 
 // animation
-@import "./animation";
+@import './animation';
 
 // input
-@import "../components/Input/style";
+@import '../components/Input/style';
 
 // autoComplete
-@import "../components/AutoComplete/style";
+@import '../components/AutoComplete/style';
 
 // upload
-@import "../components/Upload/style";
+@import '../components/Upload/style';
 
 // progress
-@import "../components/Progress/style";
+@import '../components/Progress/style';
 
 // switch
-@import "../components/Switch/style";
+@import '../components/Switch/style';
 
 // radio
-@import "../components/Radio/style";
+@import '../components/Radio/style';
 
 //checkbox
-@import "../components/Checkbox/style";
+@import '../components/Checkbox/style';
 
 // Alert
-@import "../components/Alert/style"
+@import '../components/Alert/style';
+
+// Hr
+@import '../components/Hr/style';

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { storiesOf } from "@storybook/react";
-import Progress from "./progress";
-import Button from "../Button/button";
+import React, { useState } from 'react'
+import { storiesOf } from '@storybook/react'
+import Progress from './progress'
+import Button from '../Button/button'
 
 const SimpleProgress = () => {
-  return <Progress style={{ width: 500 }} percentage={10} showText={false} />;
-};
+  return <Progress style={{ width: 500 }} percentage={10} showText={false} />
+}
 
 const DiffThemeProgress = () => {
   return (
@@ -42,25 +42,25 @@ const DiffThemeProgress = () => {
         strokeHeight={20}
       />
     </div>
-  );
-};
+  )
+}
 
 const customColors = [
-  { color: "#0d6efd", percentage: 20 },
-  { color: "purple", percentage: 40 },
-  { color: "#d63384", percentage: 60 },
-  { color: "#F56C6C", percentage: 80 },
-  { color: "#17a2b8", percentage: 100 },
-];
+  { color: '#0d6efd', percentage: 20 },
+  { color: 'purple', percentage: 40 },
+  { color: '#d63384', percentage: 60 },
+  { color: '#F56C6C', percentage: 80 },
+  { color: '#17a2b8', percentage: 100 }
+]
 const customColorMethod = (percentage: any) => {
   if (percentage < 30) {
-    return "#909399";
+    return '#909399'
   } else if (percentage < 70) {
-    return "#e6a23c";
+    return '#e6a23c'
   } else {
-    return "#67c23a";
+    return '#67c23a'
   }
-};
+}
 const CustomColorsProgress = () => {
   const [value, setValue] = useState(20)
   const [value2, setValue2] = useState(40)
@@ -89,21 +89,31 @@ const CustomColorsProgress = () => {
         strokeHeight={20}
       />
       <br />
-      <Button size="sm" onClick={() => {
-        setValue(value + 10)
-        setValue2(value2 + 10)
-        setValue3(value3 + 10)
-      }}>增加</Button>
-      <Button size="sm" onClick={() => {
-        setValue(value - 10)
-        setValue2(value2 - 10)
-        setValue3(value3 - 10)
-      }}>减少</Button>
+      <Button
+        theme="primary"
+        onClick={() => {
+          setValue(value + 10)
+          setValue2(value2 + 10)
+          setValue3(value3 + 10)
+        }}
+      >
+        增加
+      </Button>
+      {''}
+      <Button
+        onClick={() => {
+          setValue(value - 10)
+          setValue2(value2 - 10)
+          setValue3(value3 - 10)
+        }}
+      >
+        减少
+      </Button>
     </div>
-  );
-};
+  )
+}
 
-storiesOf("Progress Component", module)
-  .add("线形进度条", SimpleProgress)
-  .add("百分比内显", DiffThemeProgress)
-  .add("自定义颜色", CustomColorsProgress);
+storiesOf('Progress', module)
+  .add('线形进度条', SimpleProgress)
+  .add('百分比内显', DiffThemeProgress)
+  .add('自定义颜色', CustomColorsProgress)

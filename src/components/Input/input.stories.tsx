@@ -1,27 +1,32 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
+import React from 'react'
+import { storiesOf } from '@storybook/react'
 
-import Input from "./input";
+import Input from './input'
 
 const baseInput = () => {
-  return <Input placeholder="请输入内容" />;
-};
+  return <Input placeholder="请输入内容" />
+}
 
 const disabledInput = () => {
-  return <Input placeholder="请输入内容" disabled />;
-};
+  return <Input placeholder="请输入内容" disabled />
+}
 
 const clearableInput = () => {
-  return <Input placeholder="请输入内容" clearable />;
-};
+  return <Input placeholder="请输入内容" clearable />
+}
 
-const renderInputwithIcon = () => {
+const renderInputWithIcon = () => {
   return (
-    <Input placeholder="请输入内容" clearable prefix="search" suffix="user-circle" />
-  );
-};
+    <Input
+      placeholder="请输入内容"
+      clearable
+      prefix="search"
+      suffix="user-circle"
+    />
+  )
+}
 
-const renderInputwithAddon = () => {
+const renderInputWithAddon = () => {
   return (
     <Input
       placeholder="请输入内容"
@@ -29,12 +34,12 @@ const renderInputwithAddon = () => {
       addonAfter=".com"
       style={{ width: 400 }}
     />
-  );
-};
+  )
+}
 
-storiesOf("Input Component", module)
-  .add("基础Input", baseInput)
-  .add("禁用状态Input", disabledInput)
-  .add("可清空Input", clearableInput)
-  .add("带icon的输入框", renderInputwithIcon)
-  .add("复合型输入框", renderInputwithAddon);
+storiesOf('Input', module)
+  .add('基础Input', baseInput)
+  .add('禁用状态Input', disabledInput)
+  .add('可清空Input', clearableInput)
+  .add('带icon的输入框', renderInputWithIcon)
+  .add('复合型输入框', renderInputWithAddon)

@@ -1,11 +1,10 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
+import React from 'react'
+import { storiesOf } from '@storybook/react'
 // import { action } from "@storybook/addon-actions";
 
-import Menu from "./menu";
+import Menu from './menu'
 import SubMenu from './subMenu'
 import MenuItem from './menuItem'
-
 
 const verticalMenu = () => (
   <Menu
@@ -22,7 +21,7 @@ const verticalMenu = () => (
     </SubMenu>
     <MenuItem>link4</MenuItem>
   </Menu>
-);
+)
 
 const horizontalMenu = () => (
   <Menu
@@ -39,9 +38,8 @@ const horizontalMenu = () => (
     </SubMenu>
     <MenuItem>link4</MenuItem>
   </Menu>
-);
+)
 
-storiesOf("Menu Component", module)
+storiesOf('Menu', module)
   .add('横向Menu', horizontalMenu)
-  .add("竖向Menu", verticalMenu)
-
+  .add('竖向Menu', verticalMenu)

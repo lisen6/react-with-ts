@@ -2,6 +2,7 @@
   max-width: 800px;
   border: solid $panel-item-border-width $panel-item-border-color;
   border-bottom: none;
+  font-size: 14px;
 
   &.collapse-icon-position-left {
     .collapse-item {
@@ -77,9 +78,6 @@
       }
     }
   }
-
-
-
 
   .Panel-content {
     box-sizing: border-box;

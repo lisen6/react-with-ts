@@ -120,7 +120,7 @@ const DisabledCollapse = () => {
   )
 }
 
-storiesOf('Collapse Component', module)
+storiesOf('Collapse', module)
   .add('默认展开的Collapse', DefaultOpenCollapse)
   .add('手风琴模式的Collapse', AccordionCollapse)
   .add('面板嵌套', NestingCollapse)
