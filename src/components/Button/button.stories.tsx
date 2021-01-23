@@ -15,7 +15,7 @@ const DefaultButton = () => {
       >
         <Button>Button</Button>
 
-        <Button theme="primary">Button</Button>
+        <Button theme="primary">Primary</Button>
 
         <Button theme="danger">Error</Button>
 
@@ -49,7 +49,7 @@ const DefaultButton = () => {
           B
         </Button>
         <Button theme="primary" kind="circle">
-          B
+          P
         </Button>
         <Button theme="danger" kind="circle">
           E

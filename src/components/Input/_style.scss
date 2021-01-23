@@ -6,7 +6,7 @@
 
   &:hover {
     .viking-input-inner {
-      border: solid 1px #409eff;
+      border: solid 1px #3370ff;
     }
   }
 
@@ -41,24 +41,22 @@
     cursor: pointer;
 
     &:hover {
-      +.input__suffix {
+      + .input__suffix {
         .clear-icon {
           opacity: 1;
         }
       }
     }
 
-
     &:focus {
       outline: none;
-      border-color: #409eff;
+      border-color: #3370ff;
     }
   }
 
-
-
   &.input--prefix {
     .viking-input-inner {
+      box-sizing: border-box;
       padding-left: 30px;
     }
 
@@ -83,7 +81,8 @@
 
   &.input--suffix {
     .viking-input-inner {
-      padding-right: 30px;
+      box-sizing: border-box;
+      // padding-right: 30px;
     }
 
     .inner-input-wrapper {
@@ -118,8 +117,8 @@
           transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
           z-index: 100;
 
-          +.icon {
-            z-index: 99
+          + .icon {
+            z-index: 99;
           }
         }
       }
@@ -144,12 +143,12 @@
         background-color: #f5f7fa;
         color: #909399;
         position: relative;
-        border: solid 1px #dcdfde;
+        border: solid 1px #bbbfc480;
         border-radius: 4px;
         border-right: 0;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
-        padding: 0 20px;
+        padding: 0 11px;
         white-space: nowrap;
       }
 
@@ -172,12 +171,12 @@
         background-color: #f5f7fa;
         color: #909399;
         position: relative;
-        border: solid 1px #dcdfde;
+        border: solid 1px #bbbfc480;
         border-radius: 4px;
         border-left: 0;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
-        padding: 0 20px;
+        padding: 0 11px;
         white-space: nowrap;
       }
 

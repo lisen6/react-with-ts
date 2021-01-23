@@ -59,29 +59,31 @@ const BasicAlert = () => {
       </div>
 
       <Hr margin="10px">action</Hr>
-      <Alert
-        type="error"
-        showIcon
-        action={
-          <Button href="https://www.baidu.com" theme="link">
-            操作
-          </Button>
-        }
-      >
-        Error Text
-      </Alert>
-      <Alert
-        type="error"
-        description={`Error Description Error Description Error Description Error Description`}
-        showIcon
-        action={
-          <Button href="https://www.baidu.com" theme="link" size="small">
-            操作
-          </Button>
-        }
-      >
-        Error Text
-      </Alert>
+      <div style={{ width: 600 }}>
+        <Alert
+          type="error"
+          showIcon
+          action={
+            <Button href="https://www.baidu.com" theme="link">
+              操作
+            </Button>
+          }
+        >
+          Error Text
+        </Alert>
+        <Alert
+          type="error"
+          description={`Error Description Error Description Error Description Error Description`}
+          showIcon
+          action={
+            <Button href="https://www.baidu.com" theme="link" size="small">
+              操作
+            </Button>
+          }
+        >
+          Error Text
+        </Alert>
+      </div>
 
       <Hr margin="10px">static Alert</Hr>
       <Button onClick={() => Alert.success(`我是新增的${new Date()}`)}>

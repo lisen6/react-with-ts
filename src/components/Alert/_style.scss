@@ -1,7 +1,7 @@
 .viking-alert {
   box-sizing: border-box;
   margin: 0;
-  color: rgba(0, 0, 0, .85);
+  color: #1f2329;
   font-size: 14px;
   line-height: 1.5715;
   list-style: none;
@@ -18,10 +18,6 @@
 
   .viking-alert-content {
     flex: 1;
-
-    .viking-alert-message {
-      color: rgba(0, 0, 0, .85)
-    }
 
     .viking-alert-description {
       align-items: flex-start;
@@ -41,17 +37,16 @@
     cursor: pointer;
 
     svg {
-      color: rgba(0, 0, 0, .45);
+      color: #1f2329;
     }
 
     .viking-alert-close-text {
-      color: rgba(0, 0, 0, .45);
-      transition: color .3s;
+      transition: color 0.3s;
     }
 
     &:hover {
       .viking-alert-close-text {
-        color: #333;
+        color: #333333;
       }
     }
   }
@@ -65,18 +60,18 @@
     }
 
     .viking-alert-close-text {
-      color: rgba(0, 0, 0, .45);
-      transition: color .3s;
+      transition: color 0.3s;
     }
   }
 
-  $theme-colors: ("success":#52c41a,
-    "info":#1890ff,
-    "warning":#faad14,
-    "error": #ff4d4f);
+  $theme-colors: (
+    'success': #65c344,
+    'info': #3f74f6,
+    'warning': #f7c646,
+    'error': #e3584d
+  );
 
-  @each $key,
-  $val in $theme-colors {
+  @each $key, $val in $theme-colors {
     &.viking-alert-#{$key} {
       .viking-alert-icon {
         svg {
@@ -86,7 +81,6 @@
     }
   }
 }
-
 
 .alert-fixed-container {
   position: fixed;
@@ -104,7 +98,7 @@
     border-radius: 4px;
     border: solid 1px #ebeef5;
     background-color: #edf2fc;
-    transition: opacity .3s, transform .4s, top .4s;
+    transition: opacity 0.3s, transform 0.4s, top 0.4s;
     overflow: hidden;
     padding: 15px 15px 15px 20px;
     font-size: 14px;
