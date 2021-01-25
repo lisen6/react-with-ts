@@ -26,10 +26,11 @@ export interface OptionProps
 }
 
 export interface CheckboxProps extends OptionProps {
-  value?: any;
-  defaultValue?: any;
-  onChange?: (val: any, e: ChangeEvent) => void;
-  options?: OptionProps[];
+  value?: any
+  defaultValue?: any
+  indeterminate: boolean
+  onChange?: (val: any, e: ChangeEvent) => void
+  options?: OptionProps[]
 }
 
 interface CheckboxInnerProps extends Omit<CheckboxProps, "onChange"> {
@@ -40,13 +41,14 @@ interface CheckboxInnerProps extends Omit<CheckboxProps, "onChange"> {
 const Option: FC<OptionProps> = (props) => null;
 
 const InnerCheckbox = forwardRef<HTMLInputElement, CheckboxInnerProps>((props, ref) => {
-  const { disabled, label, value, onChange, ...restProps } = props;
+  const { disabled, label, value, onChange, indeterminate, ...restProps } = props;
 
   const inputRef = useRef<HTMLInputElement>(null!);
 
   const labelClass = classNames("viking-checkbox", {
     "is-checked": !!value,
     "is-disabled": !!disabled,
+    'is-indeterminate': !!indeterminate
   });
 
   return (
@@ -74,12 +76,14 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
     defaultValue,
     defaultChecked,
     disabled,
+    indeterminate,
     options,
     renderOption,
     children,
     onChange,
     ...restProps
   } = props;
+
 
   propsValue = typeof propsValue === "undefined" ? checked : propsValue;
 
@@ -126,6 +130,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref)
         ref={ref}
         label={label}
         value={value}
+        indeterminate={indeterminate}
         onChange={onSingleCheckboxChange}
         {...restProps}
       />

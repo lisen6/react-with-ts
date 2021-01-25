@@ -1,0 +1,33 @@
+.viking-tree-list {
+  .viking-tree-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+
+    .viking-tree-switch {
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
+      cursor: pointer;
+
+      .icon {
+        width: 10px;
+      }
+    }
+
+    .viking-tree-checkbox {
+      .viking-checkbox {
+        margin-right: 0;
+      }
+
+      label {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .viking-tree-node-children {
+    padding-left: 20px;
+  }
+}
