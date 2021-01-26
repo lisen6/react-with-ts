@@ -19,10 +19,14 @@ const Tree = forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
 
   const [nodeKeyMap, setNodeKeyMap] = useState<any>({})
 
-  const buildKeyMap = (treeData: treeDataProps[], parent: treeDataProps, keyMap: any = {}) => {
-    treeData.forEach((item: treeDataProps) => {
+  const buildKeyMap = (
+    treeData: treeDataProps[],
+    parent: treeDataProps,
+    keyMap: any = {}
+  ) => {
+    treeData?.forEach((item: treeDataProps) => {
       item.parent = parent
-      keyMap[`${item.id}`] = item;
+      keyMap[`${item.id}`] = item
       if (item?.children?.length! > 0) {
         buildKeyMap(item.children!, item, keyMap)
       }
@@ -36,9 +40,7 @@ const Tree = forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
     setNodeKeyMap({ ...nodeKeyMap })
   }
 
-  const handleItemChecked = (key: number) => {
-
-  }
+  const handleItemChecked = (key: number) => {}
 
   useEffect(() => {
     setNodeKeyMap(buildKeyMap(treeData!, null as any, {}))
@@ -46,12 +48,10 @@ const Tree = forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
 
   return (
     <div ref={ref} className="viking-tree-list">
-      {
-        treeData?.map(item => {
-          let props = { ...item, onItemExpend: handleItemExpend }
-          return <TreeNode {...props} />
-        })
-      }
+      {treeData?.map((item) => {
+        let props = { ...item, onItemExpend: handleItemExpend }
+        return <TreeNode {...props} />
+      })}
     </div>
   )
 })
