@@ -1,41 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
 
 import Tree from './tree'
+import Button from '../Button/button'
+
 
 const BasicTree = () => {
   const data = [
     {
-      id: 1,
+      id: '1',
       label: '一级 2',
-      expend: true,
       children: [
         {
-          id: 3,
+          id: '3',
           label: '二级 2-1',
           children: [
             {
-              id: 4,
+              id: '4',
               label: '三级 3-1-1'
             },
             {
-              id: 5,
+              id: '5',
               label: '三级 3-1-2',
               disabled: true
             }
           ]
         },
         {
-          id: 2,
+          id: '2',
           label: '二级 2-2',
           disabled: true,
           children: [
             {
-              id: 6,
+              id: '6',
               label: '三级 3-2-1'
             },
             {
-              id: 7,
+              id: '7',
               label: '三级 3-2-2',
               disabled: true
             }
@@ -44,9 +45,16 @@ const BasicTree = () => {
       ]
     }
   ]
+  const [expendKeys, setExpendKeys] = useState<string[]>(['1', '2', '3'])
+  const [checkedKeys, setCheckedKeys] = useState<string[]>(['1', '2', '3'])
   return (
     <>
-      <Tree treeData={data} />
+      <Tree treeData={data} defaultExpandedKeys={expendKeys} defaultCheckedKeys={checkedKeys} />
+      <br />
+      <Button onClick={() => setExpendKeys(['1', '2'])} theme="primary">ExpandedKeys</Button>
+      <br />
+      <br />
+      <Button onClick={() => setCheckedKeys(['1', '2'])} theme="primary">checkedKeys</Button>
     </>
   )
 }

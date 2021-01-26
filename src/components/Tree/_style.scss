@@ -1,9 +1,12 @@
 .viking-tree-list {
+  min-height: 300px;
+
   .viking-tree-content {
     position: relative;
     display: flex;
     align-items: center;
     padding-left: 10px;
+    cursor: pointer;
 
     .viking-tree-switch {
       display: flex;
