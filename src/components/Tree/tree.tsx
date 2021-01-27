@@ -28,12 +28,12 @@ const Tree = forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
   ) => {
     treeData?.forEach((item: TreeDataProps) => {
       item.parent = parent
-      if (defaultExpandedKeys?.includes(item.id)) {
-        item.expend = true
-      }
-      if (defaultCheckedKeys?.includes(item.id)) {
-        item.checked = true
-      }
+      // if (defaultExpandedKeys?.includes(item.id)) {
+      //   item.expend = true
+      // }
+      // if (defaultCheckedKeys?.includes(item.id)) {
+      //   item.checked = true
+      // }
       keyMap[`${item.id}`] = item
       if (item?.children?.length! > 0) {
         buildKeyMap(item.children!, item, keyMap)
@@ -51,8 +51,8 @@ const Tree = forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
     let data = nodeKeyMap[key]
     if (data) {
       data.checked = !data.checked
-      if (data.checked) { // 如果父节点勾选
-        checkAllChild(data.children, true) // 全选子节点
+      if (data.checked) { // 如果当前节点勾选
+        checkAllChild(data.children, true) // 子节点全部勾选
         checkParent(data.parent)  // 判断父节点是否勾选
       } else {
         checkAllChild(data.children, false) // 取消子节点勾选
@@ -65,7 +65,7 @@ const Tree = forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
   // 父节点如果勾选  优先深度遍历子节点勾选
   const checkAllChild = (children: TreeDataProps[], checked: boolean) => {
     children?.forEach((item: TreeDataProps) => {
-      item.checked = item.disabled ? false : checked;
+      item.checked = item.disabled ? item.checked : checked;
       if (item.children) {
         checkAllChild(item.children, checked)
       }

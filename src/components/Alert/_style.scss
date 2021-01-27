@@ -64,14 +64,13 @@
     }
   }
 
-  $theme-colors: (
-    'success': #65c344,
+  $theme-colors: ('success': #65c344,
     'info': #3f74f6,
     'warning': #f7c646,
-    'error': #e3584d
-  );
+    'error': #e3584d);
 
-  @each $key, $val in $theme-colors {
+  @each $key,
+  $val in $theme-colors {
     &.viking-alert-#{$key} {
       .viking-alert-icon {
         svg {
@@ -102,5 +101,11 @@
     overflow: hidden;
     padding: 15px 15px 15px 20px;
     font-size: 14px;
+    margin-bottom: 16px;
+
+    .viking-icon-close {
+      margin-left: 15px;
+      cursor: pointer;
+    }
   }
 }

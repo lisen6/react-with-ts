@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react'
+import React, { useState, useMemo } from 'react'
 import ReactDOM from 'react-dom'
 import StaticAlert, {
   StaticAlertProps as AlertProps,
@@ -52,7 +52,6 @@ const Alert = () => {
               it.visible = false
             }
           })
-          list = [list[0], list[1]]
         }
 
         return [...list]
@@ -62,13 +61,31 @@ const Alert = () => {
 
   Object.keys(KINDS).map((type: any) => (apis[type] = fillApis(type)))
 
+  const destroy = (key: number) => {
+    setList((list) => {
+      list.forEach((it) => {
+        if (it.key === key) {
+          it.visible = false
+        }
+      })
+      return [...list]
+    })
+  }
+
+  const length = useMemo(() => {
+    return list.filter(item => item.visible).length
+  }, [list])
+
   return (
     <div className="alert-fixed-container">
       {
-        list.map(({ key, text, ...props }) =>
-          <div key={key} style={{ marginBottom: 16 }}>
-            <StaticAlert {...props}>{text}</StaticAlert>
-          </div>)
+        list.map(({ key, text, ...props }, index) =>
+          <>
+            {
+              props.visible && <StaticAlert key={key} onClose={() => destroy(key!)} {...props}>{text}</StaticAlert>
+            }
+          </>
+        )
       }
 
     </div>
@@ -79,7 +96,7 @@ const Alert = () => {
 let count = 0
 let limit = 2
 
-const apis = {
+const apis: any = {
   success: (item: StaticAlertProps | string) => { },
   error: (item: StaticAlertProps | string) => { },
   info: (item: StaticAlertProps | string) => { },
@@ -92,7 +109,6 @@ function getPortalRoot(document: Document) {
   let root = document.querySelector('#viking-alert-container')
   if (!root) {
     root = document.createElement('div')
-    root.textContent = '123'
     root.id = 'viking-alert-container'
     document.body.appendChild(root)
   }

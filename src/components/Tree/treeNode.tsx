@@ -39,7 +39,7 @@ const TreeNode: FC<TreeDataProps> = (props) => {
         </span>
 
         <span className={checkboxClass}>
-          <Checkbox disabled={disabled} value={checked} onChange={() => {
+          <Checkbox value={checked} onChange={() => {
             onItemCheck(id)
           }} />
         </span>

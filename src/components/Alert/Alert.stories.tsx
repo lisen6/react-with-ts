@@ -86,8 +86,17 @@ const BasicAlert = () => {
       </div>
 
       <Hr margin="10px">static Alert</Hr>
-      <Button onClick={() => Alert.success(`我是新增的${new Date()}`)}>
-        点击显示Alert
+      <Button theme="primary" onClick={() => Alert.success({ text: `我是新增的${new Date()}`, closable: true })}>
+        Alert.success
+      </Button>
+      <Button theme="primary" onClick={() => Alert.warning(`我是新增的${new Date()}`)}>
+        Alert.warning
+      </Button>
+      <Button theme="primary" onClick={() => Alert.info(`我是新增的${new Date()}`)}>
+        Alert.info
+      </Button>
+      <Button theme="primary" onClick={() => Alert.error(`我是新增的${new Date()}`)}>
+        Alert.error
       </Button>
     </div>
   )
