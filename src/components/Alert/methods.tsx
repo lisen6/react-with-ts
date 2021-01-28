@@ -52,8 +52,8 @@ const Alert = () => {
               it.visible = false
             }
           })
+          list = [list[0], list[1]]
         }
-
         return [...list]
       })
     }
@@ -68,24 +68,18 @@ const Alert = () => {
           it.visible = false
         }
       })
-      return [...list]
+      return [...list.filter(item => item.visible)]
     })
   }
 
-  const length = useMemo(() => {
-    return list.filter((item) => item.visible).length
-  }, [list])
+  console.log(list)
 
   return (
     <div className="alert-fixed-container">
       {list.map(({ key, text, ...props }, index) => (
-        <>
-          {props.visible && (
-            <StaticAlert key={key} onClose={() => destroy(key!)} {...props}>
-              {text}
-            </StaticAlert>
-          )}
-        </>
+        <StaticAlert key={key} onClose={() => destroy(key!)} {...props}>
+          {text}
+        </StaticAlert>
       ))}
     </div>
   )
@@ -95,10 +89,10 @@ let count = 0
 let limit = 2
 
 const apis: any = {
-  success: (item: StaticAlertProps | string) => {},
-  error: (item: StaticAlertProps | string) => {},
-  info: (item: StaticAlertProps | string) => {},
-  warning: (item: StaticAlertProps | string) => {}
+  success: (item: StaticAlertProps | string) => { },
+  error: (item: StaticAlertProps | string) => { },
+  info: (item: StaticAlertProps | string) => { },
+  warning: (item: StaticAlertProps | string) => { }
 }
 
 export default apis

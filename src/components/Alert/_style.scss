@@ -37,16 +37,17 @@
     cursor: pointer;
 
     svg {
-      color: #1f2329;
+      color: #c0c4cc;
     }
 
     .viking-alert-close-text {
+      color: #c0c4cc;
       transition: color 0.3s;
     }
 
     &:hover {
       .viking-alert-close-text {
-        color: #333333;
+        color: #1f2329;
       }
     }
   }
@@ -64,14 +65,13 @@
     }
   }
 
-  $theme-colors: (
-    'success': #65c344,
+  $theme-colors: ('success': #65c344,
     'info': #3f74f6,
     'warning': #f7c646,
-    'error': #e3584d
-  );
+    'error': #e3584d);
 
-  @each $key, $val in $theme-colors {
+  @each $key,
+  $val in $theme-colors {
     &.viking-alert-#{$key} {
       .viking-alert-icon {
         svg {

@@ -7,7 +7,7 @@ import Checkbox from '../Checkbox/checkbox'
 import { TreeDataProps } from './tree'
 
 const TreeNode: FC<TreeDataProps> = (props) => {
-  const { label, id, expend, disabled, indeterminate: halfChecked, checked: defaultChecked, children, onItemExpend, onItemCheck } = props
+  const { label, id, expend, indeterminate: halfChecked, checked: defaultChecked, children, onItemExpend, onItemCheck } = props
 
   const [checked, setChecked] = useState<boolean>(defaultChecked)
 

@@ -17,7 +17,7 @@ export interface TreeProps
 }
 
 const Tree = forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
-  const { treeData, defaultExpandedKeys, defaultCheckedKeys } = props
+  const { treeData, defaultExpandedKeys } = props
 
   const [nodeKeyMap, setNodeKeyMap] = useState<any>({})
 
