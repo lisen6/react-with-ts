@@ -7,6 +7,7 @@ import React, {
   HTMLAttributes,
   useState
 } from 'react'
+import Transition from '../Transition/transition'
 
 import Icon from '../Icon/Icon'
 
@@ -83,28 +84,30 @@ const StaticAlert: FC<StaticAlertProps> = (props) => {
   }, [propsVisible])
 
   return visible ? (
-    <div
-      className="viking-message"
-      style={{
-        background: background,
-        color: theme,
-        border: `solid 1px ${borderColor}`
-      }}
-    >
-      <Icon icon={icon} />
-      <span style={{ marginLeft: 10 }}>{children}</span>
-      {closable && (
-        <span
-          className="viking-icon-close"
-          onClick={(e) => {
-            onClose?.(e)
-            setVisible(false)
-          }}
-        >
-          <Icon icon="times" color="gray" />
-        </span>
-      )}
-    </div>
+    <Transition classNames='alert' in={visible} timeout={800} animation={'zoom-in-top'}>
+      <div
+        className="viking-message"
+        style={{
+          background: background,
+          color: theme,
+          border: `solid 1px ${borderColor}`
+        }}
+      >
+        <Icon icon={icon} />
+        <span style={{ marginLeft: 10 }}>{children}</span>
+        {closable && (
+          <span
+            className="viking-icon-close"
+            onClick={(e) => {
+              onClose?.(e)
+              setVisible(false)
+            }}
+          >
+            <Icon icon="times" color="gray" />
+          </span>
+        )}
+      </div>
+    </Transition>
   ) : null
 }
 

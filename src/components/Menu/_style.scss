@@ -8,7 +8,7 @@
   box-shadow: $menu-box-shadow;
   font-size: 14px;
 
-  > .menu-item {
+  >.menu-item {
     padding: $menu-item-padding-y $menu-item-padding-x;
     cursor: pointer;
     transition: $menu-transition;
@@ -27,8 +27,7 @@
     &.is-active,
     &:hover {
       color: $menu-item-active-color;
-      border-bottom: $menu-item-active-border-width solid
-        $menu-item-active-color;
+      border-bottom: $menu-item-active-border-width solid $menu-item-active-color;
     }
   }
 
@@ -67,13 +66,11 @@
 
   .menu-submenu {
     opacity: 0;
-    // display: none;
     list-style: none;
     padding-left: 0;
     white-space: nowrap;
     transition: opacity 0.4s ease-in;
 
-    // transition: $menu-transition;
     .menu-item {
       padding: $menu-item-padding-y $menu-item-padding-x;
       cursor: pointer;
@@ -94,7 +91,7 @@
 }
 
 .menu-horizontal {
-  > .menu-item {
+  >.menu-item {
     border-bottom: $menu-item-active-border-width solid transparent;
   }
 
