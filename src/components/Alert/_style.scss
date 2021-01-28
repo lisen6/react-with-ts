@@ -64,13 +64,14 @@
     }
   }
 
-  $theme-colors: ('success': #65c344,
+  $theme-colors: (
+    'success': #65c344,
     'info': #3f74f6,
     'warning': #f7c646,
-    'error': #e3584d);
+    'error': #e3584d
+  );
 
-  @each $key,
-  $val in $theme-colors {
+  @each $key, $val in $theme-colors {
     &.viking-alert-#{$key} {
       .viking-alert-icon {
         svg {
@@ -90,6 +91,7 @@
   flex-direction: column;
   align-items: center;
   top: 36px;
+  z-index: 1700;
 
   .viking-message {
     min-width: 380px;
@@ -106,6 +108,7 @@
     .viking-icon-close {
       margin-left: 15px;
       cursor: pointer;
+      pointer-events: all;
     }
   }
 }

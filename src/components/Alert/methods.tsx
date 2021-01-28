@@ -73,34 +73,32 @@ const Alert = () => {
   }
 
   const length = useMemo(() => {
-    return list.filter(item => item.visible).length
+    return list.filter((item) => item.visible).length
   }, [list])
 
   return (
     <div className="alert-fixed-container">
-      {
-        list.map(({ key, text, ...props }, index) =>
-          <>
-            {
-              props.visible && <StaticAlert key={key} onClose={() => destroy(key!)} {...props}>{text}</StaticAlert>
-            }
-          </>
-        )
-      }
-
+      {list.map(({ key, text, ...props }, index) => (
+        <>
+          {props.visible && (
+            <StaticAlert key={key} onClose={() => destroy(key!)} {...props}>
+              {text}
+            </StaticAlert>
+          )}
+        </>
+      ))}
     </div>
   )
 }
-
 
 let count = 0
 let limit = 2
 
 const apis: any = {
-  success: (item: StaticAlertProps | string) => { },
-  error: (item: StaticAlertProps | string) => { },
-  info: (item: StaticAlertProps | string) => { },
-  warning: (item: StaticAlertProps | string) => { }
+  success: (item: StaticAlertProps | string) => {},
+  error: (item: StaticAlertProps | string) => {},
+  info: (item: StaticAlertProps | string) => {},
+  warning: (item: StaticAlertProps | string) => {}
 }
 
 export default apis
@@ -110,12 +108,11 @@ function getPortalRoot(document: Document) {
   if (!root) {
     root = document.createElement('div')
     root.id = 'viking-alert-container'
+    root.style.cssText =
+      'height:0;width:0;margin-right:-99999px;overflow:visible;'
     document.body.appendChild(root)
   }
   return root
 }
 
 ReactDOM.render(<Alert />, getPortalRoot(document))
-
-
-
