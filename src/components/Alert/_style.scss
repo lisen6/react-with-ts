@@ -1,33 +1,27 @@
 .viking-alert {
   box-sizing: border-box;
   margin: 0;
-  color: #1f2329;
   font-size: 14px;
   line-height: 1.5715;
   list-style: none;
   position: relative;
   display: flex;
   align-items: center;
-  padding: 8px 15px;
-  border-radius: 2px;
+  padding: 9px 16px;
+  border-radius: 4px;
   margin-bottom: 16px;
-
-  .viking-alert-icon {
-    margin-right: 8px;
-  }
 
   .viking-alert-content {
     flex: 1;
+    margin-left: 8px;
 
     .viking-alert-description {
       align-items: flex-start;
-      font-size: 14px;
       line-height: 22px;
     }
   }
 
   .viking-alert-close-icon {
-    align-self: flex-start;
     margin-left: 8px;
     padding: 0;
     font-size: 12px;
@@ -54,24 +48,20 @@
 
   &.viking-alert-with-description {
     align-items: flex-start;
-    padding: 15px 15px 15px 24px;
-
-    .viking-alert-icon {
-      margin-right: 15px;
-    }
 
     .viking-alert-close-text {
       transition: color 0.3s;
     }
   }
 
-  $theme-colors: ('success': #65c344,
+  $theme-colors: (
+    'success': #65c344,
     'info': #3f74f6,
     'warning': #f7c646,
-    'error': #e3584d);
+    'error': #e3584d
+  );
 
-  @each $key,
-  $val in $theme-colors {
+  @each $key, $val in $theme-colors {
     &.viking-alert-#{$key} {
       .viking-alert-icon {
         svg {
@@ -111,17 +101,4 @@
       pointer-events: all;
     }
   }
-}
-
-
-
-.alert-appear-active {
-  opacity: 0;
-  transition: opacity 4s ease-in;
-  top: -10px;
-}
-
-.alert-appear-done {
-  opacity: 1;
-  top: 0px;
 }

@@ -2,7 +2,6 @@ import React, { FC, useState, useEffect } from 'react'
 import classNames from 'classnames'
 import Icon from '../Icon/Icon'
 
-
 export interface PanelProps {
   /** 面板头内容 */
   header?: string
@@ -49,12 +48,16 @@ const Panel: FC<PanelProps> = (props) => {
   })
 
   const renderIcon = () => {
-    return showArrow && <Icon icon="chevron-left" className={IconClasses} size="1x" />
+    return (
+      showArrow && (
+        <Icon icon="chevron-left" className={IconClasses} size="1x" />
+      )
+    )
   }
 
   useEffect(() => {
     !disabled && setIsActive(isOpened)
-  }, [isOpened])
+  }, [isOpened, disabled])
 
   return (
     <div className="collapse-item">

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import StaticAlert, {
   StaticAlertProps as AlertProps,
@@ -52,7 +52,6 @@ const Alert = () => {
               it.visible = false
             }
           })
-          list = [list[0], list[1]]
         }
         return [...list]
       })
@@ -68,11 +67,9 @@ const Alert = () => {
           it.visible = false
         }
       })
-      return [...list.filter(item => item.visible)]
+      return [...list.filter((item) => item.visible)]
     })
   }
-
-  console.log(list)
 
   return (
     <div className="alert-fixed-container">
@@ -89,19 +86,19 @@ let count = 0
 let limit = 2
 
 const apis: any = {
-  success: (item: StaticAlertProps | string) => { },
-  error: (item: StaticAlertProps | string) => { },
-  info: (item: StaticAlertProps | string) => { },
-  warning: (item: StaticAlertProps | string) => { }
+  success: (item: StaticAlertProps | string) => {},
+  error: (item: StaticAlertProps | string) => {},
+  info: (item: StaticAlertProps | string) => {},
+  warning: (item: StaticAlertProps | string) => {}
 }
 
 export default apis
 
 function getPortalRoot(document: Document) {
-  let root = document.querySelector('#viking-alert-container')
+  let root = document.querySelector('#viking_inner_portal_root__')
   if (!root) {
     root = document.createElement('div')
-    root.id = 'viking-alert-container'
+    root.id = 'viking_inner_portal_root__'
     root.style.cssText =
       'height:0;width:0;margin-right:-99999px;overflow:visible;'
     document.body.appendChild(root)

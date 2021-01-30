@@ -28,8 +28,7 @@
     }
   }
 
-  @each $key,
-  $val in $theme-colors {
+  @each $key, $val in $theme-colors {
     .color-#{$key} {
       background-color: $val;
     }

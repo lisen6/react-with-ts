@@ -84,11 +84,16 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
       >
         {showIcon && (
           <span className="viking-alert-icon">
-            <Icon icon={kind.icon as any} size={description ? 'lg' : '1x'} />
+            <Icon icon={kind.icon as any} />
           </span>
         )}
         <div className="viking-alert-content">
-          <div className="viking-alert-message">{children}</div>
+          <div
+            className="viking-alert-message"
+            style={{ fontWeight: !!description ? 500 : 0 }}
+          >
+            {children}
+          </div>
           <div className="viking-alert-description">{description}</div>
         </div>
         {action ? <div className="viking-alert-action">{action}</div> : null}

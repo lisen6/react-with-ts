@@ -9,42 +9,42 @@ import React, {
   ChangeEvent,
   ReactNode,
   isValidElement,
-  InputHTMLAttributes,
-} from "react";
-import classNames from "classnames";
+  InputHTMLAttributes
+} from 'react'
+import classNames from 'classnames'
 
 export interface OptionProps
   extends Omit<
     InputHTMLAttributes<Element>,
-    "value" | "defaultValue" | "onChange" | "title"
+    'value' | 'defaultValue' | 'onChange' | 'title'
   > {
-  disabled?: boolean;
-  label?: ReactNode;
-  value?: any;
-  [key: string]: any;
+  disabled?: boolean
+  label?: ReactNode
+  value?: any
+  [key: string]: any
 }
 export interface RadioProps extends OptionProps {
-  value?: any;
-  defaultValue?: any;
-  onChange?: (val: any, e: ChangeEvent) => void;
-  options?: OptionProps[];
+  value?: any
+  defaultValue?: any
+  onChange?: (val: any, e: ChangeEvent) => void
+  options?: OptionProps[]
 }
 
-interface RadioInnerProps extends Omit<RadioProps, "onChange"> {
-  kind?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+interface RadioInnerProps extends Omit<RadioProps, 'onChange'> {
+  kind?: string
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 const InnerRadio: FC<RadioInnerProps> = (props) => {
-  const { disabled, label, value, kind, onChange } = props;
+  const { disabled, label, value, kind, onChange } = props
 
-  const inputRef = useRef<HTMLInputElement>(null!);
+  const inputRef = useRef<HTMLInputElement>(null!)
 
-  const labelClass = classNames("viking-radio", {
-    "is-checked": !!value,
-    "is-disabled": !!disabled,
-    "viking-radio-button": kind === "button",
-  });
+  const labelClass = classNames('viking-radio', {
+    'is-checked': !!value,
+    'is-disabled': !!disabled,
+    'viking-radio-button': kind === 'button'
+  })
 
   return (
     <label className={labelClass} onMouseLeave={() => inputRef.current.blur()}>
@@ -59,13 +59,13 @@ const InnerRadio: FC<RadioInnerProps> = (props) => {
       <span className="viking-radio__input" />
       <span className="viking-radio__label">{label}</span>
     </label>
-  );
-};
+  )
+}
 
 // 单选按钮组
-const Option: FC<OptionProps> = (props) => null;
+const Option: FC<OptionProps> = (props) => null
 
-const ButtonOption: FC<OptionProps> = (props) => null;
+const ButtonOption: FC<OptionProps> = (props) => null
 
 export const Radio: FC<RadioProps> = (props) => {
   let {
@@ -78,49 +78,49 @@ export const Radio: FC<RadioProps> = (props) => {
     options,
     renderOption,
     children,
-    onChange,
-  } = props;
+    onChange
+  } = props
 
-  propsValue = typeof propsValue === "undefined" ? checked : propsValue;
+  propsValue = typeof propsValue === 'undefined' ? checked : propsValue
 
   defaultValue =
-    typeof defaultValue === "undefined" ? defaultChecked : defaultValue;
+    typeof defaultValue === 'undefined' ? defaultChecked : defaultValue
 
-  label = label || children;
+  label = label || children
 
   const [value, setValue] = useState(
-    typeof propsValue === "undefined" ? defaultValue : propsValue
-  );
+    typeof propsValue === 'undefined' ? defaultValue : propsValue
+  )
 
   const childrenOptions = useMemo(
     () =>
       Children.map(children, (child) => {
         if (isValidElement(child) && child?.type === Option) {
-          return Object.assign({ kind: "default" }, child.props);
+          return Object.assign({ kind: 'default' }, child.props)
         }
         if (isValidElement(child) && child?.type === ButtonOption) {
-          return Object.assign({ kind: "button" }, child.props);
+          return Object.assign({ kind: 'button' }, child.props)
         }
       }),
     [children]
-  );
+  )
 
   useEffect(() => {
-    typeof propsValue !== "undefined" && setValue(propsValue);
-  }, [propsValue]);
+    typeof propsValue !== 'undefined' && setValue(propsValue)
+  }, [propsValue])
 
   /**
    * if Single
    */
   const onSingleRadioChange = useCallback(
     (e) => {
-      if (typeof propsValue === "undefined") {
-        setValue(e.target.checked);
+      if (typeof propsValue === 'undefined') {
+        setValue(e.target.checked)
       }
-      onChange?.(propsValue || e.target.checked, e);
+      onChange?.(propsValue || e.target.checked, e)
     },
     [propsValue, onChange]
-  );
+  )
 
   const singleRadio = useMemo(() => {
     return (
@@ -130,49 +130,49 @@ export const Radio: FC<RadioProps> = (props) => {
         value={value}
         onChange={onSingleRadioChange}
       />
-    );
-  }, [disabled, value, label, onSingleRadioChange]);
+    )
+  }, [disabled, value, label, onSingleRadioChange])
 
   /**
    * if Group
    */
   const innerOptions = useMemo(() => {
-    const _opt: OptionProps[] = [];
+    const _opt: OptionProps[] = []
 
     if (!options?.length) {
-      options = childrenOptions || [];
+      options = childrenOptions || []
     }
 
     _opt.push.apply(
       _opt,
       options.map((o) => ({ ...o, disabled: disabled || o.disabled }))
-    );
+    )
 
-    return _opt;
-  }, [options, childrenOptions, disabled]);
+    return _opt
+  }, [options, childrenOptions, disabled])
 
   const onGroupRadioChange = useCallback(
     (index, optionValue, e) => {
-      if (typeof propsValue === "undefined") {
-        setValue(typeof optionValue === "undefined" ? index : optionValue);
+      if (typeof propsValue === 'undefined') {
+        setValue(typeof optionValue === 'undefined' ? index : optionValue)
       }
-      onChange?.(typeof optionValue === "undefined" ? index : optionValue, e);
+      onChange?.(typeof optionValue === 'undefined' ? index : optionValue, e)
     },
     [propsValue, onChange]
-  );
+  )
 
   const group = useMemo(
     () =>
       innerOptions.map((opt, index) => {
         const _label = renderOption
           ? renderOption(opt, index)
-          : opt.children || opt.label;
+          : opt.children || opt.label
         return (
           <InnerRadio
             key={index}
             disabled={!!opt.disabled}
             value={
-              typeof opt.value === "undefined"
+              typeof opt.value === 'undefined'
                 ? value === index
                 : value === opt.value
             }
@@ -180,10 +180,10 @@ export const Radio: FC<RadioProps> = (props) => {
             kind={opt.kind}
             onChange={(e) => onGroupRadioChange(index, opt.value, e)}
           />
-        );
+        )
       }),
     [innerOptions, renderOption, value]
-  );
+  )
 
   return (
     <>
@@ -193,20 +193,20 @@ export const Radio: FC<RadioProps> = (props) => {
         <div className="viking-radio-group">{group}</div>
       )}
     </>
-  );
-};
-
-function isSingle(options: any, childrenOptions: any) {
-  return !options?.length && !childrenOptions?.length;
+  )
 }
 
-Option.displayName = "Option";
+function isSingle(options: any, childrenOptions: any) {
+  return !options?.length && !childrenOptions?.length
+}
 
-ButtonOption.displayName = "Button";
+Option.displayName = 'Option'
 
-Radio.displayName = "Radio";
+ButtonOption.displayName = 'Button'
+
+Radio.displayName = 'Radio'
 
 export default Object.assign(Radio, {
   Option,
-  Button: ButtonOption,
-});
+  Button: ButtonOption
+})

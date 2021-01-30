@@ -7,7 +7,7 @@ import React, {
   HTMLAttributes,
   useState
 } from 'react'
-import Transition from '../Transition/transition'
+import Animation from '../Animation/animation'
 
 import Icon from '../Icon/Icon'
 
@@ -49,6 +49,33 @@ export interface StaticAlertProps extends HTMLAttributes<Element> {
   onAction?: MouseEventHandler
 }
 
+const KEYFRAME_MAP = {
+  SlideIn: {
+    from: {
+      marginTop: '-48px',
+      transform: 'scale(.5,.5)',
+      opacity: 0
+    },
+    to: {
+      marginTop: '0',
+      transform: 'scale(1,1)',
+      opacity: 1
+    }
+  },
+  SlideOut: {
+    from: {
+      marginTop: '0',
+      transform: 'scale(1,1)',
+      opacity: 1
+    },
+    to: {
+      marginTop: '-48px',
+      transform: 'scale(.5,.5)',
+      opacity: 0
+    }
+  }
+} as const
+
 const StaticAlert: FC<StaticAlertProps> = (props) => {
   const {
     kind,
@@ -64,27 +91,34 @@ const StaticAlert: FC<StaticAlertProps> = (props) => {
   } = props
 
   const [visible, setVisible] = useState(propsVisible)
+  const [destroy, setDestroy] = useState(false)
 
   const timer = useRef<number>(null!)
 
   const { icon, theme, borderColor, background } = KINDS[kind]
 
   useEffect(() => {
-    // if (propsVisible && Number.isFinite(duration)) {
-    //   clearTimeout(timer.current)
-    //   timer.current = setTimeout(() => {
-    //     setVisible(false)
-    //   }, duration)
-    // }
-    // return () => clearTimeout(timer.current)
-  }, [propsVisible])
+    if (propsVisible && Number.isFinite(duration)) {
+      clearTimeout(timer.current)
+      timer.current = setTimeout(() => {
+        setVisible(false)
+      }, duration)
+    }
+    return () => clearTimeout(timer.current)
+  }, [propsVisible, duration])
 
   useEffect(() => {
     setVisible(propsVisible)
   }, [propsVisible])
 
-  return visible ? (
-    <Transition classNames='alert' in={visible} timeout={800} animation={'zoom-in-top'}>
+  return destroy ? null : (
+    <Animation
+      style={{ overflow: 'visible' }}
+      auto
+      duration={0.2}
+      keyframes={KEYFRAME_MAP[visible ? 'SlideIn' : 'SlideOut']}
+      onEnd={() => visible || setDestroy(true)}
+    >
       <div
         className="viking-message"
         style={{
@@ -92,6 +126,7 @@ const StaticAlert: FC<StaticAlertProps> = (props) => {
           color: theme,
           border: `solid 1px ${borderColor}`
         }}
+        {...restProps}
       >
         <Icon icon={icon} />
         <span style={{ marginLeft: 10 }}>{children}</span>
@@ -107,8 +142,8 @@ const StaticAlert: FC<StaticAlertProps> = (props) => {
           </span>
         )}
       </div>
-    </Transition>
-  ) : null
+    </Animation>
+  )
 }
 
 export default StaticAlert

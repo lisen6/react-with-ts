@@ -4,7 +4,6 @@ import { storiesOf } from '@storybook/react'
 import Tree from './tree'
 import Button from '../Button/button'
 
-
 const BasicTree = () => {
   const data = [
     {
@@ -49,12 +48,20 @@ const BasicTree = () => {
   const [checkedKeys, setCheckedKeys] = useState<string[]>(['1', '2', '3'])
   return (
     <>
-      <Tree treeData={data} defaultExpandedKeys={expendKeys} defaultCheckedKeys={checkedKeys} />
+      <Tree
+        treeData={data}
+        defaultExpandedKeys={expendKeys}
+        defaultCheckedKeys={checkedKeys}
+      />
       <br />
-      <Button onClick={() => setExpendKeys(['1', '2'])} theme="primary">ExpandedKeys</Button>
+      <Button onClick={() => setExpendKeys(['1', '2'])} theme="primary">
+        ExpandedKeys
+      </Button>
       <br />
       <br />
-      <Button onClick={() => setCheckedKeys(['1', '2'])} theme="primary">checkedKeys</Button>
+      <Button onClick={() => setCheckedKeys(['1', '2'])} theme="primary">
+        checkedKeys
+      </Button>
     </>
   )
 }

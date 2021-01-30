@@ -5,7 +5,6 @@ import React, {
   HTMLAttributes
 } from 'react'
 import classnames from 'classnames'
-import { KINDS } from '../Alert/StaticAlert'
 
 type ButtonSize = 'large' | 'small'
 

@@ -5,26 +5,26 @@ import React, {
   ChangeEvent,
   KeyboardEvent,
   ReactElement,
-  useEffect,
-} from "react";
-import classNames from "classnames";
+  useEffect
+} from 'react'
+import classNames from 'classnames'
 
-import Input, { InputProps } from "../Input/input";
+import Input, { InputProps } from '../Input/input'
 
-import useDebounce from "../../hooks/useDebounce";
-import useClickOutSide from "../../hooks/useClickOutSide";
+import useDebounce from '../../hooks/useDebounce'
+import useClickOutSide from '../../hooks/useClickOutSide'
 
 interface DataSourceObject {
-  value: string;
+  value: string
 }
 
-export type DataSourceType<T = {}> = T & DataSourceObject;
-export interface AutoCompleteProps extends Omit<InputProps, "onSelect"> {
+export type DataSourceType<T = {}> = T & DataSourceObject
+export interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
   fetchSuggestions: (
     str: string
-  ) => DataSourceType[] | Promise<DataSourceType[]>;
-  onSelect?: (item: DataSourceType) => void;
-  renderOptions?: (item: DataSourceType) => ReactElement;
+  ) => DataSourceType[] | Promise<DataSourceType[]>
+  onSelect?: (item: DataSourceType) => void
+  renderOptions?: (item: DataSourceType) => ReactElement
 }
 
 export const AutoComplete: FC<AutoCompleteProps> = (props) => {
@@ -34,53 +34,53 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
     value,
     renderOptions,
     ...restProps
-  } = props;
+  } = props
 
   // input值
-  const [inputValue, setInputValue] = useState(value);
+  const [inputValue, setInputValue] = useState(value)
 
   // 是否展示下拉列表
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false)
 
   // 展示列表
-  const [suggestions, setSuggestions] = useState<DataSourceType[]>([]);
+  const [suggestions, setSuggestions] = useState<DataSourceType[]>([])
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   // 防抖
-  const debouncedValue = useDebounce(inputValue);
+  const debouncedValue = useDebounce(inputValue)
 
   // 条目高亮
-  const [highlightIndex, setHighlightIndex] = useState(0);
+  const [highlightIndex, setHighlightIndex] = useState(0)
 
   // 用来限制选中之后还会再触发查询的问题
-  const triggerSearchRef = useRef(true);
+  const triggerSearchRef = useRef(true)
 
-  const componentRef = useRef<HTMLDivElement>(null);
+  const componentRef = useRef<HTMLDivElement>(null)
 
   useClickOutSide(componentRef, () => {
-    setVisible(false);
-  });
+    setVisible(false)
+  })
 
   // 输入内容回调
   const handleChange = (value: string, e: ChangeEvent<HTMLInputElement>) => {
-    triggerSearchRef.current = true;
-    setInputValue(value);
-  };
+    triggerSearchRef.current = true
+    setInputValue(value)
+  }
 
   // 点击
   const handleFocus = (e: ChangeEvent<HTMLInputElement>) => {
-    setVisible(true);
-  };
+    setVisible(true)
+  }
 
   const highlight = (index: number, e: KeyboardEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    if (index < 0) index = suggestions.length - 1;
+    e.preventDefault()
+    if (index < 0) index = suggestions.length - 1
     if (index >= suggestions.length) {
-      index = 0;
+      index = 0
     }
-    setHighlightIndex(index);
-  };
+    setHighlightIndex(index)
+  }
 
   // 键盘事件
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -88,41 +88,41 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
       // enter
       case 13:
         if (suggestions[highlightIndex]) {
-          handleSelect(suggestions[highlightIndex]);
+          handleSelect(suggestions[highlightIndex])
         }
-        break;
+        break
 
       // top
       case 38:
-        highlight(highlightIndex - 1, e);
-        break;
+        highlight(highlightIndex - 1, e)
+        break
 
       // bottom
       case 40:
-        highlight(highlightIndex + 1, e);
-        break;
+        highlight(highlightIndex + 1, e)
+        break
 
       // esc
       case 27:
-        setVisible(false);
-        break;
+        setVisible(false)
+        break
       default:
-        break;
+        break
     }
-  };
+  }
 
   // 选中之后的回调
   const handleSelect = (item: DataSourceType) => {
-    setVisible(false);
-    setInputValue(item.value);
-    onSelect?.(item);
-    triggerSearchRef.current = false;
-  };
+    setVisible(false)
+    setInputValue(item.value)
+    onSelect?.(item)
+    triggerSearchRef.current = false
+  }
 
   // 渲染自定义html
   const renderTemplate = (item: DataSourceType) => {
-    return renderOptions ? renderOptions(item) : item.value;
-  };
+    return renderOptions ? renderOptions(item) : item.value
+  }
 
   const renderSuggestions = () => {
     return (
@@ -131,9 +131,9 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
           <div className="viking-select-dropdown-wrapper">
             <ul className="viking-select-dropdown">
               {suggestions.map((item: any, index) => {
-                const highNames = classNames("suggestion-item", {
-                  "item-highlighted": index === highlightIndex,
-                });
+                const highNames = classNames('suggestion-item', {
+                  'item-highlighted': index === highlightIndex
+                })
                 return (
                   <li
                     className={highNames}
@@ -142,7 +142,7 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
                   >
                     {renderTemplate(item)}
                   </li>
-                );
+                )
               })}
             </ul>
           </div>
@@ -153,29 +153,29 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
           </div>
         )}
       </>
-    );
-  };
+    )
+  }
 
   useEffect(() => {
     if (debouncedValue && triggerSearchRef.current) {
-      const result = fetchSuggestions(debouncedValue); // result是联合类型  DataSourceType || Promise
+      const result = fetchSuggestions(debouncedValue) // result是联合类型  DataSourceType || Promise
       if (result instanceof Promise) {
-        setLoading(true);
+        setLoading(true)
         result.then((data) => {
           setTimeout(() => {
-            setLoading(false);
-            setVisible(true);
-            setSuggestions(data);
-          }, 3000);
-        });
+            setLoading(false)
+            setVisible(true)
+            setSuggestions(data)
+          }, 3000)
+        })
       } else {
-        setSuggestions(result);
+        setSuggestions(result)
       }
     } else {
-      setVisible(false);
+      setVisible(false)
     }
-    setHighlightIndex(0);
-  }, [debouncedValue]);
+    setHighlightIndex(0)
+  }, [debouncedValue])
 
   return (
     <div className="viking-autoComplete" ref={componentRef}>
@@ -189,7 +189,7 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
 
       {visible && renderSuggestions()}
     </div>
-  );
-};
+  )
+}
 
-export default AutoComplete;
+export default AutoComplete

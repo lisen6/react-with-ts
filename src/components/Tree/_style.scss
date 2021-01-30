@@ -1,5 +1,5 @@
 .viking-tree-list {
-  min-height: 300px;
+  font-size: 14px;
 
   .viking-tree-content {
     position: relative;
@@ -16,6 +16,14 @@
 
       .icon {
         width: 10px;
+        transition: all 0.2s;
+        transform: rotate(-90deg);
+      }
+
+      &.is-expend {
+        .icon {
+          transform: rotate(0);
+        }
       }
     }
 

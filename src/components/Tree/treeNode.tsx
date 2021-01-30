@@ -7,7 +7,16 @@ import Checkbox from '../Checkbox/checkbox'
 import { TreeDataProps } from './tree'
 
 const TreeNode: FC<TreeDataProps> = (props) => {
-  const { label, id, expend, indeterminate: halfChecked, checked: defaultChecked, children, onItemExpend, onItemCheck } = props
+  const {
+    label,
+    id,
+    expend,
+    indeterminate: halfChecked,
+    checked: defaultChecked,
+    children,
+    onItemExpend,
+    onItemCheck
+  } = props
 
   const [checked, setChecked] = useState<boolean>(defaultChecked)
 
@@ -30,18 +39,21 @@ const TreeNode: FC<TreeDataProps> = (props) => {
   return (
     <>
       <div className="viking-tree-content" onClick={() => onItemExpend(id)}>
-        <span className={switchClass} >
+        <span className={switchClass}>
           {children && children.length > 0 ? (
-            <Icon icon={expend ? `caret-down` : `caret-right`} />
+            <Icon icon="caret-down" />
           ) : (
-              <div style={{ width: '10px' }} />
-            )}
+            <div style={{ width: '10px' }} />
+          )}
         </span>
 
         <span className={checkboxClass}>
-          <Checkbox value={checked} onChange={() => {
-            onItemCheck(id)
-          }} />
+          <Checkbox
+            value={checked}
+            onChange={() => {
+              onItemCheck(id)
+            }}
+          />
         </span>
         <span className="viking-tree-node-content-wrapper">
           <span className="viking-tree-title">{label}</span>

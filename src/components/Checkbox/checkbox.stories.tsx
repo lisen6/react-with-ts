@@ -11,7 +11,9 @@ const BasicCheckbox = () => {
     <>
       <div>
         <Hr>非受控组件</Hr>
-        <Checkbox defaultValue indeterminate>Basic</Checkbox>
+        <Checkbox defaultValue indeterminate>
+          Basic
+        </Checkbox>
       </div>
       <div style={{ marginTop: 30 }}>
         <Hr>受控组件</Hr>

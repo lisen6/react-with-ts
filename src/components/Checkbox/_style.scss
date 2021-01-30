@@ -1,7 +1,6 @@
 .viking-checkbox {
   display: flex;
   align-items: center;
-  color: #606266;
   font-weight: 500;
   line-height: 1;
   position: relative;
@@ -25,7 +24,7 @@
       background-color: #3370ff;
 
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         box-sizing: border-box;
         width: 9px;
@@ -94,7 +93,6 @@
 
   .viking-checkbox__label {
     padding-left: 8px;
-    color: #1f2329;
     user-select: none;
   }
 
@@ -105,7 +103,7 @@
         background-color: #3370ff;
 
         &::before {
-          content: "";
+          content: '';
           position: absolute;
           box-sizing: border-box;
           width: 7px;
@@ -115,7 +113,7 @@
           height: 2px;
           // border: 2px solid white;
           background-color: #fff;
-          transform: rotate(0) translate(-50%, -50%)
+          transform: rotate(0) translate(-50%, -50%);
         }
       }
     }

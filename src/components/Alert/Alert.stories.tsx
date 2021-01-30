@@ -64,7 +64,11 @@ const BasicAlert = () => {
           type="error"
           showIcon
           action={
-            <Button href="https://www.baidu.com" theme="link">
+            <Button
+              style={{ minWidth: 0 }}
+              href="https://www.baidu.com"
+              theme="link"
+            >
               操作
             </Button>
           }
@@ -76,7 +80,12 @@ const BasicAlert = () => {
           description={`Error Description Error Description Error Description Error Description`}
           showIcon
           action={
-            <Button href="https://www.baidu.com" theme="link" size="small">
+            <Button
+              style={{ minWidth: 0 }}
+              href="https://www.baidu.com"
+              theme="link"
+              size="small"
+            >
               操作
             </Button>
           }
@@ -86,21 +95,37 @@ const BasicAlert = () => {
       </div>
 
       <Hr margin="10px">static Alert</Hr>
-      <div style={{ display: 'flex', width: 400, justifyContent: 'space-between' }}>
-        <Button theme="primary" onClick={() => Alert.success({ text: `我是新增的${new Date()}`, closable: true })}>
+      <div
+        style={{ display: 'flex', width: 400, justifyContent: 'space-between' }}
+      >
+        <Button
+          theme="primary"
+          onClick={() =>
+            Alert.success({ text: `我是新增的${new Date()}`, closable: true })
+          }
+        >
           Alert.success
         </Button>
-        <Button theme="primary" onClick={() => Alert.warning(`我是新增的${new Date()}`)}>
+        <Button
+          theme="primary"
+          onClick={() => Alert.warning(`我是新增的${new Date()}`)}
+        >
           Alert.warning
         </Button>
-        <Button theme="primary" onClick={() => Alert.info(`我是新增的${new Date()}`)}>
+        <Button
+          theme="primary"
+          onClick={() => Alert.info(`我是新增的${new Date()}`)}
+        >
           Alert.info
         </Button>
-        <Button theme="primary" onClick={() => Alert.error(`我是新增的${new Date()}`)}>
+        <Button
+          theme="primary"
+          onClick={() => Alert.error(`我是新增的${new Date()}`)}
+        >
           Alert.error
         </Button>
       </div>
-    </div >
+    </div>
   )
 }
 

@@ -1,6 +1,5 @@
-@each $key,
-$val in $theme-colors {
+@each $key, $val in $theme-colors {
   .icon-#{$key} {
-    color: $val
+    color: $val;
   }
 }

@@ -81,7 +81,6 @@ const NestingCollapse = () => (
 const DisabledCollapse = () => {
   const [value1, setValue1] = useState(['1', '2'])
 
-  const [position, setPosition] = useState('left')
   const getExtra = () => {
     return (
       <Switch

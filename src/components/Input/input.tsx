@@ -6,39 +6,39 @@ import React, {
   FocusEventHandler,
   InputHTMLAttributes,
   ChangeEvent,
-  forwardRef,
-} from "react";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import classNames from "classnames";
-import Icon from "../Icon/Icon";
+  forwardRef
+} from 'react'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import classNames from 'classnames'
+import Icon from '../Icon/Icon'
 
-type InputSize = "medium" | "small";
+type InputSize = 'medium' | 'small'
 
 export interface InputProps
   extends Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  "size" | "prefix" | "suffix" | "onChange"
+    InputHTMLAttributes<HTMLInputElement>,
+    'size' | 'prefix' | 'suffix' | 'onChange'
   > {
   /** 是否禁用状态，默认为 false */
-  disabled?: boolean;
+  disabled?: boolean
   /** 控件大小 */
-  size?: InputSize;
+  size?: InputSize
   /** 带标签的 input，设置前置标签 */
-  addonBefore?: string | ReactElement;
+  addonBefore?: string | ReactElement
   /** 带标签的 input，设置后置标签 */
-  addonAfter?: string | ReactElement;
+  addonAfter?: string | ReactElement
   /** 可以点击清除图标删除内容 */
-  clearable?: boolean;
+  clearable?: boolean
   /** 带有前缀图标的 input */
-  prefix?: IconProp;
+  prefix?: IconProp
   /** 带有后缀图标的 input */
-  suffix?: IconProp;
+  suffix?: IconProp
   /** 输入框内容 */
-  value?: string;
+  value?: string
   /** 输入框默认内容 */
-  defaultValue?: string;
+  defaultValue?: string
   /** 输入框内容变化时的回调 */
-  onChange?: (value: string, e?: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (value: string, e?: ChangeEvent<HTMLInputElement>) => void
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
@@ -57,80 +57,80 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     clearable,
     style,
     ...restProps
-  } = props;
+  } = props
 
-  const lock = useRef(false);
+  const lock = useRef(false)
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null)
 
-  const [focused, setFocused] = useState(false);
+  const [focused, setFocused] = useState(false)
 
-  const names = classNames("viking-input-wrapper", {
+  const names = classNames('viking-input-wrapper', {
     [`input-size-${size}`]: size,
-    "is-disabled": disabled,
-    "input-group": addonBefore || addonAfter,
-    "input-group-addonAfter": !!addonAfter,
-    "input-group-addonBefore": !!addonBefore,
-    "input--suffix": !!suffix || !!clearable,
-    "input--prefix": !!prefix,
-  });
+    'is-disabled': disabled,
+    'input-group': addonBefore || addonAfter,
+    'input-group-addonAfter': !!addonAfter,
+    'input-group-addonBefore': !!addonBefore,
+    'input--suffix': !!suffix || !!clearable,
+    'input--prefix': !!prefix
+  })
 
-  const prefixNames = classNames("input__prefix");
-  const suffixNames = classNames("input__suffix");
+  const prefixNames = classNames('input__prefix')
+  const suffixNames = classNames('input__suffix')
 
   const handleClear = (e: any) => {
-    setFocused(true);
+    setFocused(true)
     if (!disabled) {
-      const target = inputRef.current;
+      const target = inputRef.current
       if (target) {
-        target.value = "";
+        target.value = ''
       }
-      onChange?.("", e);
+      onChange?.('', e)
     }
-  };
+  }
 
   const innerOnChange = (e: any) => {
-    if (typeof propsValue !== "undefined") {
-      if (e.type === "compositionstart") {
-        lock.current = true;
-        return;
+    if (typeof propsValue !== 'undefined') {
+      if (e.type === 'compositionstart') {
+        lock.current = true
+        return
       }
-      if (e.type === "compositionend") {
-        lock.current = false;
+      if (e.type === 'compositionend') {
+        lock.current = false
       }
       if (!lock.current && inputRef.current) {
-        const v = e.target.value;
-        inputRef.current.value = propsValue;
-        onChange?.(v, e);
+        const v = e.target.value
+        inputRef.current.value = propsValue
+        onChange?.(v, e)
       }
     } else {
-      onChange?.(e.target.value, e);
+      onChange?.(e.target.value, e)
     }
-  };
+  }
 
   const innerOnBlur: FocusEventHandler<HTMLInputElement> = (e) => {
-    setFocused(false);
-    onBlur?.(e);
-  };
+    setFocused(false)
+    onBlur?.(e)
+  }
 
   const innerOnFocus: FocusEventHandler<HTMLInputElement> = (e) => {
-    setFocused(true);
-    onFocus?.(e);
-  };
+    setFocused(true)
+    onFocus?.(e)
+  }
 
   const innerProps = {
     disabled: disabled,
-    type: "text",
-    ...restProps,
-  };
+    type: 'text',
+    ...restProps
+  }
 
   const inputEvents = {
     onCompositionStart: innerOnChange,
     onCompositionEnd: innerOnChange,
     onChange: innerOnChange,
     onBlur: innerOnBlur,
-    onFocus: innerOnFocus,
-  };
+    onFocus: innerOnFocus
+  }
 
   const renderInput = () => {
     const renderComponentWithPrefix = () => {
@@ -140,17 +140,17 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             <Icon icon={prefix} title={`title`} />
           </div>
         )
-      );
-    };
+      )
+    }
 
     const renderComponentWithSuffix = () => {
       const showClear =
-        clearable && String(inputRef.current?.value || "").length > 0;
+        clearable && String(inputRef.current?.value || '').length > 0
       return (
         <div className={suffixNames}>
           {showClear && !disabled && (
             <Icon
-              className={"clear-icon"}
+              className={'clear-icon'}
               onClick={handleClear}
               icon="times-circle"
             />
@@ -159,8 +159,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             <Icon onClick={handleClear} className="suffix-icon" icon={suffix} />
           )}
         </div>
-      );
-    };
+      )
+    }
     return (
       <div className="inner-input-wrapper" ref={ref}>
         {renderComponentWithPrefix()}
@@ -173,18 +173,18 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         />
         {renderComponentWithSuffix()}
       </div>
-    );
-  };
+    )
+  }
 
   useEffect(() => {
     if (
-      typeof propsValue !== "undefined" &&
+      typeof propsValue !== 'undefined' &&
       propsValue !== null &&
       inputRef.current
     ) {
-      inputRef.current.value = propsValue;
+      inputRef.current.value = propsValue
     }
-  }, [propsValue]);
+  }, [propsValue])
 
   return (
     <div className={names} style={style}>
@@ -196,7 +196,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         <div className="input-group__addonAfter">{addonAfter}</div>
       )}
     </div>
-  );
-});
+  )
+})
 
-export default Input;
+export default Input

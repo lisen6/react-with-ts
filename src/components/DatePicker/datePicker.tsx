@@ -1,9 +1,8 @@
-import React, { FC } from "react";
+import React, { FC } from 'react'
 
 import Input from '../Input/input'
 
-export interface DatePickerProps {
-}
+export interface DatePickerProps {}
 
 export const DatePicker: FC<DatePickerProps> = (props) => {
   return (
@@ -11,7 +10,7 @@ export const DatePicker: FC<DatePickerProps> = (props) => {
       1234
       <Input placeholder="请选择" />
     </div>
-  );
-};
+  )
+}
 
-export default DatePicker;
+export default DatePicker

@@ -1,15 +1,15 @@
-import React, { FC } from "react";
-import { UploadFile } from "./upload";
-import Icon from "../Icon/Icon";
-import Progress from "../Progress/progress";
+import React, { FC } from 'react'
+import { UploadFile } from './upload'
+import Icon from '../Icon/Icon'
+import Progress from '../Progress/progress'
 
 interface uploadListProps {
-  fileList: UploadFile[];
-  onRemove: (_file: UploadFile) => void;
+  fileList: UploadFile[]
+  onRemove: (_file: UploadFile) => void
 }
 
 export const UploadList: FC<uploadListProps> = (props) => {
-  const { fileList, onRemove } = props;
+  const { fileList, onRemove } = props
   return (
     <ul className="viking-upload-list">
       {fileList.map((item) => {
@@ -21,13 +21,13 @@ export const UploadList: FC<uploadListProps> = (props) => {
                 {item.name}
               </span>
               <span className="file-status">
-                {item.status === "uploading" && (
+                {item.status === 'uploading' && (
                   <Icon icon="spinner" spin theme="primary" />
                 )}
-                {item.status === "success" && (
+                {item.status === 'success' && (
                   <Icon icon="check-circle" theme="success" />
                 )}
-                {item.status === "error" && (
+                {item.status === 'error' && (
                   <Icon icon="times-circle" theme="danger" />
                 )}
               </span>
@@ -35,14 +35,14 @@ export const UploadList: FC<uploadListProps> = (props) => {
                 <Icon icon="times" onClick={() => onRemove(item)} />
               </span>
             </div>
-            {item.status === "uploading" && (
+            {item.status === 'uploading' && (
               <Progress percentage={item.percentage || 0} />
             )}
           </li>
-        );
+        )
       })}
     </ul>
-  );
-};
+  )
+}
 
-export default UploadList;
+export default UploadList

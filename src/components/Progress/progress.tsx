@@ -40,25 +40,37 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
 
     const [barColor, setBarColor] = useState<string>('')
 
+    const [barPercentage, setBarPercentage] = useState<number>(
+      percentage ? percentage : 0
+    )
+
     const renderDiffColorProgress = useCallback(() => {
       if (typeof customColors === 'string') {
         setBarColor(customColors)
       } else if (Array.isArray(customColors)) {
         let renderColor = ''
         for (let v of customColors) {
-          if (v.percentage <= percentage) {
+          if (v.percentage <= barPercentage) {
             renderColor = v.color
           }
         }
         setBarColor(renderColor)
       } else if (typeof customColors === 'function') {
-        setBarColor(customColors(percentage))
+        setBarColor(customColors(barPercentage))
       }
-    }, [percentage, customColors])
+    }, [percentage, barPercentage, customColors])
 
     useEffect(() => {
       renderDiffColorProgress()
     }, [renderDiffColorProgress, percentage, customColors])
+
+    useEffect(() => {
+      percentage <= 100
+        ? percentage < 0
+          ? setBarPercentage(0)
+          : setBarPercentage(percentage)
+        : setBarPercentage(100)
+    }, [percentage, barPercentage])
 
     return (
       <div
@@ -73,9 +85,11 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
         >
           <div
             className={`viking-progress-bar-inner color-${theme}`}
-            style={{ width: `${percentage}%`, backgroundColor: barColor }}
+            style={{ width: `${barPercentage}%`, backgroundColor: barColor }}
           >
-            {showText && <span className="inner-text">{`${percentage}%`}</span>}
+            {showText && (
+              <span className="inner-text">{`${barPercentage}%`}</span>
+            )}
           </div>
         </div>
       </div>
