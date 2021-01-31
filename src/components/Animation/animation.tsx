@@ -92,8 +92,6 @@ const Animation = ({
     keyframes = KEYFRAMES[keyframes]
   }
 
-  console.log(props)
-
   return (
     <StyledAnimation
       className="viking-animation-wrapper"

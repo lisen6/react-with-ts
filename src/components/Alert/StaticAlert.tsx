@@ -14,27 +14,27 @@ import Icon from '../Icon/Icon'
 export const KINDS = {
   success: {
     icon: 'check-circle',
-    theme: '#67c23a',
     background: '#F0FBEF',
-    borderColor: '#e1f3d80'
+    borderColor: '#34C724',
+    boxShadowColor: '#646a731f'
   },
   info: {
     icon: 'info-circle',
-    theme: '#3370ff',
     background: '#f0f4ff',
-    borderColor: '#f0f4ff'
+    borderColor: '#3370ff',
+    boxShadowColor: '#646a731f'
   },
   warning: {
     icon: 'exclamation-circle',
-    theme: '#e6a23c',
+    borderColor: '#FF8800',
     background: '#FFF5EB',
-    borderColor: '#faecd8'
+    boxShadowColor: '#646a731f'
   },
   error: {
     icon: 'times-circle',
-    theme: '#f56c6c',
+    borderColor: '#F54A45',
     background: '#FEF1F1',
-    borderColor: '#fde2e2'
+    boxShadowColor: '#646a731f'
   }
 } as const
 
@@ -95,7 +95,7 @@ const StaticAlert: FC<StaticAlertProps> = (props) => {
 
   const timer = useRef<number>(null!)
 
-  const { icon, theme, borderColor, background } = KINDS[kind]
+  const { icon, boxShadowColor, borderColor, background } = KINDS[kind]
 
   useEffect(() => {
     if (propsVisible && Number.isFinite(duration)) {
@@ -123,12 +123,12 @@ const StaticAlert: FC<StaticAlertProps> = (props) => {
         className="viking-message"
         style={{
           background: background,
-          color: theme,
-          border: `solid 1px ${borderColor}`
+          border: `solid 1px ${borderColor}`,
+          boxShadow: `0 2px 16px 0 ${boxShadowColor}`
         }}
         {...restProps}
       >
-        <Icon icon={icon} />
+        <Icon icon={icon} color={borderColor} />
         <span style={{ marginLeft: 10 }}>{children}</span>
         {closable && (
           <span

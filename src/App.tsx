@@ -1,8 +1,8 @@
-import React from "react";
-import "./styles/index.scss";
+import React from 'react'
+import './styles/index.scss'
 
 function App() {
-  return <>hello world</>;
+  return <>hello world</>
 }
 
-export default App;
+export default App

@@ -1,6 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import Switch from './switch2'
+import Switch from './Switch'
 
 const Basic = () => {
   return <Switch />

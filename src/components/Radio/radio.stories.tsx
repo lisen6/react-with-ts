@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
-import Radio from './radio'
-import Button from '../Button/button'
+import Radio from './Radio'
+import Button from '../Button/Button'
 import Hr from '../Hr/Hr'
 
 const BasicRadio = () => {

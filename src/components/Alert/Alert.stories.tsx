@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import { storiesOf } from '@storybook/react'
 
 import Alert from './Alert'
-import Button from '../Button/button'
+import Button from '../Button/Button'
 
 import Hr from '../Hr/Hr'
 
@@ -100,28 +100,17 @@ const BasicAlert = () => {
       >
         <Button
           theme="primary"
-          onClick={() =>
-            Alert.success({ text: `我是新增的${new Date()}`, closable: true })
-          }
+          onClick={() => Alert.success({ text: `成功信息`, closable: true })}
         >
           Alert.success
         </Button>
-        <Button
-          theme="primary"
-          onClick={() => Alert.warning(`我是新增的${new Date()}`)}
-        >
+        <Button theme="primary" onClick={() => Alert.warning(`提示信息`)}>
           Alert.warning
         </Button>
-        <Button
-          theme="primary"
-          onClick={() => Alert.info(`我是新增的${new Date()}`)}
-        >
+        <Button theme="primary" onClick={() => Alert.info(`详细信息`)}>
           Alert.info
         </Button>
-        <Button
-          theme="primary"
-          onClick={() => Alert.error(`我是新增的${new Date()}`)}
-        >
+        <Button theme="primary" onClick={() => Alert.error(`失败信息`)}>
           Alert.error
         </Button>
       </div>

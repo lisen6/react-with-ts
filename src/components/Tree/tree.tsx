@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, useEffect, useState } from 'react'
 
-import TreeNode from './treeNode'
+import TreeNode from './TreeNode'
 
 export interface TreeDataProps {
   id: string

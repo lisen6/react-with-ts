@@ -1,3 +1,3 @@
-import Tag from './tag'
+import Tag from './Tag'
 
 export default Tag

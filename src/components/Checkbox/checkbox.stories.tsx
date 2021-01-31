@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { storiesOf } from '@storybook/react'
 
-import Checkbox from './checkbox'
-import Button from '../Button/button'
+import Checkbox from './Checkbox'
+import Button from '../Button/Button'
 import Hr from '../Hr/Hr'
 
 const BasicCheckbox = () => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import Input from './input'
+import Input from './Input'
 
 const baseInput = () => {
   return <Input placeholder="请输入内容" />

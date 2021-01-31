@@ -1,0 +1,54 @@
+.tag-wrapper {
+  background-color: #e1eaff;
+  color: #0c296e;
+  padding: 0 8px;
+  font-size: 14px;
+  height: 24px;
+  line-height: 1;
+  border-radius: 2px;
+  white-space: nowrap;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-decoration: none;
+  outline: none;
+  cursor: default;
+  margin-left: 20px;
+  margin-top: 10px;
+  &.is-Active {
+    &:hover {
+      background: #bdcef9;
+    }
+  }
+
+  &.tag-size_large {
+    font-size: 16px;
+    height: 30px;
+  }
+
+  &.tag-size_small {
+    font-size: 12px;
+    height: 18px;
+  }
+
+  &.is-weak {
+    background-color: #eff0f1;
+    color: #2b2f36;
+    &.is-Active {
+      &:hover {
+        background: #dee0e3;
+      }
+    }
+  }
+
+  &.is-circle {
+    border-radius: 12px;
+  }
+
+  .tag-close-icon {
+    color: '#8f959e';
+    transition: all 0.3s;
+    margin-left: 3px;
+  }
+}

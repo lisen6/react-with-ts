@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
-import Progress from './progress'
-import Button from '../Button/button'
+import Progress from './Progress'
+import Button from '../Button/Button'
 
 const SimpleProgress = () => {
   return <Progress style={{ width: 500 }} percentage={10} showText={false} />

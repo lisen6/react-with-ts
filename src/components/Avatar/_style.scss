@@ -1,0 +1,56 @@
+.viking-avatar {
+  position: relative;
+  user-select: none;
+  overflow: hidden;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 10px;
+  background-color: #3370ff;
+  color: #ffffff;
+
+  &.avatar-size_large {
+    width: 32px;
+    height: 32px;
+  }
+
+  &.avatar-size_normal {
+    width: 24px;
+    height: 24px;
+  }
+
+  &.avatar-size_small {
+    width: 16px;
+    height: 16px;
+  }
+
+  &.is-square {
+    border-radius: 4px;
+
+    &.avatar-size_large {
+      width: 60px;
+      height: 60px;
+    }
+
+    &.avatar-size_normal {
+      width: 40px;
+      height: 40px;
+    }
+
+    &.avatar-size_small {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  .viking-avatar-container {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+}

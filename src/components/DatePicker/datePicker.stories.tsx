@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import DatePicker from './datePicker'
+import DatePicker from './DatePicker'
 
 const Basic = () => {
   return <DatePicker />
