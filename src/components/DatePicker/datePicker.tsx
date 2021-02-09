@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import Input from '../Input/input'
+import Input from '../Input/Input'
 
 export interface DatePickerProps {}
 
