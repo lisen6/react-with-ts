@@ -20,15 +20,13 @@ const BasicTree = () => {
             },
             {
               id: '5',
-              label: '三级 3-1-2',
-              disabled: true
+              label: '三级 3-1-2'
             }
           ]
         },
         {
           id: '2',
           label: '二级 2-2',
-          disabled: true,
           children: [
             {
               id: '6',
@@ -36,8 +34,7 @@ const BasicTree = () => {
             },
             {
               id: '7',
-              label: '三级 3-2-2',
-              disabled: true
+              label: '三级 3-2-2'
             }
           ]
         }
@@ -45,13 +42,15 @@ const BasicTree = () => {
     }
   ]
   const [expendKeys, setExpendKeys] = useState<string[]>(['1', '2', '3'])
-  const [checkedKeys, setCheckedKeys] = useState<string[]>(['1', '2', '3'])
+  const [checkedKeys, setCheckedKeys] = useState<string[]>(['3'])
   return (
     <>
       <Tree
         treeData={data}
         defaultExpandedKeys={expendKeys}
         defaultCheckedKeys={checkedKeys}
+        onExpend={(v, k) => console.log(v, k, 'onExpend')}
+        onChange={(v, k) => console.log(v, k, 'Select')}
       />
       <br />
       <Button onClick={() => setExpendKeys(['1', '2'])} theme="primary">
@@ -59,7 +58,7 @@ const BasicTree = () => {
       </Button>
       <br />
       <br />
-      <Button onClick={() => setCheckedKeys(['1', '2'])} theme="primary">
+      <Button onClick={() => setCheckedKeys(['2', '3'])} theme="primary">
         checkedKeys
       </Button>
     </>

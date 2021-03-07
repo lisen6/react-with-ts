@@ -11,8 +11,14 @@
     .viking-tree-switch {
       display: flex;
       align-items: center;
-      margin-right: 10px;
+      width: 22px;
+      height: 22px;
+      margin-right: 4px;
+      color: $gray-500;
       cursor: pointer;
+      &:hover {
+        color: #3f7476;
+      }
 
       .icon {
         width: 10px;

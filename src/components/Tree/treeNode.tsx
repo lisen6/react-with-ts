@@ -10,36 +10,36 @@ const TreeNode: FC<TreeDataProps> = (props) => {
   const {
     label,
     id,
-    expend,
+    isExpend,
     indeterminate: halfChecked,
-    checked: defaultChecked,
+    isChecked: defaultChecked,
     children,
     onItemExpend,
     onItemCheck
   } = props
 
-  const [checked, setChecked] = useState<boolean>(defaultChecked)
+  const [isChecked, setIsChecked] = useState<boolean>(defaultChecked)
 
   const [indeterminate, setIndeterminate] = useState<boolean>(halfChecked)
 
   const switchClass = classNames('viking-tree-switch', {
-    'is-expend': !!expend
+    'is-expend': !!isExpend
   })
 
   const checkboxClass = classNames('viking-tree-checkbox', {})
 
   useEffect(() => {
-    setChecked(defaultChecked)
+    setIsChecked(defaultChecked)
   }, [defaultChecked])
 
-  useEffect(() => {
-    setIndeterminate(halfChecked)
-  }, [halfChecked])
+  // useEffect(() => {
+  //   setIndeterminate(halfChecked)
+  // }, [halfChecked])
 
   return (
     <>
-      <div className="viking-tree-content" onClick={() => onItemExpend(id)}>
-        <span className={switchClass}>
+      <div className="viking-tree-content">
+        <span className={switchClass} onClick={() => onItemExpend(id)}>
           {children && children.length > 0 ? (
             <Icon icon="caret-down" />
           ) : (
@@ -49,7 +49,7 @@ const TreeNode: FC<TreeDataProps> = (props) => {
 
         <span className={checkboxClass}>
           <Checkbox
-            value={checked}
+            value={isChecked}
             onChange={() => {
               onItemCheck(id)
             }}
@@ -59,11 +59,11 @@ const TreeNode: FC<TreeDataProps> = (props) => {
           <span className="viking-tree-title">{label}</span>
         </span>
       </div>
-      {children && children.length > 0 && expend ? (
+      {children && children.length > 0 && isExpend ? (
         <div className="viking-tree-node-children">
           {children.map((item) => {
             let props = { ...item, onItemExpend, onItemCheck }
-            return <TreeNode {...props} />
+            return <TreeNode key={item.id} {...props} />
           })}
         </div>
       ) : null}

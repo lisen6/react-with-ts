@@ -26,74 +26,6 @@ interface TagProps extends HTMLAttributes<HTMLElement> {
   onClose?: (val: boolean) => void
 }
 
-const THEME_MAP = {
-  blue: {
-    backgroundColor: '#e1eaff',
-    color: '#0c296e',
-    hoverColor: '#bdcef9'
-  },
-  gray: {
-    backgroundColor: '#eff0f1',
-    color: '#1f2329',
-    hoverColor: '#dee0e3'
-  },
-  wathet: {
-    backgroundColor: '#D9F3FD',
-    color: '#004761',
-    hoverColor: '#bbe6fa'
-  },
-  turquoise: {
-    backgroundColor: '#D5F6F2',
-    color: '#024B41',
-    hoverColor: '#b8ede6'
-  },
-  green: {
-    backgroundColor: '#D9F5D6',
-    color: '#124B0C',
-    hoverColor: '#c2eab6'
-  },
-  lime: {
-    backgroundColor: '#EEF6C6',
-    color: '#1f2329',
-    hoverColor: '#e2eda0'
-  },
-  yellow: {
-    backgroundColor: '#FAF1D1',
-    color: '#5C3A00',
-    hoverColor: '#f5e6b2'
-  },
-  orange: {
-    backgroundColor: '#FEEAD2',
-    color: '#6B3900',
-    hoverColor: '#f5e6b2'
-  },
-  red: {
-    backgroundColor: '#FDE2E2',
-    color: '#621C18',
-    hoverColor: '#f2c1be'
-  },
-  carmine: {
-    backgroundColor: '#FDDDEF',
-    color: '#520A32',
-    hoverColor: '#eeb2d7'
-  },
-  violet: {
-    backgroundColor: '#F8DEF8',
-    color: '#460B46',
-    hoverColor: '#e7bcec'
-  },
-  purple: {
-    backgroundColor: '#ECE2FE',
-    color: '#270561',
-    hoverColor: '#c9b5f5'
-  },
-  indigo: {
-    backgroundColor: '#E0E2FA',
-    color: '#0C1264',
-    hoverColor: '#b4baee'
-  }
-} as const
-
 const StyledSpan = styled.span(({ theme, cursor, isActive }: any) => {
   return css`
     background: ${theme.backgroundColor};
@@ -127,7 +59,7 @@ const Tag = forwardRef<HTMLSpanElement, TagProps>((props, ref) => {
     [`tag-size_${size}`]: size,
     [`is-weak`]: weak,
     [`is-circle`]: kind === 'round',
-    [`is-Active`]: onClick && !theme
+    [`is-Active`]: onClick
   })
 
   let cursor = 'default'
@@ -140,9 +72,7 @@ const Tag = forwardRef<HTMLSpanElement, TagProps>((props, ref) => {
       className={tagClass}
       ref={ref}
       onClick={(e) => onClick?.(e)}
-      theme={THEME_MAP[theme!]}
-      cursor={cursor}
-      isActive={!!onClick && theme}
+      isActive={!!onClick}
       {...restProps}
     >
       {avatar ? (
