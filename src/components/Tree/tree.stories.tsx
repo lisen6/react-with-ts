@@ -47,14 +47,14 @@ const BasicTree = () => {
     <>
       <Tree
         treeData={data}
-        defaultExpandedKeys={expendKeys}
+        defaultExpendedKeys={expendKeys}
         defaultCheckedKeys={checkedKeys}
         onExpend={(v, k) => console.log(v, k, 'onExpend')}
         onChange={(v, k) => console.log(v, k, 'Select')}
       />
       <br />
       <Button onClick={() => setExpendKeys(['1', '2'])} theme="primary">
-        ExpandedKeys
+        ExpendedKeys
       </Button>
       <br />
       <br />

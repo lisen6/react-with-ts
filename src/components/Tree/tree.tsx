@@ -18,7 +18,7 @@ export interface TreeDataProps {
 export interface TreeProps
   extends Omit<HTMLAttributes<Element>, 'onSelect' | 'onClick' | 'onChange'> {
   treeData?: TreeDataProps[]
-  defaultExpandedKeys?: string[]
+  defaultExpendedKeys?: string[]
   defaultCheckedKeys?: string[]
   onExpend?: (
     v: string,
@@ -35,20 +35,20 @@ const Tree = forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
     treeData,
     onExpend,
     onChange,
-    defaultExpandedKeys,
+    defaultExpendedKeys,
     defaultCheckedKeys
   } = props
 
   const [nodeKeyMap, setNodeKeyMap] = useState<any>({})
   const [checkedKeys, setCheckedKeys] = useState<string[]>([])
-  const [expandedKeys, setExpandedKeys] = useState<string[]>([])
+  const [expendedKeys, setExpendedKeys] = useState<string[]>([])
   const [halfCheckedKeys, setHalfCheckedKeys] = useState<string[]>([])
 
   const buildKeyMap = useCallback(
     (treeData: TreeDataProps[], parent: TreeDataProps, keyMap: any = {}) => {
       treeData?.forEach((item: TreeDataProps) => {
         item.parent = parent
-        item.isExpend = defaultExpandedKeys?.includes(item.id)
+        item.isExpend = defaultExpendedKeys?.includes(item.id)
 
         if (item.isExpend) setCheckedKeys([...checkedKeys, item.key])
 
