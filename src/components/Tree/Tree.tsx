@@ -6,7 +6,7 @@ import React, {
   useState
 } from 'react'
 
-import TreeNode from './TreeNode1'
+import TreeNode from './TreeNode'
 
 export interface TreeDataProps {
   id: string

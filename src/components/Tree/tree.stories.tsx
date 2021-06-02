@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
 
-import Tree from './Tree1'
-import Button from '../Button/Button1'
+import Tree from './Tree'
+import Button from '../Button/Button'
 
 const BasicTree = () => {
   const data = [

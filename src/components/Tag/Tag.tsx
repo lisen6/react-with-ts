@@ -11,7 +11,7 @@ import styled from 'styled-components'
 import { css } from 'styled-components'
 
 import Icon from '../Icon/Icon'
-import Avatar from '../Avatar/Avatar1'
+import Avatar from '../Avatar/Avatar'
 
 interface TagProps extends HTMLAttributes<HTMLElement> {
   kind?: 'default' | 'round'

@@ -7,9 +7,9 @@ import React, {
 } from 'react'
 
 import axios from 'axios'
-import Button from '../Button/Button1'
-import UploadList from './UploadList1'
-import Dragger from './Dragger1'
+import Button from '../Button/Button'
+import UploadList from './UploadList'
+import Dragger from './Dragger'
 
 export type UploadFileStatus = 'ready' | 'uploading' | 'success' | 'error'
 

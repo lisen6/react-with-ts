@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import Avatar from './Avatar1'
+import Avatar from './Avatar'
 import Hr from '../Hr/Hr'
 import girl from '../../assets/image/girl.jpg'
 

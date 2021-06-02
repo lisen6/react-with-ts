@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react'
 import { storiesOf } from '@storybook/react'
 
-import Animation from './Animation1'
-import Button from '../Button/Button1'
+import Animation from './Animation'
+import Button from '../Button/Button'
 
 const BasicAnimation = () => {
   const [play, setPlay] = useState(false)
