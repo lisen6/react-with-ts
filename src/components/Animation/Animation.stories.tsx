@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { storiesOf } from '@storybook/react'
 
-import Animation from './animation'
+import Animation from './Animation'
 import Button from '../Button/Button'
 
 const BasicAnimation = () => {

@@ -7,7 +7,7 @@ import React, {
   HTMLAttributes,
   useState
 } from 'react'
-import Animation from '../Animation/animation'
+import Animation from '../Animation/Animation'
 
 import Icon from '../Icon/Icon'
 

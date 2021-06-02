@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { UploadFile } from './upload'
+import { UploadFile } from './Upload'
 import Icon from '../Icon/Icon'
 import Progress from '../Progress/Progress'
 
