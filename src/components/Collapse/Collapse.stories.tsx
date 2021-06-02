@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 
 import Collapse from './Collapse'
 import Panel from './Panel'
-import Switch from '../Switch/Switch'
+import Switch from '../Switch/Switch1'
 
 const DefaultOpenCollapse = () => {
   const [value1, setValue1] = useState(['1', '2'])

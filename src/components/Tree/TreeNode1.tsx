@@ -2,9 +2,9 @@ import React, { FC, useEffect, useState } from 'react'
 import classNames from 'classnames'
 
 import Icon from '../Icon/Icon'
-import Checkbox from '../Checkbox/Checkbox'
+import Checkbox from '../Checkbox/Checkbox1'
 
-import { TreeDataProps } from './Tree'
+import { TreeDataProps } from './Tree1'
 
 const TreeNode: FC<TreeDataProps> = (props) => {
   const {

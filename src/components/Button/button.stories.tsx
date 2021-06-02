@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import Button from './Button'
+import Button from './Button1'
 import Hr from '../Hr/Hr'
 
 const DefaultButton = () => {

@@ -1,3 +1,3 @@
-import Tree from './Tree'
+import Tree from './Tree1'
 
 export default Tree

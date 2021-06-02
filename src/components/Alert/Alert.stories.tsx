@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from 'react'
 import { storiesOf } from '@storybook/react'
 
-import Alert from './Alert'
-import Button from '../Button/Button'
+import Alert from './Alert1'
+import Button from '../Button/Button1'
 
 import Hr from '../Hr/Hr'
 

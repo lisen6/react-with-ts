@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { Upload, UploadFile } from './Upload'
+import { Upload, UploadFile } from './Upload1'
 import Icon from '../Icon/Icon'
 
 const defaultFileList: UploadFile[] = [
