@@ -97,7 +97,7 @@
     "customize-cra": "^1.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^4.3.6",
-    "node-sass": "^4.14.1",
+    "node-sass": "4.14.0",
     "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-app-rewired": "^2.1.7",
